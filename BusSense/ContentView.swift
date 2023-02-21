@@ -8,45 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var model = FrameHandler()
     
     var body: some View {
-        
-        ZStack {
-            
-            Color("Color1").ignoresSafeArea()
-            
-            VStack {
+        NavigationView {
+            VStack(spacing: 30) {
+                NavigationLink(destination: MainView()) {
+                    Text("MainView")
+                }
                 
-                Image("logo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                NavigationLink(destination: WaitingView()) {
+                    Text("WaitingView")
+                }
                 
-                Spacer()
+                NavigationLink(destination: ResultView()) {
+                    Text("ResultView")
+                }
                 
-                Text("Current Bus Stop:\nADD GPS LOCATION")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .background(Color("Color2"))
-                    .cornerRadius(20)
-                
-                Spacer()
-                
-                Text("Which bus are you looking for?\nADD SEARCH BAR & MIC")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .background(Color("Color2"))
-                    .cornerRadius(20)
-                    
-                    
-                Spacer()
+                // camera only works on actual iphone not the simulator
+                NavigationLink(destination: FrameView(image: model.frame)
+                    .ignoresSafeArea()) {
+                        Text("FrameView")
+                    }
             }
-            .padding()
+            .navigationTitle("Navigation")
         }
     }
 }

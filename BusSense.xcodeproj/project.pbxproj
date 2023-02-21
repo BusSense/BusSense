@@ -17,6 +17,9 @@
 		21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */; };
 		21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B7298F5D7B0015FF7E /* ResultView.swift */; };
 		21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B9298F66580015FF7E /* WaitingView.swift */; };
+		BE5D30D829A42D4500DE0EAE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D30D729A42D4500DE0EAE /* MainView.swift */; };
+		BE5D30DA29A4743600DE0EAE /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D30D929A4743600DE0EAE /* FrameView.swift */; };
+		BE5D30DC29A4746500DE0EAE /* FrameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D30DB29A4746500DE0EAE /* FrameHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		21FFD3B9298F66580015FF7E /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		BE5D30D729A42D4500DE0EAE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BE5D30D929A4743600DE0EAE /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		BE5D30DB29A4746500DE0EAE /* FrameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,9 @@
 				21FFD3B7298F5D7B0015FF7E /* ResultView.swift */,
 				21724E6F298F1FA500E5BDFF /* Assets.xcassets */,
 				21724E71298F1FA500E5BDFF /* Preview Content */,
+				BE5D30D729A42D4500DE0EAE /* MainView.swift */,
+				BE5D30D929A4743600DE0EAE /* FrameView.swift */,
+				BE5D30DB29A4746500DE0EAE /* FrameHandler.swift */,
 			);
 			path = BusSense;
 			sourceTree = "<group>";
@@ -267,9 +276,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				21724E6E298F1FA000E5BDFF /* ContentView.swift in Sources */,
+				BE5D30D829A42D4500DE0EAE /* MainView.swift in Sources */,
 				21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */,
 				21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */,
 				21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */,
+				BE5D30DA29A4743600DE0EAE /* FrameView.swift in Sources */,
+				BE5D30DC29A4746500DE0EAE /* FrameHandler.swift in Sources */,
 				21724E6C298F1FA000E5BDFF /* BusSenseApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +443,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,6 +472,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
