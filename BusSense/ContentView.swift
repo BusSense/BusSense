@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @ObservedObject var locationManager = LocationManager.shared
+    
     var body: some View {
         
         ZStack {
@@ -23,14 +25,28 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Text("Current Bus Stop:\nADD GPS LOCATION")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .background(Color("Color2"))
-                    .cornerRadius(20)
+                if locationManager.userLocation == nil {
+                    Text("Current Bus Stop:\nADD GPS LOCATION")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                        .background(Color("Color2"))
+                        .cornerRadius(20)
+                        .onAppear() {
+                            LocationManager.shared.requestLocation()
+                        }
+                } else if let location = locationManager.userLocation {
+                    Text("Current Bus Stop:\n\(location.coordinate.longitude), \(location.coordinate.latitude)")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                        .background(Color("Color2"))
+                        .cornerRadius(20)
+                }
                 
                 Spacer()
                 
