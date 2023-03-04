@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210A0AB729A152B200AC7F34 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210A0AB629A152B200AC7F34 /* SpeechRecognizer.swift */; };
+		210A0AB929A19C4C00AC7F34 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210A0AB829A19C4C00AC7F34 /* Bus.swift */; };
 		21724E6C298F1FA000E5BDFF /* BusSenseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */; };
 		21724E6E298F1FA000E5BDFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21724E6D298F1FA000E5BDFF /* ContentView.swift */; };
 		21724E70298F1FA500E5BDFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21724E6F298F1FA500E5BDFF /* Assets.xcassets */; };
-		21724E73298F1FA500E5BDFF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21724E72298F1FA500E5BDFF /* Preview Assets.xcassets */; };
 		21724E7D298F1FA600E5BDFF /* BusSenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21724E7C298F1FA600E5BDFF /* BusSenseTests.swift */; };
 		21724E87298F1FA600E5BDFF /* BusSenseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21724E86298F1FA600E5BDFF /* BusSenseUITests.swift */; };
 		21724E89298F1FA600E5BDFF /* BusSenseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21724E88298F1FA600E5BDFF /* BusSenseUITestsLaunchTests.swift */; };
+		21CD669529B3028E00A0274F /* BusNumberSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD669429B3028E00A0274F /* BusNumberSelectionView.swift */; };
+		21CD669729B3058500A0274F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD669629B3058500A0274F /* LocationManager.swift */; };
 		21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */; };
 		21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B7298F5D7B0015FF7E /* ResultView.swift */; };
 		21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B9298F66580015FF7E /* WaitingView.swift */; };
@@ -37,16 +40,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		210A0AB629A152B200AC7F34 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		210A0AB829A19C4C00AC7F34 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 		21724E68298F1FA000E5BDFF /* BusSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusSense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSenseApp.swift; sourceTree = "<group>"; };
 		21724E6D298F1FA000E5BDFF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		21724E6F298F1FA500E5BDFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		21724E72298F1FA500E5BDFF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21724E78298F1FA600E5BDFF /* BusSenseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusSenseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21724E7C298F1FA600E5BDFF /* BusSenseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSenseTests.swift; sourceTree = "<group>"; };
 		21724E82298F1FA600E5BDFF /* BusSenseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusSenseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21724E86298F1FA600E5BDFF /* BusSenseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSenseUITests.swift; sourceTree = "<group>"; };
 		21724E88298F1FA600E5BDFF /* BusSenseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSenseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		21CD669429B3028E00A0274F /* BusNumberSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusNumberSelectionView.swift; sourceTree = "<group>"; };
+		21CD669629B3058500A0274F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		21FDB9F329A13011008BE44A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		21FFD3B9298F66580015FF7E /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
@@ -100,11 +107,16 @@
 		21724E6A298F1FA000E5BDFF /* BusSense */ = {
 			isa = PBXGroup;
 			children = (
+				21FDB9F329A13011008BE44A /* Info.plist */,
 				21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */,
 				21724E6D298F1FA000E5BDFF /* ContentView.swift */,
 				21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */,
 				21FFD3B9298F66580015FF7E /* WaitingView.swift */,
 				21FFD3B7298F5D7B0015FF7E /* ResultView.swift */,
+				21CD669429B3028E00A0274F /* BusNumberSelectionView.swift */,
+				210A0AB629A152B200AC7F34 /* SpeechRecognizer.swift */,
+				210A0AB829A19C4C00AC7F34 /* Bus.swift */,
+				21CD669629B3058500A0274F /* LocationManager.swift */,
 				21724E6F298F1FA500E5BDFF /* Assets.xcassets */,
 				21724E71298F1FA500E5BDFF /* Preview Content */,
 			);
@@ -114,7 +126,6 @@
 		21724E71298F1FA500E5BDFF /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				21724E72298F1FA500E5BDFF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -240,7 +251,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21724E73298F1FA500E5BDFF /* Preview Assets.xcassets in Resources */,
 				21724E70298F1FA500E5BDFF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,11 +276,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				210A0AB929A19C4C00AC7F34 /* Bus.swift in Sources */,
 				21724E6E298F1FA000E5BDFF /* ContentView.swift in Sources */,
 				21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */,
+				21CD669529B3028E00A0274F /* BusNumberSelectionView.swift in Sources */,
 				21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */,
 				21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */,
 				21724E6C298F1FA000E5BDFF /* BusSenseApp.swift in Sources */,
+				210A0AB729A152B200AC7F34 /* SpeechRecognizer.swift in Sources */,
+				21CD669729B3058500A0274F /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +445,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusSense/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to use microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please allow access to recognize speech";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,6 +476,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusSense/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please allow access to use microphone";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please allow access to recognize speech";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

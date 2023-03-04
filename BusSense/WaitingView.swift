@@ -9,15 +9,28 @@ import SwiftUI
 
 struct WaitingView: View {
     
+    @ObservedObject var chosenBus: ChosenBus
+    
     var body: some View {
         
         ZStack {
+            
+            let busName = chosenBus.bound + " bound " + chosenBus.borough + String(chosenBus.number)
             
             Color("Color1").ignoresSafeArea()
             
             VStack {
                 
-                Text("Currently waiting for:\nBUS BOUND SELECTION")
+                Text("Waiting for:")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.white)
+                    .multilineTextAlignment(.center)
+                    .padding(50)
+                    .background(Color("Color2"))
+                    .cornerRadius(20)
+                
+                Text(busName)
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
@@ -28,12 +41,12 @@ struct WaitingView: View {
                 
                 Spacer()
                 
-                Text("X min")
+                Text("Status: \nX min\nY blocks")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
-                    .padding(100)
+                    .padding(50)
                     .background(Color("Color2"))
                     .cornerRadius(20)
                     
@@ -55,7 +68,7 @@ struct WaitingView: View {
 
 struct WaitingView_Previews: PreviewProvider {
     static var previews: some View {
-        WaitingView()
+        WaitingView(chosenBus: ChosenBus())
     }
 }
 
