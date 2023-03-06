@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210305E529B568A700841B62 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210305E429B568A700841B62 /* FrameView.swift */; };
+		210305E729B568CE00841B62 /* FrameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210305E629B568CE00841B62 /* FrameHandler.swift */; };
+		210305EB29B576AE00841B62 /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 210305EA29B576AE00841B62 /* routes.txt */; };
 		210A0AB729A152B200AC7F34 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210A0AB629A152B200AC7F34 /* SpeechRecognizer.swift */; };
 		210A0AB929A19C4C00AC7F34 /* Bus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210A0AB829A19C4C00AC7F34 /* Bus.swift */; };
 		21724E6C298F1FA000E5BDFF /* BusSenseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		210305E429B568A700841B62 /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		210305E629B568CE00841B62 /* FrameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameHandler.swift; sourceTree = "<group>"; };
+		210305EA29B576AE00841B62 /* routes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = routes.txt; sourceTree = "<group>"; };
 		210A0AB629A152B200AC7F34 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		210A0AB829A19C4C00AC7F34 /* Bus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bus.swift; sourceTree = "<group>"; };
 		21724E68298F1FA000E5BDFF /* BusSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusSense.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +116,7 @@
 				21FDB9F329A13011008BE44A /* Info.plist */,
 				21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */,
 				21724E6D298F1FA000E5BDFF /* ContentView.swift */,
+				210305EA29B576AE00841B62 /* routes.txt */,
 				21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */,
 				21FFD3B9298F66580015FF7E /* WaitingView.swift */,
 				21FFD3B7298F5D7B0015FF7E /* ResultView.swift */,
@@ -119,6 +126,8 @@
 				21CD669629B3058500A0274F /* LocationManager.swift */,
 				21724E6F298F1FA500E5BDFF /* Assets.xcassets */,
 				21724E71298F1FA500E5BDFF /* Preview Content */,
+				210305E429B568A700841B62 /* FrameView.swift */,
+				210305E629B568CE00841B62 /* FrameHandler.swift */,
 			);
 			path = BusSense;
 			sourceTree = "<group>";
@@ -251,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				210305EB29B576AE00841B62 /* routes.txt in Resources */,
 				21724E70298F1FA500E5BDFF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,9 +291,11 @@
 				21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */,
 				21CD669529B3028E00A0274F /* BusNumberSelectionView.swift in Sources */,
 				21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */,
+				210305E729B568CE00841B62 /* FrameHandler.swift in Sources */,
 				21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */,
 				21724E6C298F1FA000E5BDFF /* BusSenseApp.swift in Sources */,
 				210A0AB729A152B200AC7F34 /* SpeechRecognizer.swift in Sources */,
+				210305E529B568A700841B62 /* FrameView.swift in Sources */,
 				21CD669729B3058500A0274F /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,38 +17,40 @@ struct WaitingView: View {
             
             let busName = chosenBus.bound + " bound " + chosenBus.borough + String(chosenBus.number)
             
+            let waitingMessage = "Waiting for:\n" + busName
+            
             Color("Color1").ignoresSafeArea()
             
             VStack {
                 
-                Text("Waiting for:")
+                Text(waitingMessage)
                     .font(.title)
                     .fontWeight(.bold)
+                    .frame(width:300, height:300)
                     .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding(50)
                     .background(Color("Color2"))
                     .cornerRadius(20)
+                    .padding(20)
+                    .multilineTextAlignment(.center)
                 
-                Text(busName)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding(50)
-                    .background(Color("Color2"))
-                    .cornerRadius(20)
+//                Text(busName)
+//                    .font(.title)
+//                    .frame(width:300, height:300)
+//                    .foregroundColor(Color.white)
+//                    .background(Color("Color2"))
+//                    .cornerRadius(20)
                 
                 Spacer()
                 
                 Text("Status: \nX min\nY blocks")
                     .font(.title)
                     .fontWeight(.bold)
+                    .frame(width:300, height:200)
                     .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
-                    .padding(50)
                     .background(Color("Color2"))
                     .cornerRadius(20)
+                    .padding(20)
+                    .multilineTextAlignment(.center)
                     
                 Spacer()
                 

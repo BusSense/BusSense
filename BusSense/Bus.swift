@@ -14,19 +14,19 @@ class Bus: ObservableObject {
     let bound1: String
     let bound2: String
     let borough: String
-    let number: Int
+    let number: String
     
     init() {
         self.id = bus_id
         self.bound1 = "X"
         self.bound2 = "X"
         self.borough = "X"
-        self.number = 0
+        self.number = "0"
     
         bus_id += 1
     }
     
-    init(bound1: String, bound2: String, borough: String, number: Int) {
+    init(bound1: String, bound2: String, borough: String, number: String) {
         self.id = bus_id
         self.bound1 = bound1
         self.bound2 = bound2
@@ -43,18 +43,18 @@ class ChosenBus: ObservableObject {
     let id: Int
     let bound: String
     let borough: String
-    let number: Int
+    let number: String
     
     init() {
         self.id = bus_id
         self.bound = "X"
         self.borough = "X"
-        self.number = 0
+        self.number = "0"
     
         bus_id += 1
     }
     
-    init(bound: String, borough: String, number: Int) {
+    init(bound: String, borough: String, number: String) {
         self.id = bus_id
         self.bound = bound
         self.borough = borough

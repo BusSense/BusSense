@@ -1,0 +1,229 @@
+B1,Bay Ridge,Manhattan Beach via 86th St / Ocean Pkwy,B,1
+B11,Sunset Park,Midwood via 49th & 50th St / Avenue J,B,11
+B12,Lefferts Gardens,East New York via Clarkson Av / Empire Blvd / East New York Av,B,12
+B13,Spring Creek,Wyckoff Hospital via Crescent St / Jamaica Av / Wyckoff Av,B,13
+B14,Spring Creek,Crown Heights via Sutter Av / Pitkin Av,B,14
+B15,Bedford Stuyvesant,JFK Airport via Marcus Garvey Blvd / New Lots Av,B,15
+B16,Bay Ridge,Lefferts Gardens via Ft Hamilton Pkwy / 13th & 14th Av,B,16
+B17,Canarsie,Crown Heights via Remsen Av / Seaview Av,B,17
+B2,Kings Hwy Station,Kings Plaza via Avenue R / Avenue S,B,2
+B20,Ridgewood,Spring Creek via Pennsylvania Av / Decatur St,B,20
+B24,Williamsburg,Greenpoint via Greenpoint Av & 48th St / Meeker Av,B,24
+B25,Dwntn Bklyn & DUMBO,Broadway Junction via Fulton St,B,25
+B26,Downtown Brooklyn,Ridgewood via Halsey St / Fulton St,B,26
+B3,Bensonhurst,Bergen Beach via Avenue U,B,3
+B31,Gerritsen Beach,Kings Hwy Station via Gerritsen Av / Avenue R,B,31
+B32,Williamsburg,Long Island City via Kent Av / Wythe Av,B,32
+B35,Brownsville,Sunset Park via Church Av / 39th St,B,35
+B36,Sheepshead Bay,Coney Island via Avenue Z / Surf Av,B,36
+B37,Downtown Brooklyn,Bay Ridge via 3rd Av,B,37
+B38,Ridgewood,Downtown Brooklyn via DeKalb & Lafayette Av,B,38
+B39,Williamsburg Bridge Plaza,Lower East Side via Williamsburg Bridge / Delancey St,B,39
+B4,Bay Ridge,Sheepshead Bay via Bay Ridge Pkwy / 86th St / Avenue Z,B,4
+B41,Kings Plaza,Downtown Brooklyn via Flatbush Av / Livingston St,B,41
+B42,Canarsie Pier,Rockaway Parkway Station via Rockaway Pkwy,B,42
+B43,Greenpoint,Lefferts Gardens via Manhattan Av / Graham Av / Tompkins Av / Throop Av,B,43
+B44,Sheepshead Bay,Williamsburg via Nostrand Av,B,44
+B44+,Sheepshead Bay,Williamsburg,Select Bus Service via Nostrand Av,B,44+
+B45,Downtown Brooklyn,Crown Heights via St Johns Place / Washington Av / Atlantic Av,B,45
+B46,Kings Plaza,Williamsburg via Utica Av - Malcolm X Blvd,B,46
+B46+,Kings Plaza,Williamsburg,Select Bus Service via Utica Av - Malcolm X Blvd,B,46+
+B47,Kings Plaza,Bedford-Stuyvesant via Broadway / Ralph Av / Avenue U,B,47
+B48,Lefferts Gardens,Greenpoint via Lorimer St / Franklin & Classon Av,B,48
+B49,Manhattan Beach,Bedford-Stuyvesant via Ocean Av / Bedford & Rogers Av,B,49
+B52,Downtown Brooklyn,Ridgewood via Gates Av / Greene Av / Atlantic Av,B,52
+B54,Downtown Brooklyn,Ridgewood via Myrtle Av,B,54
+B57,Gowanus,Maspeth via Flushing Av,B,57
+B6,Bath Beach,East New York via Bay Pkwy / Avenue J / Flatlands Av,B,6
+B60,Williamsburg,Canarsie via Wilson Av / Rockaway Av,B,60
+B61,Park Slope,Downtown Brooklyn via Van Brunt St / Columbia St / 9th St,B,61
+B62,Downtown Brooklyn,Long Island City via Bklyn Navy Yard / Manhattan Av / Jackson Av,B,62
+B63,Bay Ridge,Cobble Hill via 5th Av / Atlantic Av,B,63
+B64,Bay Ridge,Coney Island via Bay Ridge Av / Bath Av,B,64
+B65,Downtown Brooklyn,Crown Heights via Bergen St & Dean St,B,65
+B67,Brooklyn Navy Yard,Kensington via Flatbush Av / 7th Av / McDonald Av,B,67
+B68,Coney Island,Windsor Terrace via Coney Island Av / Brighton Beach Av,B,68
+B69,Downtown Brooklyn,Kensington via Vanderbilt Av / 7th Av / McDonald Av,B,69
+B7,Midwood,Bedford-Stuyvesant via Kings Hwy / Saratoga Av,B,7
+B70,Dyker Heights,Sunset Park via 92nd St / 3rd Av / 8th Av,B,70
+B74,Sea Gate,Stillwell Av via Mermaid Av,B,74
+B8,Dyker Heights,East Flatbush via 18th Av / Foster Av / Avenue D,B,8
+B82,Coney Island,Spring Creek Towers via Bay Pkwy / Kings Hwy / Flatlands Av,B,82
+B82+,Coney Island -spring Creek Towers,select Bus service via Bay Pkwy / Kings Hwy / Flatlands Av,B,82+
+B83,Spring Creek,Broadway Junction via Van Siclen Av / Pennsylvania Av / Gateway Dr,B,83
+B84,Spring Creek-New Lots via Ashford Street/Flatlands Avenue,B,84
+B9,Bay Ridge,Kings Plaza via 60th St / Avenue M,B,9
+B91, Williamsburg Link,Loop via Union St / Driggs Av,B,91
+B91A, Williamsburg Link,Loop via Marcy Av / Bedford Av,B,91A
+B92, Williamsburg Link,Loop via Bedford Av / Metropolitan Av,B,92
+B98V, Pink Houses,Medgar Evers College via Eastern Pkwy / Rockaway Av,B,98V
+B99, Flatbush,Midtown via New York Av / Flatbush Av,B,99
+BX3,Riverdale,George Washington Bridge via Sedgwick Av / University Av / W 181st St,BX,3
+BX4,Westchester Sq,The Hub via Westchester Av,BX,4
+BX4A,Westchester Sq,Gladstone Sq via Metropolitan Av / Westchester Av,BX,4A
+BX5,Pelham Bay,Gladstone Sq via Bruckner Blvd  / Story Av,BX,5
+BX6,Hunts Point,Riverside Dr via E 161st St / E 163rd St / W 155 St,BX,6
+BX6+,Hunts Point,Riverside Dr,Select Bus Service via E 161st St / E 163rd St / W 155 St,BX,6+
+BX7,Riverdale,Washington Heights via Riverdale Av / Broadway,BX,7
+BX8,Williamsbridge,Locust Point via Bronxwood Av / Williamsbridge Rd / Crosby Av,BX,8
+BX9,Riverdale,West Farms Sq via Broadway / Kingsbridge Rd / Southern Blvd,BX,9
+BX1,Riverdale,Mott Haven via Grand Concourse / E 138th St,BX,1
+BX10,Riverdale,Norwood via H. Hudson Pkwy / W 231st St / Jerome Av,BX,10
+BX11,George Washington Bridge,Parkchester via E 170th St /  E 174th St,BX,11
+BX12,Pelham Bay,Inwood via Pelham Pkwy / Fordham Rd,BX,12
+BX12+,Bay Plaza,Inwood,Select Bus Service via Pelham Pkwy / Fordham Rd,BX,12+
+BX13,George Washington Bridge,Bronx Terminal Market via W 181st St / Ogden Av / River Av,BX,13
+BX15,Fordham Plaza,The Hub via 3rd Av,BX,15
+BX16,Pelham,Norwood via E 233rd St / Nereid Av,BX,16
+BX17,Fordham Plaza,Port Morris via Crotona Av / Prospect Av,BX,17
+BX18,Morris Heights/High Bridge Circulator via 168th St / Undercliff Av / Sedgwick Av,BX,18
+BX18B,Morris Heights/High Bridge Circulator via 168 St / Sedgwick Av,BX,18B
+BX18A,Morris Heights/High Bridge Circulator via 168 St / Undercliff Av,BX,18A
+BX19,NY Botanical Garden,Riverbank Park via Southern Bl / E 149th St,BX,19
+BX2,Kingsbridge Heights,Mott Haven via Grand Concourse / E 149th St,BX,2
+BX20,Riverdale,Inwood via Broadway / Henry Hudson Pkwy,BX,20
+BX21,Westchester Sq,Mott Haven via Morris Park Av / Boston Rd,BX,21
+BX22,Bedford Park,Castle Hill via Castle Hill Av / Fordham Rd,BX,22
+BX24,Country Club,Hutchinson Metro Center via Westchester Av / Country Club Loop,BX,24
+BX25,Co-op City Bay Plaza,Bedford Park via Allerton Av,BX,25
+BX26,Co-op City Section 5,Bedford Park via Allerton Av / Co-op City Blvd,BX,26
+BX27,Clasons Pt,Gladstone Sq via Westchester Av / Soundview Av,BX,27
+BX28,Co-op City Section 5,Fordham Center via E Gun Hill Rd / Bartow Av,BX,28
+BX29,City Island,Pelham Bay via City Island Rd / City Island Av,BX,29
+BX30,Co-op City Section 5,Pelham Parkway via Boston Rd,BX,30
+BX31,Woodlawn,Westchester Sq via E 233 St / Eastchester Rd,BX,31
+BX32,Kingsbridge VA Hospital,Mott Haven via Morris Av / Jerome Av,BX,32
+BX33,Port Morris,Harlem via E 138th St / W 135th St,BX,33
+BX34,Woodlawn,Fordham Center via Katonah Av / Bainbridge Av / Valentine Av,BX,34
+BX35,George Washington Bridge-West Farms Road via E 167th / W 181st St,BX,35
+BX36,Soundview,George Washington Bridge via E Tremont Av / White Plains Rd,BX,36
+BX38,Co-op City Bay Plaza,Norwood via E Gun Hill Rd / Co-op City Blvd,BX,38
+BX39,Wakefield,Clasons Pt via White Plains Rd,BX,39
+BX40,Throgs Neck,River Park Towers via E Tremont Av / E 180th St / Burnside Av,BX,40
+BX41,Williamsbridge,The Hub via Webster Av,BX,41
+BX41+,Williamsbridge,The Hub,Select Bus Service via Webster Av,BX,41+
+BX42,Throgs Neck,River Park Towers via E Tremont Av / E 180th St / Burnside Av,BX,42
+BX46,Prospect Av,Westchester Av / Hunts Point Market via Barretto PK,BX,46
+BX99,Woodlawn,West Village via 8 av / Grand Concourse,BX,99
+M191,191 ST Shuttle Loop via St Nicholas Av and Broadway,M,191
+M1,Harlem,East Village via 5th Av / Madison Av,M,1
+M2,Washington Heights,East Village via 5th Av / Madison Av / AC Powell Blvd,M,2
+M3,Fort George,East Village via 5th Av / Madison Av / St Nicholas Av,M,3
+M4,The Cloisters,32 St via 5th Av / Madison Av / Broadway / Ft.Washington Av,M,4
+M5,George Washington Bridge,31 St & 6 Av via 5th Av / Av of Americas / Riverside Dr,M,5
+M7,Harlem,14th Street via Columbus / Amsterdam / 6 & 7 Av / Bway,M,7
+M8,West Village,East Village via 8 & 9 St Crosstown,M,8
+M9,Battery Park City,Kips Bay via Avenue C / E Broadway,M,9
+M10,Harlem,Columbus Circle via Central Park West / Frederick Douglass Blvd,M,10
+M100,Inwood,Harlem via Broadway / Amsterdam Av,M,100
+M101,East Village,Fort George via Third Av / Lexington Av / Amsterdam Av,M,101
+M102,Harlem,East Village via 3rd Av / Lexington Av / Lenox Av,M,102
+M103,East Harlem,City Hall via 3rd Av / Lexington Av,M,103
+M104,West Harlem,Times Square via Broadway / 8th Av,M,104
+M106,East Harlem,West Side via 96th St / E 106th St Crosstown,M,106
+M11,Riverbank Park & Harlem,West Village via 9th - Columbus Av / 10th - Amsterdam Av,M,11
+M116,West Side,East Harlem via 116th St Crosstown,M,116
+M12,Midtown West,West Village via 11 Av / 12 Av,M,12
+M125,Manhattanville,The Hub via 125th St / Willis Av,M,125
+M141A,9th Avenue,Avenue A via 14th St Crosstown,M,141A
+M14A+,Lower East Side,Abingdon Sq,Select Bus Service via 14th St / Av A,M,14A+
+M14D+,Lower East Side,Chelsea Piers,Select Bus Service via 14th St / Av D,M,14D+
+M15,East Harlem,South Ferry via 1st Av / 2nd Av,M,15
+M15+,East Harlem,South Ferry,Select Bus Service via 1st Av / 2nd Av,M,15+
+M20,Lincoln Center,South Ferry via 7th Av / 8th Av / Battery Park City,M,20
+M21,Lower East Side,West Village via Houston St Crosstown,M,21
+M22,Lower East Side,Battery Park City via Madison St / Chambers St,M,22
+M23+,Chelsea Piers,East Side,Select Bus Service via 23rd St Crosstown,M,23+
+M31,Yorkville,Clinton via  York Av / 57th St,M,31
+M34+,East Side,Javits Center,Select Bus Service via 34th St Crosstown,M,34+
+M34A+,Waterside,Port Authority Terminal,Select Bus Service via 34th St Crosstown,M,34A+
+M35,Ward's Island,East Harlem via Randall's Island / RFK Bridge,M,35
+M42,United Nations,W 42 St Pier via 42nd St Crosstown,M,42
+M50,W 42 St Pier,East Side via 49th St / 50th St Crosstown,M,50
+M55,W 44 St ,South Ferry via 5 Av & 6 Av,M,55
+M57,East Side,West Side via 57th St Crosstown,M,57
+M60+,West Side,LaGuardia Airport,Select Bus Service via 125th St / Astoria Blvd,M,60+
+M66,East Side,Lincoln Center via 65th & 68th St (East) / 67th & 66th St (West),M,66
+M72,East Side,West Side via 72nd St Crosstown,M,72
+M79+,Yorkville,West Side,Select Bus Service via 79th St Crosstown,M,79+
+M86+,Yorkville,West Side,Select Bus Service via 86th St Crosstown,M,86+
+M96,East Side,West Side via 96th St Crosstown,M,96
+M98,Washington Heights,Upper East Side LTD via Harlem River Dr / Lexington / 3rd,M,98
+M99,W 42 St Pier,East New York via Fulton St,M,99
+Q1,Queens Village / Bellerose,Jamaica via Springfield Blvd / Braddock Av / Hillside Av,Q,1
+Q2,Queens Village,Jamaica via Hollis Av / Hillside Av,Q,2
+Q3,Jamaica,JFK Airport via Farmers Blvd / Hillside Av,Q,3
+Q4,Cambria Heights,Jamaica via Linden Blvd / Merrick Blvd,Q,4
+Q5,Rosedale or Green Acres Mall,Jamaica via Merrick Blvd / Hook Creek Blvd / Sunrise Highway,Q,5
+Q12,Little Neck,Flushing via Sanford Av / Northern Blvd,Q,12
+Q13,Fort Totten,Flushing via Northern Blvd / Bell Blvd,Q,13
+Q15,Flushing,Beechhurst via 150th St / 154th St,Q,15
+Q15A,Flushing,Beechhurst / Whitestone via 150th St / Whitestone,Q,15A
+Q16,Fort Totten,Flushing via Bayside Av / Francis Lewis Blvd / Utopia Parkway,Q,16
+Q17,Flushing,Jamaica via Kissena Blvd / Horace Harding Expwy / 188th St / Hillside Av,Q,17
+Q20A,College Point,Jamaica via 20 Av / Main St,Q,20A
+Q20B,College Point,Jamaica via 14 Av / Main St,Q,20B
+Q24,Broadway Junction,Jamaica via Atlantic Av,Q,24
+Q26,Fresh Meadows,Flushing (Part-time) via Hollis Court Blvd / 46th Av / Parsons Blvd,Q,26
+Q27,Cambria Heights,Flushing via Springfield Blvd / Rocky Hill Rd / 46th Av / Kissena Blvd,Q,27
+Q28,Bayside,Flushing via Northern Blvd / 32nd Av / Corporal Kennedy St,Q,28
+Q30,Little Neck or Queensborough Community College,Jamaica via Horace Harding Expwy / Utopia Pkwy / Homelawn St,Q,30
+Q31,Bayside,Jamaica via Bell Blvd / Utopia Pkwy / Homelawn St,Q,31
+Q32,Jackson Heights,Penn Station via Roosevelt Av / Queens Blvd / Fifth Av / Madison Av,Q,32
+Q36,Floral Park or Little Neck,Jamaica via Jamaica Av / Hillside Av / Little Neck Pkwy,Q,36
+Q42,Addeslieigh Park,Jamaica via 174 St / Liberty Av / Sayres Av,Q,42
+Q43,Floral Park,Jamaica via Sutphin Blvd / Hillside Av,Q,43
+Q44+,Bronx Zoo,Jamaica,Select Bus Service via Main St / Cross Bronx Svc Rd (Q20 Limited),Q,44+
+Q46,Glen Oaks,Kew Gardens via Union Turnpike,Q,46
+Q48,Flushing,LaGuardia Airport via Roosevelt Av / 108th St / Ditmars Blvd,Q,48
+Q54,Williamsburg,Jamaica via Jamaica Av / Metropolitan Av,Q,54
+Q55,Ridgewood,Richmond Hill via Myrtle Av,Q,55
+Q56,Broadway Junction,Jamaica via Jamaica Av,Q,56
+Q58,Ridgewood,Flushing via Fresh Pond Rd / Corona Av / College Pt Blvd,Q,58
+Q59,Williamsburg,Rego Park via Grand St / Grand Av / Queens Blvd,Q,59
+Q76,College Point,Jamaica via Francis Lewis Blvd / Hillside Av,Q,76
+Q77,Laurelton,Jamaica via Springfield / Francis Lewis / Hillside Av,Q,77
+Q78,Bay Terrace,Springfield Gardens via Springfield Bl,Q,78
+Q82,Jamaica,Belmont Pk via Hillside Av,Q,82
+Q83,Cambria Heights,Jamaica via Murdock Av / Liberty Av (Local and Limited-stop Service) Av,Q,83
+Q84,Laurelton,Jamaica via Merrick Blvd / 120th Av,Q,84
+Q85,Rosedale or Green Acres Shopping Mall,Jamaica via Merrick Blvd / Conduit Av,Q,85
+Q88,Elmhurst,Queens Village via Horace Harding Expwy / 73rd Av / Springfield Blvd,Q,88
+S40,St. George,Amazon via Richmond Terrace,S,40
+S42,St. George,Clyde Place via St Marks Pl / Jersey St,S,42
+S44,St. George,Staten Island Mall via Richmond Av,S,44
+S46,St. George,West Shore Plaza via Castleton Av,S,46
+S48,St. George,Mariners Harbor via Forest Av,S,48
+S51,St. George,Grant City via Bay St / Father Capodanno Blvd,S,51
+S52,St. George,Staten Island Univ. Hospital via Tompkins Av / Cebra Av / Jersey St ,S,52
+S53,Port Richmond,Bay Ridge via Verrazano-Narrows Bridge / Clove Rd,S,53
+S54,West New Brighton,Eltingville via Manor Rd,S,54
+S55,Rossville,Staten Island Mall via Bloomingdale Rd / Annadale Rd / Richmond Av,S,55
+S56,Huguenot,Staten Island Mall via Richmond Av / Arthur Kill Rd / Foster Rd,S,56
+S57,Port Richmond,New Dorp via Rockland Av / Brielle Av / Bradley Av,S,57
+S59,Port Richmond,Tottenville via Richmond Av,S,59
+S61,St. George,Staten Island Mall via Victory Blvd / Bradley Av,S,61
+S62,St. George,Travis via Victory Blvd,S,62
+S66,St. George,Port Richmond via Victory Blvd / Jewett Av,S,66
+S74,St. George,Bricktown Mall via Richmond Rd / Arthur Kill Rd,S,74
+S76,St. George,Oakwood via Richmond Rd / New Dorp Ln,S,76
+S78,St. George,Bricktown Mall via Hylan Blvd,S,78
+S79+,Staten Island Mall,Bay Ridge,Select Bus Service via Verrazano-Narrows Bridge / Hylan Blvd,S,79+
+S81,St. George,Grant City LTD via Bay St / Father Capodanno Blvd (S51 Limited),S,81
+S84,St. George,Bricktown Mall LTD via Richmond Rd / Arthur Kill Rd (S74 Limited),S,84
+S86,St. George,Oakwood LTD via Richmond Rd / New Dorp Ln (S76 Limited),S,86
+S89,Eltingville,Bayonne LTD via Richmond Av (S59 Limited),S,89
+S90,St. George,Amazon via Richmond Terrace (S40 Limited),S,90
+S91,St. George,Staten Island Mall LTD via Victory Blvd / Bradley Av (S61 Limited),S,91
+S92,St. George,Travis LTD via Victory Blvd (S62 Limited),S,92
+S93,College of Staten Island,Bay Ridge LTD via Verrazano-Narrows / Victory,S,93
+S94,St. George,Staten Island Mall LTD via Richmond Av (S44 Limited),S,94
+S96,St. George,West Shore Plaza LTD via Castleton Av (S46 Limited),S,96
+S98,St. George,Mariners Harbor LTD via Forest Av (S48 Limited),S,98
+X27,Bay Ridge,Manhattan Express via Shore Rd,X,27
+X28,Sea Gate / Bensonhurst,Manhattan Express via Surf Av / Cropsey Av,X,28
+X37,Bay Ridge,Midtown Manhattan Express via Shore Rd,X,37
+X38,Sea Gate / Bensonhurst,Midtown Manhattan Express via Surf Av / Cropsey Av,X,38
+X63,Rosedale,Midtown Manhattan Express via Merrick Bl / Francis Lewis Bl,X,63
+X64,Cambria Heights,Midtown Manhattan Express via Linden Bl / Farmers Bl / Liberty Av,X,64
+X68,Floral Park,Midtown Manhattan Express via Hillside Av / Queens Bl,X,68

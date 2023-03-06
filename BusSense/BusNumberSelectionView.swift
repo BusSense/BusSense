@@ -7,41 +7,41 @@
 
 import SwiftUI
 
-func allNumbers(busBorough: String) -> Array<Int> {
+func allNumbers(busBorough: String) -> Array<String> {
     
-    var busNumbers = [Int]()
-    let nf = NumberFormatter()
-    let path = "/Users/suhaimaislam/Downloads/routes.txt"
+    var busNumbers = [String]()
+    var arguments = [String]()
     
-    let contents = try! NSString(contentsOfFile: path,
-            encoding: String.Encoding.ascii.rawValue)
+    // read from file
+    let fileURL = Bundle.main.url(forResource: "routes", withExtension: "txt")!
+    let contents = try! String(contentsOf: fileURL, encoding: String.Encoding.utf8)
     
-    let lines = contents.components(separatedBy: "\n")
+    var lines = contents.components(separatedBy: "\n")
+    lines.removeLast()
     for line in lines {
-        let arguments = line.split(separator:",")
-        if String(arguments[3]) == busBorough {
-            let bus_number = nf.number(from: String(arguments[4]))?.intValue ?? 0
-            busNumbers.append(bus_number)
+        arguments = line.components(separatedBy: ",")
+        if arguments[3] == busBorough {
+//            let bus_number = nf.number(from: String(arguments[4]))?.intValue ?? 0
+            busNumbers.append(arguments[4])
         }
     }
     
     return busNumbers
 }
 
-func chooseBusNumber(busBorough: String, busNumber: Int) -> Bus {
+func chooseBusNumber(busBorough: String, busNumber: String) -> Bus {
     
-    let desiredBus = busBorough + String(busNumber)
+    let desiredBus = busBorough + busNumber
     var bus = Bus()
     
-    let path = "/Users/suhaimaislam/Downloads/routes.txt"
-    
-    let contents = try! NSString(contentsOfFile: path,
-            encoding: String.Encoding.ascii.rawValue)
+    // read from file
+    let fileURL = Bundle.main.url(forResource: "routes", withExtension: "txt")!
+    let contents = try! String(contentsOf: fileURL, encoding: String.Encoding.utf8)
     
     let lines = contents.components(separatedBy: "\n")
     
     for line in lines {
-        let arguments = line.split(separator:",")
+        let arguments = line.components(separatedBy: ",")
         if arguments[0] == desiredBus {
             bus = Bus(bound1: String(arguments[1]), bound2: String(arguments[2]), borough: String(arguments[3]), number: busNumber)
             break
@@ -62,10 +62,11 @@ struct BusNumberSelectionView: View {
                 
                 Color("Color1").ignoresSafeArea()
                 
-                ScrollView {
-                    let selection = "Bus Letter: " + bus.borough
+                ScrollView(.vertical) {
                     
                     let busNumbers = allNumbers(busBorough: bus.borough)
+                    
+                    let selection = "Bus Letter: " + bus.borough
                     
                     Text(selection)
                         .font(.title)
@@ -85,24 +86,20 @@ struct BusNumberSelectionView: View {
                         .background(Color("Color2"))
                         .cornerRadius(20)
                     
-                    List {
-                        
-                        ForEach(busNumbers, id: \.self) { number in
-                            Button {
-                                print("GO")
-                            } label: {
-                                NavigationLink(destination: BusBoundSelectionView(bus: chooseBusNumber(busBorough: bus.borough, busNumber: number))) {
-                                    Text("Go")
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.white)
-                                        .multilineTextAlignment(.center)
-                                        .frame(width: 65, height: 65)
-                                        .background(Color("Color2"))
-                                        .cornerRadius(20)
-                                }
+                    // buttons for bus numbers
+                    VStack {
+                        ForEach(busNumbers, id: \.self) {
+                            i in
+                            NavigationLink(destination: BusBoundSelectionView(bus: chooseBusNumber(busBorough: bus.borough, busNumber: i))) {
+                                Text("\(i)")
+                                    .font(.title)
+                                    .frame(width:300, height:200)
+                                    .foregroundColor(Color.white)
+                                    .background(Color("Color2"))
+                                    .cornerRadius(20)
                             }
                         }
+                        Spacer()
                     }
                 }
             }

@@ -36,18 +36,47 @@ func extractDigits(_ string:String) -> String {
     return stringToInt
 }
 
+// return true if string contains any element from an array
+extension String {
+    func contains(_ strings: [String]) -> Bool {
+        strings.contains { contains($0) }
+    }
+}
+
 // Use user input from mic to find bus information from "routes.txt"
 // and return Bus() object with that bus information
 func findBus(userInput: String) -> Bus {
+        
+    // read from txt file
+    let fileURL = Bundle.main.url(forResource: "routes", withExtension: "txt")!
+    let contents = try! String(contentsOf: fileURL, encoding: String.Encoding.utf8)
     
-    let nf = NumberFormatter()
-    
-    let path = "/Users/suhaimaislam/Downloads/routes.txt"
+    // Bus instance to return
     var bus = Bus()
-    let newInput = "B" + extractDigits(userInput)
     
-    let contents = try! NSString(contentsOfFile: path,
-            encoding: String.Encoding.ascii.rawValue)
+    // check which borough the user input contains & extract it
+    let boroughOptions = ["BX","B","M","Q","S"]
+    let containsBorough = userInput.contains(boroughOptions)
+    var userBorough = ""
+    if containsBorough == true {
+        if userInput.contains("BX") {
+            userBorough = "BX"
+        }
+        else if userInput.contains("B") {
+            userBorough = "B"
+        }
+        else if userInput.contains("M") {
+            userBorough = "M"
+        }
+        else if userInput.contains("Q") {
+            userBorough = "Q"
+        }
+        else if userInput.contains("S") {
+            userBorough = "S"
+        }
+    }
+    
+    let newInput = userBorough + extractDigits(userInput)
 
 //    let contents = try! String(contentsOfFile: path, encoding: .utf8)
     let lines = contents.components(separatedBy: "\n")
@@ -57,8 +86,8 @@ func findBus(userInput: String) -> Bus {
         let arguments = line.split(separator:",")
         if String(arguments[0]) == newInput {
 //            let bus_number = Int(String(arguments[4])) ?? 0
-            let bus_number = nf.number(from: String(arguments[4]))?.intValue ?? 0
-            bus = Bus(bound1: String(arguments[1]), bound2: String(arguments[2]), borough: String(arguments[3]), number: bus_number)
+//            let bus_number = nf.number(from: String(arguments[4]))?.intValue ?? 0
+            bus = Bus(bound1: String(arguments[1]), bound2: String(arguments[2]), borough: String(arguments[3]), number: String(arguments[4]))
             break
         }
     }
@@ -170,7 +199,7 @@ struct ContentView: View {
                         }
                     }
                     
-                    if choice.contains("B") && stringHasNumber(choice)==true {
+                    if (choice.contains("B") || choice.contains("BX") || choice.contains("M") || choice.contains("Q") || choice.contains("S")) && stringHasNumber(choice)==true {
                             Button {
                                 print("GO")
                             } label: {
@@ -193,7 +222,7 @@ struct ContentView: View {
                         Button {
                             print("B")
                         } label: {
-                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "B", number: 0))) {
+                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "B", number: "0"))) {
                                 Text("B")
                                 .font(.title)
                                 .fontWeight(.bold)
@@ -206,10 +235,10 @@ struct ContentView: View {
                         }
                                             
                         Button {
-                            print("Bx")
+                            print("BX")
                         } label: {
-                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "Bx", number: 0))) {
-                                Text("Bx")
+                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "BX", number: "0"))) {
+                                Text("BX")
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.white)
@@ -223,7 +252,7 @@ struct ContentView: View {
                         Button {
                             print("M")
                         } label: {
-                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "M", number: 0))) {
+                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "M", number: "0"))) {
                                 Text("M")
                                     .font(.title)
                                     .fontWeight(.bold)
@@ -238,7 +267,7 @@ struct ContentView: View {
                         Button {
                             print("Q")
                         } label: {
-                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "Q", number: 0))) {
+                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "Q", number: "0"))) {
                                 Text("Q")
                                     .font(.title)
                                     .fontWeight(.bold)
@@ -253,7 +282,7 @@ struct ContentView: View {
                         Button {
                             print("S")
                         } label: {
-                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "S", number: 0))) {
+                            NavigationLink(destination: BusNumberSelectionView(bus: Bus(bound1: "X", bound2: "X", borough: "S", number: "0"))) {
                                 Text("S")
                                     .font(.title)
                                     .fontWeight(.bold)
