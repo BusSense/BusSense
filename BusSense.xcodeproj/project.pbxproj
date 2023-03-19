@@ -17,6 +17,8 @@
 		21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */; };
 		21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B7298F5D7B0015FF7E /* ResultView.swift */; };
 		21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B9298F66580015FF7E /* WaitingView.swift */; };
+		7A7E022A29B5E36C00883F48 /* BusConfimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7E022929B5E36C00883F48 /* BusConfimationView.swift */; };
+		7A90D5B629C6D2BF007CB7D5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A90D5B529C6D2BF007CB7D5 /* APIManager.swift */; };
 		7AA4C67D29A452B80047743B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA4C67C29A452B80047743B /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		21FFD3B9298F66580015FF7E /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		7A7E022929B5E36C00883F48 /* BusConfimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusConfimationView.swift; sourceTree = "<group>"; };
+		7A90D5B529C6D2BF007CB7D5 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		7AA4C67C29A452B80047743B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,11 +109,13 @@
 				21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */,
 				21724E6D298F1FA000E5BDFF /* ContentView.swift */,
 				21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */,
+				7A7E022929B5E36C00883F48 /* BusConfimationView.swift */,
 				21FFD3B9298F66580015FF7E /* WaitingView.swift */,
 				21FFD3B7298F5D7B0015FF7E /* ResultView.swift */,
 				21724E6F298F1FA500E5BDFF /* Assets.xcassets */,
 				21724E71298F1FA500E5BDFF /* Preview Content */,
 				7AA4C67C29A452B80047743B /* LocationManager.swift */,
+				7A90D5B529C6D2BF007CB7D5 /* APIManager.swift */,
 			);
 			path = BusSense;
 			sourceTree = "<group>";
@@ -269,11 +275,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A90D5B629C6D2BF007CB7D5 /* APIManager.swift in Sources */,
 				21724E6E298F1FA000E5BDFF /* ContentView.swift in Sources */,
 				21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */,
 				7AA4C67D29A452B80047743B /* LocationManager.swift in Sources */,
 				21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */,
 				21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */,
+				7A7E022A29B5E36C00883F48 /* BusConfimationView.swift in Sources */,
 				21724E6C298F1FA000E5BDFF /* BusSenseApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
+				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App wants to use location services.";
@@ -463,6 +472,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
+				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App wants to use location services.";
