@@ -11,6 +11,7 @@ class LocationManager: NSObject, ObservableObject {
     
     private let manager = CLLocationManager()
     @Published var userLocation: CLLocation?
+    @Published var locationPermission: CLAuthorizationStatus?
     static let shared = LocationManager()
     
     override init() {
@@ -27,17 +28,20 @@ class LocationManager: NSObject, ObservableObject {
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        self.locationPermission = status
+        
         switch status {
             case .notDetermined:
-                print("DEBUG: not determined")
+                print("DEBUG: location permission not determined")
             case .restricted:
-                print("DEBUG: restricted")
+                print("DEBUG: location permission restricted")
             case .denied:
-                print("DEBUG: denied")
+                print("DEBUG: location permission denied")
             case .authorizedAlways:
-                print("Debug: auth always")
+                print("Debug: location permission auth always")
             case .authorizedWhenInUse:
-                print("DEBUG: auth when in use")
+                print("DEBUG: location permission auth when in use")
                 
             @unknown default:
                 break

@@ -17,9 +17,14 @@
 		21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */; };
 		21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B7298F5D7B0015FF7E /* ResultView.swift */; };
 		21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B9298F66580015FF7E /* WaitingView.swift */; };
+		7A7C591829C7C99D00C54AEA /* stopsForLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591729C7C99D00C54AEA /* stopsForLocation.swift */; };
+		7A7C591A29C7C9F000C54AEA /* stopMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591929C7C9F000C54AEA /* stopMonitoring.swift */; };
+		7A7C591C29C7CAA900C54AEA /* stopsForLocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591B29C7CAA900C54AEA /* stopsForLocationFetcher.swift */; };
+		7A7C594229CA6C4A00C54AEA /* stopMonitoringFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C594129CA6C4A00C54AEA /* stopMonitoringFetcher.swift */; };
 		7A7E022A29B5E36C00883F48 /* BusConfimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7E022929B5E36C00883F48 /* BusConfimationView.swift */; };
-		7A90D5B629C6D2BF007CB7D5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A90D5B529C6D2BF007CB7D5 /* APIManager.swift */; };
 		7AA4C67D29A452B80047743B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA4C67C29A452B80047743B /* LocationManager.swift */; };
+		7AC5E1EA29CB7EC800743398 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5E1E929CB7EC800743398 /* APIService.swift */; };
+		7AC5E1EC29CB7ED300743398 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5E1EB29CB7ED300743398 /* APIError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +58,14 @@
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		21FFD3B9298F66580015FF7E /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		7A7C591729C7C99D00C54AEA /* stopsForLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stopsForLocation.swift; sourceTree = "<group>"; };
+		7A7C591929C7C9F000C54AEA /* stopMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stopMonitoring.swift; sourceTree = "<group>"; };
+		7A7C591B29C7CAA900C54AEA /* stopsForLocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stopsForLocationFetcher.swift; sourceTree = "<group>"; };
+		7A7C594129CA6C4A00C54AEA /* stopMonitoringFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stopMonitoringFetcher.swift; sourceTree = "<group>"; };
 		7A7E022929B5E36C00883F48 /* BusConfimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusConfimationView.swift; sourceTree = "<group>"; };
-		7A90D5B529C6D2BF007CB7D5 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		7AA4C67C29A452B80047743B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		7AC5E1E929CB7EC800743398 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		7AC5E1EB29CB7ED300743398 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				21724E6A298F1FA000E5BDFF /* BusSense */,
+				21724E6F298F1FA500E5BDFF /* Assets.xcassets */,
+				21724E71298F1FA500E5BDFF /* Preview Content */,
 				21724E7B298F1FA600E5BDFF /* BusSenseTests */,
 				21724E85298F1FA600E5BDFF /* BusSenseUITests */,
 				21724E69298F1FA000E5BDFF /* Products */,
@@ -108,14 +120,10 @@
 			children = (
 				21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */,
 				21724E6D298F1FA000E5BDFF /* ContentView.swift */,
-				21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */,
-				7A7E022929B5E36C00883F48 /* BusConfimationView.swift */,
-				21FFD3B9298F66580015FF7E /* WaitingView.swift */,
-				21FFD3B7298F5D7B0015FF7E /* ResultView.swift */,
-				21724E6F298F1FA500E5BDFF /* Assets.xcassets */,
-				21724E71298F1FA500E5BDFF /* Preview Content */,
-				7AA4C67C29A452B80047743B /* LocationManager.swift */,
-				7A90D5B529C6D2BF007CB7D5 /* APIManager.swift */,
+				7AC5E1EF29CB8D8400743398 /* Views */,
+				7AC5E1EE29CB8CF400743398 /* Manager */,
+				7A7C591E29C7D36200C54AEA /* Networking */,
+				7A7C591D29C7D33700C54AEA /* Models */,
 			);
 			path = BusSense;
 			sourceTree = "<group>";
@@ -143,6 +151,45 @@
 				21724E88298F1FA600E5BDFF /* BusSenseUITestsLaunchTests.swift */,
 			);
 			path = BusSenseUITests;
+			sourceTree = "<group>";
+		};
+		7A7C591D29C7D33700C54AEA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7A7C591729C7C99D00C54AEA /* stopsForLocation.swift */,
+				7A7C591929C7C9F000C54AEA /* stopMonitoring.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7A7C591E29C7D36200C54AEA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7A7C591B29C7CAA900C54AEA /* stopsForLocationFetcher.swift */,
+				7A7C594129CA6C4A00C54AEA /* stopMonitoringFetcher.swift */,
+				7AC5E1E929CB7EC800743398 /* APIService.swift */,
+				7AC5E1EB29CB7ED300743398 /* APIError.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		7AC5E1EE29CB8CF400743398 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				7AA4C67C29A452B80047743B /* LocationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		7AC5E1EF29CB8D8400743398 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */,
+				7A7E022929B5E36C00883F48 /* BusConfimationView.swift */,
+				21FFD3B9298F66580015FF7E /* WaitingView.swift */,
+				21FFD3B7298F5D7B0015FF7E /* ResultView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,14 +322,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A90D5B629C6D2BF007CB7D5 /* APIManager.swift in Sources */,
 				21724E6E298F1FA000E5BDFF /* ContentView.swift in Sources */,
+				7A7C591C29C7CAA900C54AEA /* stopsForLocationFetcher.swift in Sources */,
 				21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */,
+				7A7C591A29C7C9F000C54AEA /* stopMonitoring.swift in Sources */,
 				7AA4C67D29A452B80047743B /* LocationManager.swift in Sources */,
 				21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */,
 				21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */,
+				7A7C591829C7C99D00C54AEA /* stopsForLocation.swift in Sources */,
+				7AC5E1EA29CB7EC800743398 /* APIService.swift in Sources */,
+				7A7C594229CA6C4A00C54AEA /* stopMonitoringFetcher.swift in Sources */,
 				7A7E022A29B5E36C00883F48 /* BusConfimationView.swift in Sources */,
 				21724E6C298F1FA000E5BDFF /* BusSenseApp.swift in Sources */,
+				7AC5E1EC29CB7ED300743398 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +492,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -471,7 +523,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BusSense/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
