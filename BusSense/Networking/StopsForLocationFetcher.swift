@@ -44,6 +44,8 @@ class StopsForLocationFetcher: ObservableObject {
                     print(error)
                 case .success(let busStops):
                     self.busStops = busStops
+                    print("bus stops:")
+                    print(busStops)
                 }
             }
         }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - RawServerResponseMTASIRI
+// MARK: - RawServerResponseStopMonitoring
 struct RawServerResponseStopMonitoring: Codable {
     let siri: Siri
 

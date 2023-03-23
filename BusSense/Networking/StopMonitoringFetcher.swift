@@ -48,6 +48,8 @@ class StopMonitoringFetcher: ObservableObject {
                     print(error)
                 case .success(let monitoredStop):
                     self.monitoredStop = monitoredStop
+                    print("Monitored stop:")
+                    print(monitoredStop)
                 }
             }
         }
