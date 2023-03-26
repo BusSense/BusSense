@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct BusConfimationView: View {
+struct BusTrackingView: View {
+        
     var body: some View {
         ZStack {
             Color("Color1").ignoresSafeArea()
@@ -38,8 +39,8 @@ struct BusConfimationView: View {
     }
 }
 
-struct BusConfimationView_Previews: PreviewProvider {
+struct BusTrackingView_Previews: PreviewProvider {
     static var previews: some View {
-        BusConfimationView()
+        BusTrackingView()
     }
 }

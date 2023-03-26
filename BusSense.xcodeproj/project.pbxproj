@@ -57,6 +57,7 @@
 		21724E82298F1FA600E5BDFF /* BusSenseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusSenseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21724E86298F1FA600E5BDFF /* BusSenseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSenseUITests.swift; sourceTree = "<group>"; };
 		21724E88298F1FA600E5BDFF /* BusSenseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSenseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		21D1375029CF8260008B0CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		21FFD3B9298F66580015FF7E /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 		21724E6A298F1FA000E5BDFF /* BusSense */ = {
 			isa = PBXGroup;
 			children = (
+				21D1375029CF8260008B0CF3 /* Info.plist */,
 				21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */,
 				21724E6D298F1FA000E5BDFF /* ContentView.swift */,
 				7AC5E1EF29CB8D8400743398 /* Views */,
@@ -504,9 +506,9 @@
 				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusSense/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App wants to use location services.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App wants to use location services.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -535,9 +537,9 @@
 				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusSense/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App wants to use location services.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App wants to use location services.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

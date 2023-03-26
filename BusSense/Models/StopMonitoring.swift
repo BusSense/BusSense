@@ -7,6 +7,79 @@
 
 import Foundation
 
+//struct RawServerResponseStopMonitoring: Codable {
+//    let Siri: ServiceDeliveryResponse
+//}
+//
+//struct ServiceDeliveryResponse: Codable {
+//    let ServiceDelivery: DeliveryResponse
+//}
+//
+//struct DeliveryResponse: Codable {
+//    let ResponseTimestamp: String
+//    let StopMonitoringDelivery: [StopVisits]
+//}
+//
+//struct StopVisits: Codable {
+//    let MonitoredStopVisit: VehicleJourneyResponse
+//    let ResponseTimestamp: String
+//    let ValidUntil: String
+//}
+//
+//struct VehicleJourneyResponse: Codable {
+//    let LineRef: String
+//    let DirectionRef: String
+//    let FramedVehicleJourneyRef: JourneyRefResponse
+//    let JourneyPatternRef: String
+//    let PublishedLineName: String
+//    let OperatorRef: String
+//    let OriginRef: String
+//    let DestinationName: String
+//    let OriginAimedDepartureTime: String
+//    let Monitored: Bool
+//    let VehicleLocation: Location
+//    let Bearing: Double
+//    let ProgressRate: String
+//    let ProgressStatus: String
+//    let BlockRef: String
+//    let VehicleRef: String
+//    let MonitoredCall: MonitoredCallResponse
+//    let OnwardCalls: String
+//}
+//
+//struct JourneyRefResponse: Codable {
+//    let DataFrameRef: String
+//    let DatedVehicleJourneyRef: String
+//}
+//
+//struct Location: Codable {
+//    let latitude: Double
+//    let longitude: Double
+//}
+//
+//struct MonitoredCallResponse: Codable {
+//    let AimedArrivalTime: String
+//    let ExpectedArrivalTime: String
+//    let AimedDepartureTime: String
+//    let ExpectedDepartureTime: String
+//    let Extensions: ExtensionsResponse
+//    let StopPointRef: String
+//    let VisitNumber: Int
+//    let StopPointName: String
+//}
+//
+//struct ExtensionsResponse: Codable {
+//    let Distances: Distance
+//}
+//
+//struct Distance: Codable {
+//    let PresentableDistance: String
+//    let DistanceFromCall: Double
+//    let StopsFromCall: Int
+//    let CallDistanceAlongRoute: Double
+//}
+
+
 // MARK: - RawServerResponseStopMonitoring
 struct RawServerResponseStopMonitoring: Codable {
     let siri: Siri
@@ -143,7 +216,7 @@ struct MonitoredVehicleJourney: Codable {
     let journeyPatternRef: String
     let publishedLineName: [String]
     let operatorRef, originRef, destinationRef: String
-    let destinationName: [String]
+    let destinationName: String
     let monitored: Bool
     let vehicleLocation: VehicleLocation
     let bearing: Double

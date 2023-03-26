@@ -7,47 +7,68 @@
 
 import Foundation
 
+
+// Stop-For-Location JSON
+
 struct RawServerResponseStopsForLocation: Codable {
     let code: Int
+    let currentTime: Int
     let data: DataResponse
+    let text: String
+    let version: Int
 }
 
 struct DataResponse: Codable {
         let limitExceeded: Bool
-        let busStop: [BusStop]
-        let references: ReferencesStruct
+        let stops: [BusStop]
+//        let references: ReferencesStruct
     
-    enum CodingKeys: String, CodingKey {
-        case limitExceeded, references
-        case busStop = "list"
-    }
+//    enum CodingKeys: String, CodingKey {
+////        case limitExceeded, references
+//        case limitExceeded
+//        case stops = "list"
+//    }
 }
 
 struct BusStop: Codable {
     let code: String
-    let id: String
-    let name: String
     let direction: String
+    let id: String
     let lat: Double
-    let lon: Double
     let locationType: Int
-    let routeIds: [String]
+    let lon: Double
+    let name: String
+    let routes: [BusRoutes]
     let wheelchairBoarding: String
 }
 
-struct ReferencesStruct: Codable {
-    let routes: [BusRoutes]
-}
+//struct ReferencesStruct: Codable {
+//    let routes: [BusRoutes]
+//}
 
 struct BusRoutes: Codable {
-    let agencyId: String
-    let color: String
-    let description: String
-    let id: String
-    let longName: String
-    let shortName: String
-    let textColor: String
-    let type: Int
+    var agency: Agency
+    var color: String = ""
+    var description: String = ""
+    var id: String = ""
+    var longName: String = ""
+    var shortName: String = ""
+    var textColor: String = ""
+    var type: Int = 1
+    var url: String = ""
+}
+
+struct Agency: Codable {
+    var disclaimer: String = ""
+    var email: String = ""
+    var fareUrl: String = ""
+    var id: String = ""
+    var lang: String = ""
+    var name: String = ""
+    var phone: String = ""
+    var privateService: Bool = false
+    var timezone: String = ""
+    var url: String = ""
 }
 
 struct StopsForLocation: Decodable {
@@ -59,7 +80,8 @@ struct StopsForLocation: Decodable {
         let rawResponse = try RawServerResponseStopsForLocation(from: decoder)
         
         responseCode = rawResponse.code
-        busStops = rawResponse.data.busStop
-        routes = rawResponse.data.references.routes
+        busStops = rawResponse.data.stops
+        routes = rawResponse.data.stops[0].routes
+//        routes = rawResponse.data.references.routes
     }
 }
