@@ -8,6 +8,9 @@
 import Foundation
 
 // MARK: - BusStopRoutesBuilder
+/// Combine data from stops-for-location and stop-monitoring API calls
+/// to only use the bus stop name and route destinations for user display.
+/// Should be used in BusStopResultsView
 class BusStopRoutesBuilder: ObservableObject {
     @Published var busStopRoutes = [BusStopRoutes]()
     @Published var isLoading = false
