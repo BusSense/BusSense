@@ -19,6 +19,7 @@ class StopsForLocationFetcher: ObservableObject {
 //        fetchAllBusStops()
 //    }
     
+    // TODO: - Add optional completion handler
     func fetchAllBusStops(lat: Double, lon: Double) {
         
         // start of fetching data

@@ -19,6 +19,7 @@ class BusStopRoutesBuilder: ObservableObject {
         
         isLoading = true
         let stopsForLocation = StopsForLocationFetcher()
+        // TODO: - Use optional completion handler to fetch all bus stops first
         stopsForLocation.fetchAllBusStops(lat: lat, lon: lon)
         
         if let errorMessageStopsForLocation = stopsForLocation.errorMessage {
