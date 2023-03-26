@@ -10,8 +10,9 @@ import Foundation
 // needs to inherit ObservableObject to allow it to be used in UI
 class StopMonitoringFetcher: ObservableObject {
     
-    @Published var monitoredStop = [StopMonitoring]()
+    @Published var monitoredStops: [MonitoredStopVisit]? = nil
     @Published var isLoading: Bool = false
+    @Published var hasFetchCompleted: Bool = false
     @Published var errorMessage: String? = nil
     
 //    init() {
@@ -22,6 +23,7 @@ class StopMonitoringFetcher: ObservableObject {
         
         // start of fetching data
         isLoading = true
+        hasFetchCompleted = false
         // resets errorMessage everytime function is called
         errorMessage = nil
         
@@ -36,20 +38,22 @@ class StopMonitoringFetcher: ObservableObject {
             url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
         }
         
-        service.fetch([StopMonitoring].self, url: url) { [unowned self] result in
+        service.fetch(StopMonitoring.self, url: url) { [unowned self] result in
             DispatchQueue.main.async {
                 // indicate data request has completed
                 self.isLoading = false
-                
+                self.hasFetchCompleted = true
                 // handle results
                 switch result {
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                     print(error)
                 case .success(let monitoredStop):
-                    self.monitoredStop = monitoredStop
-                    print("Monitored stop:")
-                    print(monitoredStop)
+                    if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
+                        self.monitoredStops = monitoredStopVisit
+                        print("Monitored stop:")
+                        print(monitoredStopVisit)
+                    }
                 }
             }
         }
