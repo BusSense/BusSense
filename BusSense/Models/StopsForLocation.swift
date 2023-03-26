@@ -7,53 +7,86 @@
 
 import Foundation
 
+// MARK: - RawServerResponseStopsForLocation
 struct RawServerResponseStopsForLocation: Codable {
     let code: Int
+    let currentTime: Int
     let data: DataResponse
+    let text: String
+    let version: Int
 }
 
+// MARK: - DataClass
 struct DataResponse: Codable {
-        let limitExceeded: Bool
-        let busStop: [BusStop]
-        let references: ReferencesStruct
+    let limitExceeded: Bool
+    let busStop: [BusStop]
+    let outOfRange: Bool
+    let references: References
     
     enum CodingKeys: String, CodingKey {
-        case limitExceeded, references
+        case limitExceeded, references, outOfRange
         case busStop = "list"
     }
 }
 
+// MARK: - List
 struct BusStop: Codable {
     let code: String
-    let id: String
-    let name: String
     let direction: String
+    let id: String
     let lat: Double
-    let lon: Double
     let locationType: Int
-    let routeIds: [String]
+    let lon: Double
+    let name: String
+    let routeIDS: [String]
     let wheelchairBoarding: String
+
+    enum CodingKeys: String, CodingKey {
+        case code, direction, id, lat, locationType, lon, name
+        case routeIDS = "routeIds"
+        case wheelchairBoarding
+    }
 }
 
-struct ReferencesStruct: Codable {
-    let routes: [BusRoutes]
+// MARK: - References
+struct References: Codable {
+    let agencies: [Agency]
+    let routes: [Route]
 }
 
-struct BusRoutes: Codable {
-    let agencyId: String
+// MARK: - Agency
+struct Agency: Codable {
+    let disclaimer: String
+    let id: String
+    let lang: String
+    let name: String
+    let phone: String
+    let privateService: Bool
+    let timezone: String
+    let url: String
+}
+
+// MARK: - Route
+struct Route: Codable {
+    let agencyID: String
     let color: String
     let description: String
     let id: String
-    let longName: String
-    let shortName: String
-    let textColor: String
+    let longName, shortName, textColor: String
     let type: Int
+    let url: String
+
+    enum CodingKeys: String, CodingKey {
+        case agencyID = "agencyId"
+        case color, description, id, longName, shortName, textColor, type, url
+    }
 }
 
-struct StopsForLocation: Decodable {
+struct StopsForLocation: Codable {
     var responseCode: Int
     var busStops: [BusStop]
-    var routes: [BusRoutes]
+    var routes: [Route]
+    var text: String
 
     init(from decoder: Decoder) throws {
         let rawResponse = try RawServerResponseStopsForLocation(from: decoder)
@@ -61,5 +94,6 @@ struct StopsForLocation: Decodable {
         responseCode = rawResponse.code
         busStops = rawResponse.data.busStop
         routes = rawResponse.data.references.routes
+        text = rawResponse.text
     }
 }
