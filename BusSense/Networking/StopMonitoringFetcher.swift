@@ -31,9 +31,9 @@ class StopMonitoringFetcher: ObservableObject {
         var url = URL(string: "")
         
         if let lineRef = lineRef {
-            url = URL(string: "http://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
+            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
         } else {
-            url = URL(string: "http://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
+            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
         }
         
         service.fetch([StopMonitoring].self, url: url) { [unowned self] result in

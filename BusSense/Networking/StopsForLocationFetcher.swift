@@ -30,7 +30,7 @@ class StopsForLocationFetcher: ObservableObject {
         let version = "2"
         let radius = "10"        
         let service = APIService()
-        let url = URL(string: "http://bustime.mta.info/api/where/stops-for-location.json?key=\(key)&version=\(version)&lat=\(lat)&lon=\(lon)&radius=\(radius)")
+        let url = URL(string: "https://bustime.mta.info/api/where/stops-for-location.json?key=\(key)&version=\(version)&lat=\(lat)&lon=\(lon)&radius=\(radius)")
         
         service.fetch([StopsForLocation].self, url: url) { [unowned self] result in
             DispatchQueue.main.async {
