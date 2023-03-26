@@ -10,8 +10,9 @@ import Foundation
 // needs to inherit ObservableObject to allow it to be used in UI
 class StopsForLocationFetcher: ObservableObject {
     
-    @Published var busStops = [StopsForLocation]()
+    @Published var busStops: StopsForLocation? = nil
     @Published var isLoading: Bool = false
+    @Published var hasFetchCompleted: Bool = false
     @Published var errorMessage: String? = nil
     
 //    init() {
@@ -22,6 +23,7 @@ class StopsForLocationFetcher: ObservableObject {
         
         // start of fetching data
         isLoading = true
+        hasFetchCompleted = false
         // resets errorMessage everytime function is called
         errorMessage = nil
         
@@ -32,11 +34,11 @@ class StopsForLocationFetcher: ObservableObject {
         let service = APIService()
         let url = URL(string: "https://bustime.mta.info/api/where/stops-for-location.json?key=\(key)&version=\(version)&lat=\(lat)&lon=\(lon)&radius=\(radius)")
         
-        service.fetch([StopsForLocation].self, url: url) { [unowned self] result in
+        service.fetch(StopsForLocation.self, url: url) { [unowned self] result in
             DispatchQueue.main.async {
                 // indicate data request has completed
                 self.isLoading = false
-                
+                self.hasFetchCompleted = true
                 // handle results
                 switch result {
                 case .failure(let error):
