@@ -38,6 +38,104 @@ struct ServiceDelivery: Codable {
     }
 }
 
+// MARK: - StopMonitoringDelivery
+struct StopMonitoringDelivery: Codable {
+    let monitoredStopVisit: [MonitoredStopVisit]?
+    let responseTimestamp, validUntil: String
+
+    enum CodingKeys: String, CodingKey {
+        case monitoredStopVisit = "MonitoredStopVisit"
+        case responseTimestamp = "ResponseTimestamp"
+        case validUntil = "ValidUntil"
+    }
+}
+
+// MARK: - MonitoredStopVisit
+struct MonitoredStopVisit: Codable {
+    let monitoredVehicleJourney: MonitoredVehicleJourney
+    let recordedAtTime: String
+
+    enum CodingKeys: String, CodingKey {
+        case monitoredVehicleJourney = "MonitoredVehicleJourney"
+        case recordedAtTime = "RecordedAtTime"
+    }
+}
+
+// MARK: - MonitoredVehicleJourney
+struct MonitoredVehicleJourney: Codable {
+    let lineRef, directionRef: String
+    let framedVehicleJourneyRef: FramedVehicleJourneyRef
+    let journeyPatternRef: String
+    let publishedLineName: [String]
+    let operatorRef, originRef, destinationRef: String
+    let destinationName: [String]
+    let monitored: Bool
+    let vehicleLocation: VehicleLocation
+    let bearing: Double
+    let progressRate, blockRef, vehicleRef: String
+    let monitoredCall: MonitoredCall
+
+    enum CodingKeys: String, CodingKey {
+        case lineRef = "LineRef"
+        case directionRef = "DirectionRef"
+        case framedVehicleJourneyRef = "FramedVehicleJourneyRef"
+        case journeyPatternRef = "JourneyPatternRef"
+        case publishedLineName = "PublishedLineName"
+        case operatorRef = "OperatorRef"
+        case originRef = "OriginRef"
+        case destinationRef = "DestinationRef"
+        case destinationName = "DestinationName"
+        case monitored = "Monitored"
+        case vehicleLocation = "VehicleLocation"
+        case bearing = "Bearing"
+        case progressRate = "ProgressRate"
+        case blockRef = "BlockRef"
+        case vehicleRef = "VehicleRef"
+        case monitoredCall = "MonitoredCall"
+    }
+}
+
+// MARK: - FramedVehicleJourneyRef
+struct FramedVehicleJourneyRef: Codable {
+    let dataFrameRef, datedVehicleJourneyRef: String
+
+    enum CodingKeys: String, CodingKey {
+        case dataFrameRef = "DataFrameRef"
+        case datedVehicleJourneyRef = "DatedVehicleJourneyRef"
+    }
+}
+
+// MARK: - MonitoredCall
+struct MonitoredCall: Codable {
+    let aimedArrivalTime, expectedArrivalTime, arrivalProximityText, expectedDepartureTime: String
+    let distanceFromStop, numberOfStopsAway: Int
+    let stopPointRef: String
+    let visitNumber: Int
+    let stopPointName: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case aimedArrivalTime = "AimedArrivalTime"
+        case expectedArrivalTime = "ExpectedArrivalTime"
+        case arrivalProximityText = "ArrivalProximityText"
+        case expectedDepartureTime = "ExpectedDepartureTime"
+        case distanceFromStop = "DistanceFromStop"
+        case numberOfStopsAway = "NumberOfStopsAway"
+        case stopPointRef = "StopPointRef"
+        case visitNumber = "VisitNumber"
+        case stopPointName = "StopPointName"
+    }
+}
+
+// MARK: - VehicleLocation
+struct VehicleLocation: Codable {
+    let longitude, latitude: Double
+
+    enum CodingKeys: String, CodingKey {
+        case longitude = "Longitude"
+        case latitude = "Latitude"
+    }
+}
+
 // MARK: - SituationExchangeDelivery
 struct SituationExchangeDelivery: Codable {
     let situations: Situations
@@ -113,121 +211,17 @@ struct PublicationWindow: Codable {
     }
 }
 
-// MARK: - StopMonitoringDelivery
-struct StopMonitoringDelivery: Codable {
-    let monitoredStopVisit: [MonitoredStopVisit]
-    let responseTimestamp, validUntil: String
-
-    enum CodingKeys: String, CodingKey {
-        case monitoredStopVisit = "MonitoredStopVisit"
-        case responseTimestamp = "ResponseTimestamp"
-        case validUntil = "ValidUntil"
-    }
-}
-
-// MARK: - MonitoredStopVisit
-struct MonitoredStopVisit: Codable {
-    let monitoredVehicleJourney: MonitoredVehicleJourney
-    let recordedAtTime: String
-
-    enum CodingKeys: String, CodingKey {
-        case monitoredVehicleJourney = "MonitoredVehicleJourney"
-        case recordedAtTime = "RecordedAtTime"
-    }
-}
-
-// MARK: - MonitoredVehicleJourney
-struct MonitoredVehicleJourney: Codable {
-    let lineRef, directionRef: String
-    let framedVehicleJourneyRef: FramedVehicleJourneyRef
-    let journeyPatternRef: String
-    let publishedLineName: [String]
-    let operatorRef, originRef, destinationRef: String
-    let destinationName: [String]
-    let monitored: Bool
-    let vehicleLocation: VehicleLocation
-    let bearing: Double
-    let progressRate: String
-    let blockRef: String?
-    let vehicleRef: String
-    let monitoredCall: MonitoredCall
-    let originAimedDepartureTime: String?
-    let progressStatus: [String]?
-
-    enum CodingKeys: String, CodingKey {
-        case lineRef = "LineRef"
-        case directionRef = "DirectionRef"
-        case framedVehicleJourneyRef = "FramedVehicleJourneyRef"
-        case journeyPatternRef = "JourneyPatternRef"
-        case publishedLineName = "PublishedLineName"
-        case operatorRef = "OperatorRef"
-        case originRef = "OriginRef"
-        case destinationRef = "DestinationRef"
-        case destinationName = "DestinationName"
-        case monitored = "Monitored"
-        case vehicleLocation = "VehicleLocation"
-        case bearing = "Bearing"
-        case progressRate = "ProgressRate"
-        case blockRef = "BlockRef"
-        case vehicleRef = "VehicleRef"
-        case monitoredCall = "MonitoredCall"
-        case originAimedDepartureTime = "OriginAimedDepartureTime"
-        case progressStatus = "ProgressStatus"
-    }
-}
-
-// MARK: - FramedVehicleJourneyRef
-struct FramedVehicleJourneyRef: Codable {
-    let dataFrameRef, datedVehicleJourneyRef: String
-
-    enum CodingKeys: String, CodingKey {
-        case dataFrameRef = "DataFrameRef"
-        case datedVehicleJourneyRef = "DatedVehicleJourneyRef"
-    }
-}
-
-// MARK: - MonitoredCall
-struct MonitoredCall: Codable {
-    let aimedArrivalTime: String
-    let expectedArrivalTime: String?
-    let arrivalProximityText: String
-    let expectedDepartureTime: String?
-    let distanceFromStop, numberOfStopsAway: Int
-    let stopPointRef: String
-    let visitNumber: Int
-    let stopPointName: [String]
-
-    enum CodingKeys: String, CodingKey {
-        case aimedArrivalTime = "AimedArrivalTime"
-        case expectedArrivalTime = "ExpectedArrivalTime"
-        case arrivalProximityText = "ArrivalProximityText"
-        case expectedDepartureTime = "ExpectedDepartureTime"
-        case distanceFromStop = "DistanceFromStop"
-        case numberOfStopsAway = "NumberOfStopsAway"
-        case stopPointRef = "StopPointRef"
-        case visitNumber = "VisitNumber"
-        case stopPointName = "StopPointName"
-    }
-}
-
-// MARK: - VehicleLocation
-struct VehicleLocation: Codable {
-    let longitude, latitude: Double
-
-    enum CodingKeys: String, CodingKey {
-        case longitude = "Longitude"
-        case latitude = "Latitude"
-    }
-}
-
 
 // MARK: - StopMonitoring
 struct StopMonitoring: Codable {
-    var monitoredStopVisit: [MonitoredStopVisit]
+    var monitoredStopVisit: [MonitoredStopVisit]?
 
     init(from decoder: Decoder) throws {
         let rawResponse = try RawServerResponseStopMonitoring(from: decoder)
-        
-        monitoredStopVisit = rawResponse.siri.serviceDelivery.stopMonitoringDelivery[0].monitoredStopVisit
+        if let monitoredStopVisit = rawResponse.siri.serviceDelivery.stopMonitoringDelivery[0].monitoredStopVisit {
+            self.monitoredStopVisit = monitoredStopVisit
+        } else {
+            self.monitoredStopVisit = nil
+        }
     }
 }
