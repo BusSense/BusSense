@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BusStopRoutes {
+struct BusStopRoute {
     let code: String
     let id: String
     let name: String
@@ -16,7 +16,7 @@ struct BusStopRoutes {
     let lon: Double
     let locationType: Int
     let routes: [RouteDetail]
-    let wheelchairBoarding: String
+//    let wheelchairBoarding: String
 }
 
 struct RouteDetail {
@@ -28,4 +28,5 @@ struct RouteDetail {
     let originRef: String
     let destinationRef: String
     let destinationName: String
+    let lineNameAndDestinationName: String
 }

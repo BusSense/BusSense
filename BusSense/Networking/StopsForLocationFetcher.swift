@@ -20,7 +20,7 @@ class StopsForLocationFetcher: ObservableObject {
 //    }
     
     // TODO: - Add optional completion handler
-    func fetchAllBusStops(lat: Double, lon: Double) {
+    func fetchAllBusStops(lat: Double, lon: Double, completion: @escaping () -> Void = {}) {
         
         // start of fetching data
         isLoading = true
@@ -45,10 +45,10 @@ class StopsForLocationFetcher: ObservableObject {
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                     print(error)
+                    completion()
                 case .success(let busStops):
                     self.busStops = busStops
-                    print("bus stops:")
-                    print(busStops)
+                    completion()
                 }
             }
         }

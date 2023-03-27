@@ -19,7 +19,7 @@ class StopMonitoringFetcher: ObservableObject {
 //        fetchStopMonitoring()
 //    }
     
-    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil) {
+    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil, completion: @escaping () -> Void = {}) {
         
         // start of fetching data
         isLoading = true
@@ -48,11 +48,11 @@ class StopMonitoringFetcher: ObservableObject {
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                     print(error)
+                    completion()
                 case .success(let monitoredStop):
                     if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
                         self.monitoredStops = monitoredStopVisit
-                        print("Monitored stop:")
-                        print(monitoredStopVisit)
+                        completion()
                     }
                 }
             }

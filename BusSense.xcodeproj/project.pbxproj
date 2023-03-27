@@ -17,7 +17,7 @@
 		21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */; };
 		21FFD3B8298F5D7B0015FF7E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B7298F5D7B0015FF7E /* ResultView.swift */; };
 		21FFD3BA298F66580015FF7E /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B9298F66580015FF7E /* WaitingView.swift */; };
-		7A36897829CFCB2300E245E6 /* BusStopRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36897729CFCB2300E245E6 /* BusStopRoutes.swift */; };
+		7A36897829CFCB2300E245E6 /* BusStopRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36897729CFCB2300E245E6 /* BusStopRoute.swift */; };
 		7A7C591829C7C99D00C54AEA /* StopsForLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591729C7C99D00C54AEA /* StopsForLocation.swift */; };
 		7A7C591A29C7C9F000C54AEA /* StopMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591929C7C9F000C54AEA /* StopMonitoring.swift */; };
 		7A7C591C29C7CAA900C54AEA /* StopsForLocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591B29C7CAA900C54AEA /* StopsForLocationFetcher.swift */; };
@@ -61,7 +61,7 @@
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		21FFD3B9298F66580015FF7E /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
-		7A36897729CFCB2300E245E6 /* BusStopRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopRoutes.swift; sourceTree = "<group>"; };
+		7A36897729CFCB2300E245E6 /* BusStopRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopRoute.swift; sourceTree = "<group>"; };
 		7A7C591729C7C99D00C54AEA /* StopsForLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsForLocation.swift; sourceTree = "<group>"; };
 		7A7C591929C7C9F000C54AEA /* StopMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMonitoring.swift; sourceTree = "<group>"; };
 		7A7C591B29C7CAA900C54AEA /* StopsForLocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsForLocationFetcher.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 			children = (
 				7A7C591729C7C99D00C54AEA /* StopsForLocation.swift */,
 				7A7C591929C7C9F000C54AEA /* StopMonitoring.swift */,
-				7A36897729CFCB2300E245E6 /* BusStopRoutes.swift */,
+				7A36897729CFCB2300E245E6 /* BusStopRoute.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,7 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A36897829CFCB2300E245E6 /* BusStopRoutes.swift in Sources */,
+				7A36897829CFCB2300E245E6 /* BusStopRoute.swift in Sources */,
 				21724E6E298F1FA000E5BDFF /* ContentView.swift in Sources */,
 				7A7C591C29C7CAA900C54AEA /* StopsForLocationFetcher.swift in Sources */,
 				7AC5E1F129CB90E600743398 /* BusStopResultsView.swift in Sources */,
