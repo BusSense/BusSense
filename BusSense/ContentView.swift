@@ -109,7 +109,7 @@ struct ContentView: View {
                         Button {
                             print(route.shortName)
                         } label: {
-                            NavigationLink(destination: BusTrackingView()) {
+                            NavigationLink(destination: BusTrackingView(busStop: busStops[0], busRoute: route)) {
                                 Text("\(route.shortName) \(route.longName)")
                                     .font(.title2)
                                     .fontWeight(.bold)

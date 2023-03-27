@@ -42,6 +42,11 @@ struct BusStop: Codable {
     let wheelchairBoarding: String
 }
 
+// static data for previews
+extension BusStop {
+    static var sampleData: BusStop = BusStop(code:  "401447", direction: "NE", id: "MTA_401447", lat: 40.816685, locationType: 0, lon: -73.953761, name: "AMSTERDAM AV/W 131 ST", routes: [], wheelchairBoarding: "UNKNOWN")
+}
+
 //struct ReferencesStruct: Codable {
 //    let routes: [BusRoutes]
 //}
@@ -56,6 +61,11 @@ struct BusRoutes: Codable {
     var textColor: String = ""
     var type: Int = 1
     var url: String = ""
+}
+
+// static data for previews
+extension BusRoutes {
+    static var sampleData: BusRoutes = BusRoutes(agency: Agency(), color: "blue", description: "", id: "", longName: "", shortName: "", textColor: "")
 }
 
 struct Agency: Codable {

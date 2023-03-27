@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct BusTrackingView: View {
-        
+    var busStop: BusStop
+    var busRoute: BusRoutes
+    
+    @StateObject var stopMonitoringFetcher: StopMonitoringFetcher = StopMonitoringFetcher()
+    
     var body: some View {
+        let distanceData = stopMonitoringFetcher.getDistanceAway()
         ZStack {
             Color("Color1").ignoresSafeArea()
             
@@ -23,7 +28,7 @@ struct BusTrackingView: View {
                 Text("TRACKING")
                     .font(.title)
                     .fontWeight(.bold)
-                Text("M100 - INWOOD 220 ST\nBus is 4.5 miles away")
+                Text("\(busRoute.shortName) \(busRoute.longName)" + "\n\(distanceData)")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
@@ -36,11 +41,14 @@ struct BusTrackingView: View {
                 Spacer()
             }
         }
+        .onAppear {
+            stopMonitoringFetcher.fetchStopMonitoring(monitoringRef: busStop.code, lineRef: busRoute.id.replacingOccurrences(of: " ", with: "%20"))
+        }
     }
 }
 
 struct BusTrackingView_Previews: PreviewProvider {
     static var previews: some View {
-        BusTrackingView()
+        BusTrackingView(busStop: BusStop.sampleData, busRoute: BusRoutes.sampleData)
     }
 }
