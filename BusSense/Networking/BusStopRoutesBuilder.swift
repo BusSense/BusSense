@@ -42,6 +42,7 @@ class BusStopRoutesBuilder: ObservableObject {
         group.notify(queue: DispatchQueue.global()) {
             if let busStops = self.stopsForLocationFetched.busStops {
                 print("From bus stop route builder")
+                print(busStops)
                 self.parser(busStops.busStops)
             } else {
                 print("no bus stops available")

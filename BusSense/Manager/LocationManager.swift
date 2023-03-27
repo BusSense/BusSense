@@ -11,7 +11,7 @@ class LocationManager: NSObject, ObservableObject {
     
     private let manager = CLLocationManager()
     @Published var userLocation: CLLocation?
-    @Published var locationPermission: CLAuthorizationStatus?
+    @Published var permission: CLAuthorizationStatus = .notDetermined
     static let shared = LocationManager()
     
     override init() {
@@ -29,7 +29,7 @@ class LocationManager: NSObject, ObservableObject {
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        self.locationPermission = status
+        self.permission = status
         
         switch status {
             case .notDetermined:

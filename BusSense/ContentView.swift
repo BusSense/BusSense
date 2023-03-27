@@ -10,9 +10,28 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var locationManager = LocationManager.shared
+    @StateObject var busStopRoutes = BusStopRoutesBuilder()
     
     var body: some View {
-        Text("Content View to track states")
+        // TODO: - Check camera permission here too
+        if locationManager.permission == .denied {
+            DeniedPermissionsView()
+        } else if locationManager.permission == .notDetermined {
+            DefaultView().onAppear() {
+                locationManager.requestLocation()
+            }
+        } else if let location = locationManager.userLocation {
+            if !busStopRoutes.hasFetchedCompleted || busStopRoutes.isLoading {
+                LoadingView().onAppear() {
+                    print(location.coordinate.latitude, location.coordinate.longitude)
+                    busStopRoutes.buildBusStopRoutes(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+                }
+            } else {
+                BusStopResultsView().onAppear() {
+                    print(busStopRoutes.busStopRoutes)
+                }
+            }
+        }
     }
 }
 
