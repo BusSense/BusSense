@@ -55,15 +55,88 @@ class StopMonitoringFetcher: ObservableObject {
 //        }.resume()
 //    }
     
-    func getDistanceAway() -> String{
-        guard self.isDone && !monitoredStop.isEmpty else { return "no vehicles at this time"}
-            // return distance first vehicle is away from stop
+    func getMilesAway() -> String{
+        guard self.isDone && !monitoredStop.isEmpty else { return "No vehicles detected at this time. Please try again later."}
+            // return miles first vehicle is away from stop
             return self
                 .monitoredStop[0]
                 .MonitoredVehicleJourney
                 .MonitoredCall
                 .ArrivalProximityText
     }
+    
+    func getMetersAway() -> Int{
+        guard self.isDone && !monitoredStop.isEmpty else { return 0}
+            // return meters first vehicle is away from stop
+            return self
+                .monitoredStop[0]
+                .MonitoredVehicleJourney
+                .MonitoredCall
+                .DistanceFromStop
+    }
+    
+    func getStopsAway() -> Int{
+        guard self.isDone && !monitoredStop.isEmpty else { return 0}
+            // return stops first vehicle is away from stop
+            return self
+                .monitoredStop[0]
+                .MonitoredVehicleJourney
+                .MonitoredCall
+                .NumberOfStopsAway
+    }
+    
+    func getTimeAway() -> String{
+        guard self.isDone && !monitoredStop.isEmpty else { return "No vehicles detected at this time. Please try again later."}
+            // return time first vehicle is away from stop
+        
+//        let date1 = Date()
+//        let calender = Calendar.current
+//        let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date1)
+//
+//        let arrivingTime = self.monitoredStop[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime ?? ""
+//
+//        // "2023-04-29T21:36:41.124-04:00"
+//
+//        var date = DateComponents()
+//        date.year = Int(String(arrivingTime.prefix(4))) ?? 0
+//        date.month = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 6)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -22)]) ?? 0
+//        date.day = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 8)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -19)]) ?? 0
+//        date.timeZone = TimeZone(abbreviation: "EST")
+//        date.hour = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 12)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -16)]) ?? 0
+//        date.minute = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 15)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -13)]) ?? 0
+//        date.second = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 18)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -10)]) ?? 0
+//
+//        let dateAndTime = calender.date(from: date)
+        
+        let currDate = Date()
+        var curr = Calendar.current
+        curr.timeZone = TimeZone(abbreviation: "EST")!
+        let components = curr.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currDate)
+
+        let arrivingTime = self.monitoredStop[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime ?? ""
+
+        var date = DateComponents()
+        date.year = Int(String(arrivingTime.prefix(4))) ?? 0
+        date.month = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 6)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -22)]) ?? 0
+        date.day = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 8)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -19)]) ?? 0
+        date.timeZone = TimeZone(abbreviation: "EST")
+        date.hour = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 11)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -16)]) ?? 0
+        date.minute = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 15)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -13)]) ?? 0
+        date.second = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 18)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -10)]) ?? 0
+
+        let arrivingDateTime = curr.date(from: date)!
+
+        let difference = curr.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currDate, to: arrivingDateTime)
+        let hour = difference.hour ?? 0
+        let min =  (-1 * difference.minute!) ?? 0
+        let sec = (-1 * difference.second!) ?? 0
+        
+        
+        let status = String(min) + " minutes and " + String(sec) + " seconds away" ?? ""
+        
+        return status
+    }
+    
     
     func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil) {
         

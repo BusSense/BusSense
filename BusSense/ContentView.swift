@@ -53,11 +53,11 @@ struct ContentView: View {
                     
                     if locationManager.userLocation == nil {
                         Text("Current Bus Stop:\nAMSTERDAM AV/W 131 ST (NE)")
-                            .font(.title3)
+                            .frame(width: 375, height: 200)
+                            .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(Color.white)
                             .multilineTextAlignment(.center)
-                            .padding()
                             .background(Color("Color2"))
                             .cornerRadius(20)
                             .onAppear() {
@@ -68,144 +68,69 @@ struct ContentView: View {
                             
                             if (busStops.count != 0) {
                                 Text("Nearest Bus Stop:\n\(busStops[0].name)")
+                                    .frame(width: 375, height: 200)
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.white)
                                     .multilineTextAlignment(.center)
-                                    .padding()
                                     .background(Color("Color2"))
                                     .cornerRadius(20)
                                     .frame(maxWidth: .infinity)
                             }
-//                            List(busStops, id: \.id) { item in
-//
-//                                Text("\(item.name)")
-//                                    .font(.title)
-//                                    .fontWeight(.bold)
-//                                    .foregroundColor(Color.white)
-//                                    .multilineTextAlignment(.center)
-//                                    .padding()
-//                                    .background(Color("Color2"))
-//                                    .cornerRadius(20)
-//
-//                            }
                         }.onAppear(perform: nearestBusStop)
                     }
                     
-                    Image("logo")
+                    Spacer()
+                    
+                    
+                    Image("logo2")
                         .resizable()
-                        .frame(width: 200, height:200)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 200).cornerRadius(20)
                     
-                    Text("Select Desired Bus Below:")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .background(Color("Color2"))
-                        .cornerRadius(20)
+                    Spacer()
                     
-                    ForEach(busRoutes, id: \.id) { route in
-                        Button {
-                            print(route.shortName)
-                        } label: {
-                            NavigationLink(destination: BusTrackingView(busStop: busStops[0], busRoute: route)) {
-                                Text("\(route.shortName) \(route.longName)")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color.white)
-                                    .multilineTextAlignment(.center)
-                                    .padding()
-                                    .background(Color("Color2"))
-                                    .cornerRadius(20)
-                                    .frame(maxWidth: .infinity)
+                    ZStack {
+                        
+                        Text("")
+                            .frame(width: 375, height: 300)
+                            .background(Color("Color2"))
+                            .cornerRadius(20)
+                        
+                        VStack {
+                            
+                            Spacer().frame(height: 10)
+                            
+                            Text("Select Your Bus:")
+                                .frame(width: 300, height: 50)
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.black)
+                                .multilineTextAlignment(.center)
+                                .background(Color("Color1"))
+                                .cornerRadius(5)
+                                .padding(10)
+                            
+                            Spacer().frame(height: 25)
+                            
+                            ForEach(busRoutes, id: \.id) { route in
+                                Button {
+                                    print(route.shortName)
+                                } label: {
+                                    NavigationLink(destination: BusTrackingView(busStop: busStops[0], busRoute: route).navigationBarBackButtonHidden(true)) {
+                                        Text("\(route.shortName) \(route.longName)").frame(width: 300, height: 35, alignment: .leading)
+                                            .padding(10)
+                                            .font(.title3)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(Color.black)
+                                            .background(Color("Color1"))
+                                            .cornerRadius(10)
+                                    }
+                                }
+                                Spacer().frame(height: 5)
                             }
-                        }
-                    }
-                    
-//                    List(busRoutes, id: \.id) { item in
-//                        Button {
-//                            print("M11")
-//                        } label: {
-//                            NavigationLink(destination: BusConfimationView()) {
-//                                Text("\(item.shortName) \(item.longName)")
-//                                    .font(.subheadline)
-//                                    .fontWeight(.bold)
-//                                    .foregroundColor(Color.white)
-//                                    .multilineTextAlignment(.center)
-//                                    .padding()
-//                                    .background(Color("Color2"))
-//                                    .cornerRadius(20)
-//                            }
-//                        }
-//                    }.onAppear(perform: nearestBusStop)
-                    
-                    
-                    // TODO: - Display JSON data
-                    //                    List {
-                    //                        for (busNumber, routeDescription) in sampleBusData {
-                    //                            Button {
-                    //                                print("\(busNumber)")
-                    //                            } label: {
-                    //                                NavigationLink(destination: BusConfimationView()) {
-                    //                                    Text("\(busNumber) - \(routeDescription)")
-                    //                                        .font(.title)
-                    //                                        .fontWeight(.bold)
-                    //                                        .foregroundColor(Color.white)
-                    //                                        .multilineTextAlignment(.center)
-                    //                                        .padding()
-                    //                                        .background(Color("Color2"))
-                    //                                        .cornerRadius(20)
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    .padding()
-                    
-//                    Button {
-//                        print("M11")
-//                    } label: {
-//                        NavigationLink(destination: BusConfimationView()) {
-//                            Text("M11 - Riverbank Park & Harlem")
-//                                .font(.title)
-//                                .fontWeight(.bold)
-//                                .foregroundColor(Color.white)
-//                                .multilineTextAlignment(.center)
-//                                .padding()
-//                                .background(Color("Color2"))
-//                                .cornerRadius(20)
-//                        }
-//                    }
-//
-//                    Button {
-//                        print("M100")
-//                    } label: {
-//                        NavigationLink(destination: BusConfimationView()) {
-//                            Text("M100 - Inwood")
-//                                .font(.title)
-//                                .fontWeight(.bold)
-//                                .foregroundColor(Color.white)
-//                                .multilineTextAlignment(.center)
-//                                .padding()
-//                                .background(Color("Color2"))
-//                                .cornerRadius(20)
-//                        }
-//                    }
-//
-//                    Button {
-//                        print("M101")
-//                    } label: {
-//                        NavigationLink(destination: BusConfimationView()) {
-//                            Text("M100 - Fort George")
-//                                .font(.title)
-//                                .fontWeight(.bold)
-//                                .foregroundColor(Color.white)
-//                                .multilineTextAlignment(.center)
-//                                .padding()
-//                                .background(Color("Color2"))
-//                                .cornerRadius(20)
-//                        }
-//                    }
+                        }.frame(width: 350, height: 300, alignment: .top)
+                    }.frame(width: 375, height: 350)
                 }
             }
         }
