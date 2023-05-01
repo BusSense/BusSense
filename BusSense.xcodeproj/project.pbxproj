@@ -59,6 +59,7 @@
 		21724E88298F1FA600E5BDFF /* BusSenseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusSenseUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		219AED5B29FDB5840047ABB1 /* BusTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTrackingView.swift; sourceTree = "<group>"; };
 		21D1375029CF8260008B0CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		21FA6A3A29FF345400CBBF62 /* BusSense.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusSense.entitlements; sourceTree = "<group>"; };
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		21FFD3B9298F66580015FF7E /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 		21724E6A298F1FA000E5BDFF /* BusSense */ = {
 			isa = PBXGroup;
 			children = (
+				21FA6A3A29FF345400CBBF62 /* BusSense.entitlements */,
 				21D1375029CF8260008B0CF3 /* Info.plist */,
 				21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */,
 				21724E6D298F1FA000E5BDFF /* ContentView.swift */,
@@ -500,6 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BusSense/BusSense.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -531,6 +534,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BusSense/BusSense.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";

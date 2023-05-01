@@ -18,7 +18,9 @@ struct ContentView: View {
     func nearestBusStop() {
         
         // stop for location api call
-        var request1 = URLRequest(url: URL(string: "http://bustime.mta.info/api/where/stops-for-location.json?lat=40.81666286321624&lon=-73.95375720902423&key=d0a7717c-417c-43cc-862b-5b513bb63753&radius=10")!,timeoutInterval: Double.infinity)
+//        var request1 = URLRequest(url: URL(string: "http://bustime.mta.info/api/where/stops-for-location.json?lat=40.81666286321624&lon=-73.95375720902423&key=d0a7717c-417c-43cc-862b-5b513bb63753&radius=10")!,timeoutInterval: Double.infinity)
+        
+        var request1 = URLRequest(url: URL(string: "http://bustime.mta.info/api/where/stops-for-location.json?lat=40.83312769175062&lon=-73.86679670244578&key=d0a7717c-417c-43cc-862b-5b513bb63753&radius=200")!,timeoutInterval: Double.infinity)
         request1.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: request1) { data, response, error in

@@ -12,6 +12,7 @@ struct BusTrackingView: View {
     var busRoute: BusRoutes
     
     @StateObject var stopMonitoringFetcher: StopMonitoringFetcher = StopMonitoringFetcher()
+    @StateObject var stopforLocationFetcher: StopsForLocationFetcher = StopsForLocationFetcher()
     
     var body: some View {
         let milesData = stopMonitoringFetcher.getMilesAway()
@@ -25,11 +26,11 @@ struct BusTrackingView: View {
             
             VStack {
                 
-                Spacer().frame(height: 20)
+                Spacer().frame(height: 10)
                 
                 VStack {
                     
-                    Spacer().frame(height: 10)
+//                    Spacer().frame(height: 10)
                     
                     Text("CURRENTLY TRACKING:")
                         .frame(width: 350, height: 30)
@@ -39,7 +40,6 @@ struct BusTrackingView: View {
                         .multilineTextAlignment(.center)
                         .background(Color("Color1"))
                         .cornerRadius(10)
-                        .frame(maxWidth: .infinity)
                     
                     if milesData == "No vehicles detected at this time. Please try again later." {
                         Text("\(busRoute.shortName) \(busRoute.longName)" + "\n\n\(milesData)")
@@ -67,14 +67,40 @@ struct BusTrackingView: View {
                 .background(Color("Color2"))
                 .cornerRadius(20)
                 
-                Spacer()
+                VStack {
+                    
+                    Spacer().frame(height: 10)
+                    
+                    Text("NOTICE:")
+                        .frame(width: 350, height: 30)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.black)
+                        .multilineTextAlignment(.center)
+                        .background(Color("Color1"))
+                        .cornerRadius(10)
+                    
+                    Text("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+                        .frame(width: 350, height: 100)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                        .background(Color("Color2"))
+                        .cornerRadius(20)
+                }.frame(width: 375, height: 200, alignment: .top)
+                    .background(Color("Color2"))
+                    .cornerRadius(20)
                 
-                Image("logo2")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200).cornerRadius(20)
+                Spacer().frame(height: 10)
                 
-                Spacer()
+//                Image("logo2")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 150).cornerRadius(20)
+                
+                Spacer().frame(height: 10)
                 
                 HStack {
                     
@@ -85,7 +111,7 @@ struct BusTrackingView: View {
                             
                             ZStack {
                                 
-                                Text("").frame(width: 175, height: 250)
+                                Text("").frame(width: 175, height: 225)
                                     .background(Color("Color2"))
                                     .cornerRadius(20)
                                 
@@ -105,7 +131,7 @@ struct BusTrackingView: View {
                                     Image("leftarrow")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 150)
+                                        .frame(width: 100)
                                 }
                             }
                         }
@@ -118,7 +144,7 @@ struct BusTrackingView: View {
                             
                             ZStack {
                                 
-                                Text("").frame(width: 175, height: 250)
+                                Text("").frame(width: 175, height: 225)
                                     .background(Color("Color2"))
                                     .cornerRadius(20)
                                 
@@ -137,37 +163,11 @@ struct BusTrackingView: View {
                                     Image("refresh")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 100)
+                                        .frame(width: 75)
                                 }
                             }
                         }
                     }
-                    
-//                    ZStack {
-//
-//                        Text("").frame(width: 175, height: 250)
-//                            .background(Color("Color2"))
-//                            .cornerRadius(20)
-//
-//                        VStack {
-//                            Text("Update Bus \nStatus")
-//                                .frame(width: 175, height: 50)
-//                                .multilineTextAlignment(.center)
-//                                .background(Color("Color2"))
-//                                .font(.title3)
-//                                .fontWeight(.bold)
-//                                .foregroundColor(Color.white)
-//                                .cornerRadius(20)
-//
-//                            Spacer().frame(height: 40)
-//
-//                            Image("refresh")
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: 100)
-//                        }
-//                    }
-                    
                 }
             }
         }

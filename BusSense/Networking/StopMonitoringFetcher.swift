@@ -114,6 +114,11 @@ class StopMonitoringFetcher: ObservableObject {
         let components = curr.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currDate)
 
         let arrivingTime = self.monitoredStop[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime ?? ""
+        
+        var status = ""
+        if arrivingTime == "" {
+            return status
+        }
 
         var date = DateComponents()
         date.year = Int(String(arrivingTime.prefix(4))) ?? 0
@@ -132,7 +137,7 @@ class StopMonitoringFetcher: ObservableObject {
         let sec = (-1 * difference.second!) ?? 0
         
         
-        let status = String(min) + " minutes and " + String(sec) + " seconds away" ?? ""
+        status = String(min) + " minutes and " + String(sec) + " seconds away" ?? ""
         
         return status
     }
