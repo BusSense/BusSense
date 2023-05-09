@@ -9,7 +9,11 @@ import SwiftUI
 
 struct LoadingView: View {
     var body: some View {
-        Text("This view is displayed when an API call is made and hasn't finished loading yet")
+        ZStack {
+            Color("Color1").ignoresSafeArea()
+            
+            ProgressView()
+        }
     }
 }
 
