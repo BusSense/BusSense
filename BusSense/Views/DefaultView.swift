@@ -9,7 +9,19 @@ import SwiftUI
 
 struct DefaultView: View {
     var body: some View {
-        Text("This is the default view for when the user opens up the app for the first time and permissions are requested")
+        ZStack {
+            Color("Color1").ignoresSafeArea()
+            
+            VStack {
+                Image(systemName: "bus.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                Text("Please enable location services to enable bus tracking!")
+                    .multilineTextAlignment(.center)
+                    .padding()
+            }
+        }
     }
 }
 
