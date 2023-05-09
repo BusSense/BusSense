@@ -13,13 +13,15 @@ struct DefaultView: View {
             Color("Color1").ignoresSafeArea()
             
             VStack {
-                Image(systemName: "bus.fill")
+                Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                Text("Please enable location services to enable bus tracking!")
-                    .multilineTextAlignment(.center)
+                    .frame(width: 300, height: 300)
                     .padding()
+                Text("Please enable location services to enable bus tracking!")
+                    .font(.system(size: 20))
+                    .multilineTextAlignment(.center)
+//                    .padding()
             }
         }
     }
