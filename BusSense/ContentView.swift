@@ -27,8 +27,9 @@ struct ContentView: View {
                     busStopRoutes.buildBusStopRoutes(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                 }
             } else {
-                BusStopResultsView().onAppear() {
-                    print(busStopRoutes.busStopRoutes)
+                BusStopResultsView(busStopRoutes: busStopRoutes).onAppear() {
+//                    print("BusStopResultsView()")
+//                    print(busStopRoutes.busStopRoutes)
                 }
             }
         }

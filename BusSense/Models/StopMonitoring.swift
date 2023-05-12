@@ -72,7 +72,9 @@ struct MonitoredVehicleJourney: Codable {
     let monitored: Bool
     let vehicleLocation: VehicleLocation
     let bearing: Double
-    let progressRate, blockRef, vehicleRef: String
+    let progressRate: String
+    let blockRef: String?
+    let vehicleRef: String
     let monitoredCall: MonitoredCall
 
     enum CodingKeys: String, CodingKey {
@@ -107,7 +109,10 @@ struct FramedVehicleJourneyRef: Codable {
 
 // MARK: - MonitoredCall
 struct MonitoredCall: Codable {
-    let aimedArrivalTime, expectedArrivalTime, arrivalProximityText, expectedDepartureTime: String
+    let aimedArrivalTime: String
+    let expectedArrivalTime: String?
+    let arrivalProximityText: String
+    let expectedDepartureTime: String?
     let distanceFromStop, numberOfStopsAway: Int
     let stopPointRef: String
     let visitNumber: Int
@@ -156,9 +161,9 @@ struct Situations: Codable {
 
 // MARK: - PtSituationElement
 struct PtSituationElement: Codable {
-    let publicationWindow: PublicationWindow
-    let severity: String
-    let summary, description: [String]
+    let publicationWindow: PublicationWindow?
+    let severity: String?
+    let summary, description: [String]?
     let affects: Affects
     let creationTime, situationNumber: String
 
@@ -193,7 +198,8 @@ struct VehicleJourneys: Codable {
 
 // MARK: - AffectedVehicleJourney
 struct AffectedVehicleJourney: Codable {
-    let lineRef, directionRef: String
+    let lineRef: String
+    let directionRef: String?
 
     enum CodingKeys: String, CodingKey {
         case lineRef = "LineRef"

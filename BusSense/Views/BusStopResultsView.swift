@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct BusStopResultsView: View {
-//    @StateObject var busStopRoutes: BusStopRoutesBuilder
+    @ObservedObject var busStopRoutes: BusStopRoutesBuilder
+//    var busStopRoutes: [BusStopRoute]
     
     var body: some View {
         ZStack {
@@ -24,6 +25,8 @@ struct BusStopResultsView: View {
                     .multilineTextAlignment(.center)
                     .background(Color.green)
                     .cornerRadius(5)
+            }.onAppear() {
+                print(busStopRoutes.busStopRoutes)
             }
         }
         
@@ -230,6 +233,6 @@ struct BusStopResultsView: View {
 
 struct BusStopResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        BusStopResultsView()
+        BusStopResultsView(busStopRoutes: BusStopRoutesBuilder())
     }
 }

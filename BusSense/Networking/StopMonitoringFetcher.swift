@@ -52,6 +52,7 @@ class StopMonitoringFetcher: ObservableObject {
                 case .success(let monitoredStop):
                     if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
                         self.monitoredStops = monitoredStopVisit
+//                        print(monitoredStopVisit)
                         completion()
                     }
                 }
