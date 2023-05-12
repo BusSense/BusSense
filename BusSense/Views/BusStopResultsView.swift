@@ -21,10 +21,24 @@ struct BusStopResultsView: View {
                 .frame(width: 300, height: 300)
             
             VStack {
-                Text("This is where the list of bus stops and available routes to track go!")
-                    .multilineTextAlignment(.center)
-                    .background(Color.green)
-                    .cornerRadius(5)
+//                Text("This is where the list of bus stops and available routes to track go!")
+//                    .multilineTextAlignment(.center)
+//                    .background(Color.green)
+//                    .cornerRadius(5)
+                ForEach(busStopRoutes.busStopRoutes, id: \.id) { route in
+                    Button {
+                        print(route.routes)
+                    } label: {
+                        NavigationLink(destination: BusTrackingView(busStop: busStopRoutes.busStopRoutes, busRoute: route).navigationBarBackButtonHidden(true)) {
+                            Text("\(route.shortName) \(route.longName)").frame(width: 300, height: 35, alignment: .leading)
+                                .padding(10)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.black)
+                                .background(Color("Color1"))
+                                .cornerRadius(10)
+                        }
+                    }
             }.onAppear() {
                 print(busStopRoutes.busStopRoutes)
             }
