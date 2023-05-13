@@ -59,4 +59,64 @@ class StopMonitoringFetcher: ObservableObject {
             }
         }
     }
+    
+    func getProximityAway() -> String{
+        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
+            // return miles first vehicle is away from stop
+            return self
+            .monitoredStops![0]
+            .monitoredVehicleJourney
+            .monitoredCall
+            .arrivalProximityText
+    }
+    
+    func getMetersAway() -> Int{
+        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return 0 }
+            // return miles first vehicle is away from stop
+            return self
+            .monitoredStops![0]
+            .monitoredVehicleJourney
+            .monitoredCall
+            .distanceFromStop
+    }
+    
+    func getStopsAway() -> Int{
+        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return 0 }
+            // return miles first vehicle is away from stop
+            return self
+            .monitoredStops![0]
+            .monitoredVehicleJourney
+            .monitoredCall
+            .numberOfStopsAway
+    }
+    
+    func getTimeAway() -> String{
+        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
+        
+        let currDate = Date()
+        var curr = Calendar.current
+        curr.timeZone = TimeZone(abbreviation: "EST")!
+        let components = curr.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currDate)
+        
+        let arrivingTime = self.monitoredStops![0].monitoredVehicleJourney.monitoredCall.expectedArrivalTime ?? ""
+        
+        var date = DateComponents()
+        date.year = Int(String(arrivingTime.prefix(4))) ?? 0
+        date.month = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 6)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -22)]) ?? 0
+        date.day = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 8)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -19)]) ?? 0
+        date.timeZone = TimeZone(abbreviation: "EST")
+        date.hour = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 11)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -16)]) ?? 0
+        date.minute = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 15)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -13)]) ?? 0
+        date.second = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 18)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -10)]) ?? 0
+
+        let arrivingDateTime = curr.date(from: date)!
+        
+        let diffs = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currDate, to: arrivingDateTime)
+        
+        let status = String(diffs.minute!) + " minutes and " + String(diffs.second!) + " seconds away"
+        
+        // return miles first vehicle is away from stop
+        return status
+    }
+    
 }

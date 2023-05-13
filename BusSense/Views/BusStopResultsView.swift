@@ -9,127 +9,61 @@ import SwiftUI
 
 struct BusStopResultsView: View {
     @ObservedObject var busStopRoutes: BusStopRoutesBuilder
-//    var busStopRoutes: [BusStopRoute]
     
     var body: some View {
-        ZStack {
-            Color("Color1").ignoresSafeArea()
+        
+               
+        NavigationView {
             
-            Image("logo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 300, height: 300)
-            
-            VStack {
-//                Text("This is where the list of bus stops and available routes to track go!")
-//                    .multilineTextAlignment(.center)
-//                    .background(Color.green)
-//                    .cornerRadius(5)
-                ForEach(busStopRoutes.busStopRoutes, id: \.id) { route in
-                    Button {
-                        print(route.routes)
-                    } label: {
-                        NavigationLink(destination: BusTrackingView(busStop: busStopRoutes.busStopRoutes, busRoute: route).navigationBarBackButtonHidden(true)) {
-                            Text("\(route.shortName) \(route.longName)").frame(width: 300, height: 35, alignment: .leading)
-                                .padding(10)
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.black)
-                                .background(Color("Color1"))
-                                .cornerRadius(10)
+            ZStack {
+                
+                Color("Color1").ignoresSafeArea()
+                
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300, height: 300)
+                
+                ScrollView(.horizontal) {
+                    HStack(alignment: .center, spacing: 20) {
+                        VStack {
+                            ForEach(busStopRoutes.busStopRoutes, id: \.id) { stop in
+                                Text("Bus Stop Name:\n\(stop.name)")
+                                    .frame(width: 350, height: 75)
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.black)
+                                    .multilineTextAlignment(.center)
+                                    .background(Color("Color1"))
+                                    .cornerRadius(10)
+                                                                
+                                ForEach(stop.routes, id: \.lineRef) { route in
+                                    
+                                    Button (action: {
+                                        print(route.lineNameAndDestinationName)
+                                    }, label: {
+                                        NavigationLink(destination: BusTrackingView(busStop: stop, busRoute: route).navigationBarBackButtonHidden(true)) {
+                                            Text("\(route.lineNameAndDestinationName)").frame(width: 300, height: 35, alignment: .leading)
+                                                .padding(10)
+                                                .font(.title3)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(Color.black)
+                                                .background(Color("Color1"))
+                                                .cornerRadius(10)
+                                        }
+                                    })
+                                }.onAppear() {
+                                    print(busStopRoutes.busStopRoutes)
+                                }
+                            }
                         }
+                        .frame(width: 375, height: 700, alignment: .center)
+                        .background(Color("Color2"))
+                        .cornerRadius(20)
                     }
-            }.onAppear() {
-                print(busStopRoutes.busStopRoutes)
+                }
             }
         }
-        
-        
-//        NavigationView{
-//            ZStack {
-//                Color("Color1").ignoresSafeArea()
-//
-//                VStack {
-//                    if locationManager.userLocation == nil {
-//                        Text("Current Bus Stop:\nAMSTERDAM AV/W 131 ST (NE)")
-//                            .frame(width: 375, height: 200)
-//                            .font(.title)
-//                            .fontWeight(.bold)
-//                            .foregroundColor(Color.white)
-//                            .multilineTextAlignment(.center)
-//                            .background(Color("Color2"))
-//                            .cornerRadius(20)
-//                            .onAppear() {
-//                                LocationManager.shared.requestLocation()
-//                            }
-//                    } else if let location = locationManager.userLocation {
-//                        VStack {
-//
-//                            if (busStops.count != 0) {
-//                                Text("Nearest Bus Stop:\n\(busStops[0].name)")
-//                                    .frame(width: 375, height: 200)
-//                                    .font(.title2)
-//                                    .fontWeight(.bold)
-//                                    .foregroundColor(Color.white)
-//                                    .multilineTextAlignment(.center)
-//                                    .background(Color("Color2"))
-//                                    .cornerRadius(20)
-//                                    .frame(maxWidth: .infinity)
-//                            }
-//                        }.onAppear(perform: nearestBusStop)
-//                    }
-//
-//                    Spacer()
-//
-//
-//                    Image("logo2")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 200).cornerRadius(20)
-//
-//                    Spacer()
-//
-//                    ZStack {
-//
-//                        Text("")
-//                            .frame(width: 375, height: 300)
-//                            .background(Color("Color2"))
-//                            .cornerRadius(20)
-//
-//                        VStack {
-//
-//                            Spacer().frame(height: 10)
-//
-//                            Text("Select Your Bus:")
-//                                .frame(width: 300, height: 50)
-//                                .font(.title2)
-//                                .fontWeight(.bold)
-//                                .foregroundColor(Color.black)
-//                                .multilineTextAlignment(.center)
-//                                .background(Color("Color1"))
-//                                .cornerRadius(5)
-//                                .padding(10)
-//
-//                            Spacer().frame(height: 25)
-//
-//                            ForEach(busRoutes, id: \.id) { route in
-//                                Button {
-//                                    print(route.shortName)
-//                                } label: {
-//                                    NavigationLink(destination: BusTrackingView(busStop: busStops[0], busRoute: route).navigationBarBackButtonHidden(true)) {
-//                                        Text("\(route.shortName) \(route.longName)").frame(width: 300, height: 35, alignment: .leading)
-//                                            .padding(10)
-//                                            .font(.title3)
-//                                            .fontWeight(.bold)
-//                                            .foregroundColor(Color.black)
-//                                            .background(Color("Color1"))
-//                                            .cornerRadius(10)
-//                                    }
-//                                }
-//                                Spacer().frame(height: 5)
-//                            }
-//                        }.frame(width: 350, height: 300, alignment: .top)
-//                    }.frame(width: 375, height: 350)
         
         
                     
