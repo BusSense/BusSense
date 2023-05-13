@@ -64,43 +64,43 @@ class StopMonitoringFetcher: ObservableObject {
         }
     }
     
-    @MainActor
-    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil) {
-        // start of fetching data
-        isLoading = true
-        hasFetchCompleted = false
-        // resets errorMessage everytime function is called
-        errorMessage = nil
-        
-        let key = "test"
-        let version = "2"
-        var url = URL(string: "")
-        
-        if let lineRef = lineRef {
-            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
-        } else {
-            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
-        }
-        
-        Task.init {
-            defer {
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.hasFetchCompleted = true
-                }
-            }
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url!)
-                let decoder = JSONDecoder()
-                let monitoredStops = try decoder.decode(StopMonitoring.self, from: data)
-                DispatchQueue.main.async {
-                    self.monitoredStops = monitoredStops.monitoredStopVisit
-                }
-            } catch {
-                print(error)
-            }
-        }
-    }
+//    @MainActor
+//    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil) {
+//        // start of fetching data
+//        isLoading = true
+//        hasFetchCompleted = false
+//        // resets errorMessage everytime function is called
+//        errorMessage = nil
+//        
+//        let key = "test"
+//        let version = "2"
+//        var url = URL(string: "")
+//        
+//        if let lineRef = lineRef {
+//            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
+//        } else {
+//            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
+//        }
+//        
+//        Task.init {
+//            defer {
+//                DispatchQueue.main.async {
+//                    self.isLoading = false
+//                    self.hasFetchCompleted = true
+//                }
+//            }
+//            do {
+//                let (data, _) = try await URLSession.shared.data(from: url!)
+//                let decoder = JSONDecoder()
+//                let monitoredStops = try decoder.decode(StopMonitoring.self, from: data)
+//                DispatchQueue.main.async {
+//                    self.monitoredStops = monitoredStops.monitoredStopVisit
+//                }
+//            } catch {
+//                print(error)
+//            }
+//        }
+//    }
     
     func getProximityAway() -> String{
         guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
