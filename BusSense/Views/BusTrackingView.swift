@@ -35,7 +35,7 @@ struct BusTrackingView: View {
                 
                 VStack {
                     
-//                    Spacer().frame(height: 10)
+                    Spacer().frame(height: 10)
                     
                     Text("CURRENTLY TRACKING:")
                         .frame(width: 350, height: 30)

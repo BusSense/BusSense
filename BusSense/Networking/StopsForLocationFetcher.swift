@@ -31,7 +31,7 @@ class StopsForLocationFetcher: ObservableObject {
         // TODO: - Set actual key in plist
         let key = "test"
         let version = "2"
-        let radius = "10"        
+        let radius = "50"        
         let service = APIService()
         let url = URL(string: "https://bustime.mta.info/api/where/stops-for-location.json?key=\(key)&version=\(version)&lat=\(lat)&lon=\(lon)&radius=\(radius)")
         
