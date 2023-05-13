@@ -20,7 +20,7 @@ class StopMonitoringFetcher: ObservableObject {
 //    }
     
     func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil, completion: @escaping () -> Void = {}) {
-        
+        print("entered fetchStopMonitoring")
         // start of fetching data
         isLoading = true
         hasFetchCompleted = false
@@ -52,10 +52,52 @@ class StopMonitoringFetcher: ObservableObject {
                 case .success(let monitoredStop):
                     if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
                         self.monitoredStops = monitoredStopVisit
-//                        print(monitoredStopVisit)
+                        print(monitoredStopVisit)
+                        completion()
+                    } else {
+                        // indicates that there were no returned buses for the bus stop
+                        self.monitoredStops = []
                         completion()
                     }
                 }
+            }
+        }
+    }
+    
+    @MainActor
+    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil) {
+        // start of fetching data
+        isLoading = true
+        hasFetchCompleted = false
+        // resets errorMessage everytime function is called
+        errorMessage = nil
+        
+        let key = "test"
+        let version = "2"
+        var url = URL(string: "")
+        
+        if let lineRef = lineRef {
+            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
+        } else {
+            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
+        }
+        
+        Task.init {
+            defer {
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.hasFetchCompleted = true
+                }
+            }
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url!)
+                let decoder = JSONDecoder()
+                let monitoredStops = try decoder.decode(StopMonitoring.self, from: data)
+                DispatchQueue.main.async {
+                    self.monitoredStops = monitoredStops.monitoredStopVisit
+                }
+            } catch {
+                print(error)
             }
         }
     }

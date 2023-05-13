@@ -36,4 +36,8 @@ struct APIService {
         
         task.resume()
     }
+    
+//    func fetch<T: Decodable>(_ type: T.Type, url: URL) async throws -> T {
+//        
+//    }
 }

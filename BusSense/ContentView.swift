@@ -24,6 +24,7 @@ struct ContentView: View {
             if !busStopRoutes.hasFetchedCompleted || busStopRoutes.isLoading {
                 LoadingView().onAppear() {
                     print(location.coordinate.latitude, location.coordinate.longitude)
+//                    busStopRoutes.buildBusStopRoutesOld(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                     busStopRoutes.buildBusStopRoutes(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                 }
             } else {

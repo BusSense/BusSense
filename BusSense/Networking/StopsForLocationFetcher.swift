@@ -10,7 +10,7 @@ import Foundation
 // needs to inherit ObservableObject to allow it to be used in UI
 class StopsForLocationFetcher: ObservableObject {
     
-    @Published var busStops: StopsForLocation? = nil
+    @Published var nearbyStops: StopsForLocation? = nil
     @Published var isLoading: Bool = false
     @Published var hasFetchCompleted: Bool = false
     @Published var errorMessage: String? = nil
@@ -47,9 +47,44 @@ class StopsForLocationFetcher: ObservableObject {
                     print(error)
                     completion()
                 case .success(let busStops):
-                    self.busStops = busStops
+                    self.nearbyStops = busStops
                     completion()
                 }
+            }
+        }
+    }
+    
+    func fetchNearbyBusStops(lat: Double, lon: Double) {
+        print("fetchNearbyBusStops")
+        // start of fetching data
+        isLoading = true
+        hasFetchCompleted = false
+        // resets errorMessage everytime function is called
+        errorMessage = nil
+        
+        // TODO: - Set actual key in plist
+        let key = "test"
+        let version = "2"
+        let radius = "10"
+        let url = URL(string: "https://bustime.mta.info/api/where/stops-for-location.json?key=\(key)&version=\(version)&lat=\(lat)&lon=\(lon)&radius=\(radius)")
+        
+        Task.init {
+            defer {
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.hasFetchCompleted = true
+                }
+            }
+            do {
+    //            let (data, response) = try await URLSession.shared.data(from: url)
+                let (data, _) = try await URLSession.shared.data(from: url!)
+                let decoder = JSONDecoder()
+                let nearbyStops = try decoder.decode(StopsForLocation.self, from: data)
+                DispatchQueue.main.async {
+                    self.nearbyStops = nearbyStops
+                }
+            } catch {
+                print(error)
             }
         }
     }
