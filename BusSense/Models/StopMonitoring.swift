@@ -29,7 +29,7 @@ struct Siri: Codable {
 struct ServiceDelivery: Codable {
     let responseTimestamp: String
     let stopMonitoringDelivery: [StopMonitoringDelivery]
-    let situationExchangeDelivery: [SituationExchangeDelivery]
+    let situationExchangeDelivery: [SituationExchangeDelivery]?
 
     enum CodingKeys: String, CodingKey {
         case responseTimestamp = "ResponseTimestamp"
