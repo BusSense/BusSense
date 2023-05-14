@@ -11,6 +11,7 @@ struct BusTrackingView: View {
     
     var busStop: BusStopRoute
     var busRoute: RouteDetail
+    let speechSynthesizer = SpeechSynthesizer()
     
     @StateObject var stopMonitoringFetcher: StopMonitoringFetcher = StopMonitoringFetcher()
     
@@ -56,6 +57,12 @@ struct BusTrackingView: View {
                             .padding()
                             .background(Color("Color2"))
                             .cornerRadius(20)
+                            .onAppear() {
+                                speechSynthesizer.speak("currently tracking")
+                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
+                                speechSynthesizer.speak("NOTICE:")
+                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+                            }
                     } else {
                         Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)\n\(metersData) meters away\n\(stopsData) stops away\n\(timeData)")
                             .frame(width: 350, height: 200)
@@ -66,6 +73,12 @@ struct BusTrackingView: View {
                             .padding()
                             .background(Color("Color2"))
                             .cornerRadius(20)
+                            .onAppear() {
+                                speechSynthesizer.speak("currently tracking")
+                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
+                                speechSynthesizer.speak("NOTICE:")
+                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+                            }
                     }
                 }
                 .frame(width: 375, height: 300, alignment: .top)
@@ -94,7 +107,6 @@ struct BusTrackingView: View {
                         .padding()
                         .background(Color("Color2"))
                         .cornerRadius(20)
-                    
                     
                     
                 }.frame(width: 375, height: 200, alignment: .top)
@@ -136,10 +148,11 @@ struct BusTrackingView: View {
                                     
                                     Spacer().frame(height: 20)
                                     
-                                    Image("leftarrow")
+                                    Image(systemName: "arrowshape.backward")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 100)
+                                        .foregroundColor(.white)
                                 }
                             }
                         }
@@ -166,12 +179,13 @@ struct BusTrackingView: View {
                                         .foregroundColor(Color.white)
                                         .cornerRadius(20)
                                     
-                                    Spacer().frame(height: 40)
+                                    Spacer().frame(height: 20)
                                     
-                                    Image("refresh")
+                                    Image(systemName: "arrow.clockwise")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 75)
+                                        .foregroundColor(.white)
                                 }
                             }
                         }
