@@ -37,7 +37,10 @@ struct APIService {
         task.resume()
     }
     
-//    func fetch<T: Decodable>(_ type: T.Type, url: URL) async throws -> T {
-//        
-//    }
+    func fetch<T: Decodable>(_ type: T.Type, url: URL) async throws -> T {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let decoder = JSONDecoder()
+        let decoded = try decoder.decode(type, from: data)
+        return decoded
+    }
 }
