@@ -12,7 +12,7 @@ struct BusStopResultsView: View {
     @ObservedObject var busStopRoutes: BusStopRoutesBuilder
 //    @ObservedObject var busStopRoutes: MTA
     let speechSynthesizer = SpeechSynthesizer()
-    let cRadius = 10.0
+    let radius = 10.0
     
     
     var body: some View {
@@ -74,7 +74,7 @@ struct BusStopResultsView: View {
                                     }
                                     .frame(width: 350, height: 150)
                                     .background(Color("Color2"))
-                                    .cornerRadius(cRadius)
+                                    .cornerRadius(radius)
                                     
                                     Spacer().frame(height: 50)
 
@@ -119,11 +119,11 @@ struct BusStopResultsView: View {
                                     }
                                     .frame(width: 350, height: 400, alignment: .top)
                                     .background(Color("Color2"))
-                                    .cornerRadius(cRadius)
+                                    .cornerRadius(radius)
                                 }
                                 .frame(width: 375, height: 650, alignment: .center)
                                 .background(Color("Color1"))
-                                .cornerRadius(cRadius)
+                                .cornerRadius(radius)
                             }
                         }
                         .tabViewStyle(.page)
