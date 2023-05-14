@@ -54,7 +54,7 @@ class StopsForLocationFetcher: ObservableObject {
         }
     }
     
-//    func fetchNearbyBusStops(lat: Double, lon: Double)` {
+//    func fetchNearbyBusStops(lat: Double, lon: Double) {
 //        print("fetchNearbyBusStops")
 //        // start of fetching data
 //        isLoading = true
@@ -76,10 +76,7 @@ class StopsForLocationFetcher: ObservableObject {
 //                }
 //            }
 //            do {
-//    //            let (data, response) = try await URLSession.shared.data(from: url)
-//                let (data, _) = try await URLSession.shared.data(from: url!)
-//                let decoder = JSONDecoder()
-//                let nearbyStops = try decoder.decode(StopsForLocation.self, from: data)
+//                let nearbyStops = try await APIService().fetch(type: StopsForLocation.self, from: url!)
 //                DispatchQueue.main.async {
 //                    self.nearbyStops = nearbyStops
 //                }
