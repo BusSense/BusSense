@@ -12,12 +12,56 @@ struct BusTrackingView: View {
     var busStop: BusStopRoute
     var busRoute: RouteDetail
     let speechSynthesizer = SpeechSynthesizer()
-    
+        
     @StateObject var stopMonitoringFetcher: StopMonitoringFetcher = StopMonitoringFetcher()
     
-    func notice() {
+    // generate notice of number of buses ahead of desired bus
+    func notice(stop: BusStopRoute, route: RouteDetail, fetcher: StopMonitoringFetcher) -> [(Date, String)] {
         
+        // array of tuples (oncoming time and bus to that specific stop)
+        var arrivingTimes: [(day: Date, bus: String)] = []
+        
+        let currDate = Date()
+        var curr = Calendar.current
+        
+        // get all buses arriving at stop
+        fetcher.fetchStopMonitoring(monitoringRef: stop.code)
+        
+        for x in fetcher.monitoredStops! {
+            
+            var nextTime = x.monitoredVehicleJourney.monitoredCall.expectedArrivalTime
+            
+            var date = DateComponents()
+            date.year = Int(String(nextTime!.prefix(4))) ?? 0
+            date.month = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 6)..<nextTime!.index(nextTime!.endIndex, offsetBy: -22)]) ?? 0
+            date.day = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 8)..<nextTime!.index(nextTime!.endIndex, offsetBy: -19)]) ?? 0
+            date.timeZone = TimeZone(abbreviation: "EST")
+            date.hour = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 11)..<nextTime!.index(nextTime!.endIndex, offsetBy: -16)]) ?? 0
+            date.minute = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 15)..<nextTime!.index(nextTime!.endIndex, offsetBy: -13)]) ?? 0
+            date.second = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 18)..<nextTime!.index(nextTime!.endIndex, offsetBy: -10)]) ?? 0
+            let arrivingDateTime = curr.date(from: date)!
+            
+            arrivingTimes.append((arrivingDateTime, x.monitoredVehicleJourney.lineRef))
+        }
+            
+            arrivingTimes = arrivingTimes.sorted(by: {$0.day < $1.day})
+            
+        
+        return arrivingTimes
     }
+    
+    // count the number of buses ahead of the desired bus
+    func ahead(route: RouteDetail, arrivingTimes: [(Date, String)]) -> Int {
+        
+        var numberofBus = 0
+        for i in arrivingTimes {
+            if i.1 != route.lineRef {
+                numberofBus += 1
+            }
+        }
+        return numberofBus
+    }
+    
     
     var body: some View {
         
@@ -25,6 +69,10 @@ struct BusTrackingView: View {
         let metersData = stopMonitoringFetcher.getMetersAway()
         let stopsData = stopMonitoringFetcher.getStopsAway()
         let timeData = stopMonitoringFetcher.getTimeAway()
+                
+        // call notice and ahead function to determine the buses ahead of desired bus
+        let order = notice(stop: busStop, route: busRoute, fetcher: stopMonitoringFetcher)
+        let busesAhead = ahead(route: busRoute, arrivingTimes: order)
         
         ZStack {
             
@@ -98,7 +146,7 @@ struct BusTrackingView: View {
                         .background(Color("Color1"))
                         .cornerRadius(10)
                     
-                    Text("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+                    Text("\(order[0].1) is the next approaching bus. The next approaching bus is not \(busRoute.lineNameAndDestinationName). There are \(busesAhead) buses ahead of \(busRoute.lineNameAndDestinationName).")
                         .frame(width: 350, height: 100)
                         .font(.title3)
                         .fontWeight(.bold)
@@ -107,6 +155,7 @@ struct BusTrackingView: View {
                         .padding()
                         .background(Color("Color2"))
                         .cornerRadius(20)
+                        .onAppear()
                     
                     
                 }.frame(width: 375, height: 200, alignment: .top)

@@ -117,10 +117,16 @@ class StopMonitoringFetcher: ObservableObject {
         
         let diffs = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currDate, to: arrivingDateTime)
         
-        let minAway = -1 * diffs.minute!
-        let secAway = -1 * diffs.second!
+        let minAway = diffs.minute!
+        let secAway = diffs.second!
         
-        let status = String(minAway) + " minutes and " + String(secAway) + " seconds away"
+        var status = ""
+        if minAway > 0 {
+            status = String(minAway) + " minutes and " + String(secAway) + " seconds away"
+        }
+        else {
+            status = String(secAway) + " seconds away"
+        }
         
         // return miles first vehicle is away from stop
         return status
