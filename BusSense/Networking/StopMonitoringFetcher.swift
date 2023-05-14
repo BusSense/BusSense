@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import BackgroundTasks
+import UserNotifications
 
 // needs to inherit ObservableObject to allow it to be used in UI
 class StopMonitoringFetcher: ObservableObject {
@@ -14,50 +16,137 @@ class StopMonitoringFetcher: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var hasFetchCompleted: Bool = false
     @Published var errorMessage: String? = nil
+    var previousProximity: String? = nil
+    
+    static var shared: StopMonitoringFetcher = StopMonitoringFetcher()
+    
+    // Store these 3 variables for notifying users
+    static var busStop: BusStopRoute? = nil
+    static var busRoute: RouteDetail? = nil
+    static var stopMonitoringFetcher: StopMonitoringFetcher? = nil
     
 //    init() {
 //        fetchStopMonitoring()
 //    }
     
-    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil, completion: @escaping () -> Void = {}) {
-        print("entered fetchStopMonitoring")
-        // start of fetching data
-        isLoading = true
-        hasFetchCompleted = false
-        // resets errorMessage everytime function is called
-        errorMessage = nil
+    // This will be called in BusTrackingView so we have access to the bus being tracked
+    func initData(busStop1: BusStopRoute, busRoute1: RouteDetail, stopMonitoringFetcher1: StopMonitoringFetcher){
+        print("init data")
+//        print(busStop1)
+//        print(busRoute1)
+        StopMonitoringFetcher.busStop = busStop1
+        StopMonitoringFetcher.busRoute = busRoute1
+        StopMonitoringFetcher.stopMonitoringFetcher = stopMonitoringFetcher1
+    }
+    
+    static func scheduleAppRefresh() {
+        Task{
+            // Delay of 7.5 seconds (1 second = 1_000_000_000 nanoseconds)
+//            try? await Task.sleep(nanoseconds: 7_500_000_000)
+            print("scheduling app refresh")
+//            await StopMonitoringFetcher.handleBackgroundTask()
+            
+            // Start background task in 30 seconds
+            let request = BGAppRefreshTaskRequest(identifier: "myapprefresh")
+            request.earliestBeginDate = .now.addingTimeInterval(5)
+            try? BGTaskScheduler.shared.submit(request)
+        }
+    }
+    
+    static func handleBackgroundTask() async{
+        print("handle background task")
+        // Schedule another task
+        scheduleAppRefresh()
         
-        let key = "test"
-        let version = "2"
-        let service = APIService()
-        var url = URL(string: "")
+        // Fetch updates
+        Task{
+            let stopMonitoringFetcher = StopMonitoringFetcher.stopMonitoringFetcher
+            let busStop = StopMonitoringFetcher.busStop
+            let busRoute = StopMonitoringFetcher.busRoute
+            
+            guard stopMonitoringFetcher != nil else {return}
+            guard busStop != nil else {return}
+            guard busRoute != nil else {return}
+            
+            // Wait for updates
+            await stopMonitoringFetcher!.fetchStopMonitoring(monitoringRef: busStop!.code, lineRef: busRoute!.lineRef.replacingOccurrences(of: " ", with: "%20"))
+            
+            // Send notification to users
+            print("notification test")
+        }
+    }
+    
+    func scheduleNotification() {
+        print("schedule notifiction")
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        let proximityText = self.getProximityAway()
         
-        if let lineRef = lineRef {
-            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
-        } else {
-            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
+        // Same as previous dont notify
+        if(self.previousProximity == proximityText){
+            return
         }
         
-        service.fetch(StopMonitoring.self, url: url) { [unowned self] result in
-            DispatchQueue.main.async {
-                // indicate data request has completed
-                self.isLoading = false
-                self.hasFetchCompleted = true
-                // handle results
-                switch result {
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                    print(error)
-                    completion()
-                case .success(let monitoredStop):
-                    if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
-                        self.monitoredStops = monitoredStopVisit
-                        print(monitoredStopVisit)
+        // Update previous
+        self.previousProximity = proximityText
+        
+        content.title = "Bus Update"
+        content.body = "Your bus is \(proximityText) away"
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = UNNotificationSound.default
+
+        var dateComponents = DateComponents()
+        dateComponents.hour = 10
+        dateComponents.minute = 30
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
+    
+    func fetchStopMonitoring (monitoringRef: String, lineRef: String? = nil, completion: @escaping () -> Void = {}) async{
+        DispatchQueue.main.async {
+//            print("entered fetchStopMonitoring")
+            // start of fetching data
+            self.isLoading = true
+            self.hasFetchCompleted = false
+            // resets errorMessage everytime function is called
+            self.errorMessage = nil
+            
+            let key = "test"
+            let version = "2"
+            let service = APIService()
+            var url = URL(string: "")
+            
+            if let lineRef = lineRef {
+                url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
+            } else {
+                url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
+            }
+            
+            service.fetch(StopMonitoring.self, url: url) { [unowned self] result in
+                DispatchQueue.main.async {
+                    // indicate data request has completed
+                    self.isLoading = false
+                    self.hasFetchCompleted = true
+                    // handle results
+                    switch result {
+                    case .failure(let error):
+                        self.errorMessage = error.localizedDescription
+                        print(error)
                         completion()
-                    } else {
-                        // indicates that there were no returned buses for the bus stop
-                        self.monitoredStops = []
-                        completion()
+                    case .success(let monitoredStop):
+                        if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
+                            self.monitoredStops = monitoredStopVisit
+//                            print(monitoredStopVisit)
+                            completion()
+                        } else {
+                            // indicates that there were no returned buses for the bus stop
+                            self.monitoredStops = []
+                            completion()
+                        }
                     }
                 }
             }
@@ -110,9 +199,10 @@ class StopMonitoringFetcher: ObservableObject {
 //    }
     
     func getProximityAway() -> String{
-        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
+        let empty = monitoredStops?.isEmpty ?? false
+        guard self.hasFetchCompleted && !empty else { return "No vehicles detected at this time. Please try again later."}
             // return miles first vehicle is away from stop
-            return self
+        return StopMonitoringFetcher.shared
             .monitoredStops![0]
             .monitoredVehicleJourney
             .monitoredCall
@@ -120,9 +210,10 @@ class StopMonitoringFetcher: ObservableObject {
     }
     
     func getMetersAway() -> Int{
-        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return 0 }
+        let empty = monitoredStops?.isEmpty ?? false
+        guard self.hasFetchCompleted && !empty else { return 0 }
             // return miles first vehicle is away from stop
-            return self
+            return StopMonitoringFetcher.shared
             .monitoredStops![0]
             .monitoredVehicleJourney
             .monitoredCall
@@ -130,7 +221,8 @@ class StopMonitoringFetcher: ObservableObject {
     }
     
     func getStopsAway() -> Int{
-        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return 0 }
+        let empty = monitoredStops?.isEmpty ?? false
+        guard self.hasFetchCompleted && !empty else { return 0 }
             // return miles first vehicle is away from stop
             return self
             .monitoredStops![0]
@@ -140,7 +232,8 @@ class StopMonitoringFetcher: ObservableObject {
     }
     
     func getTimeAway() -> String{
-        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
+        let empty = monitoredStops?.isEmpty ?? false
+        guard self.hasFetchCompleted && !empty else { return "No vehicles detected at this time. Please try again later."}
         
         let currDate = Date()
         var curr = Calendar.current

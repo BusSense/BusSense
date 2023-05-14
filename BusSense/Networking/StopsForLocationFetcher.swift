@@ -29,11 +29,14 @@ class StopsForLocationFetcher: ObservableObject {
         errorMessage = nil
         
         // TODO: - Set actual key in plist
-        let key = "test"
+        let key = "d0a7717c-417c-43cc-862b-5b513bb63753"
         let version = "2"
-        let radius = "50"        
+        let radius = "301111"
+        let lat = 40.6259
+        let lon = -74.0224
         let service = APIService()
         let url = URL(string: "https://bustime.mta.info/api/where/stops-for-location.json?key=\(key)&version=\(version)&lat=\(lat)&lon=\(lon)&radius=\(radius)")
+//        print(url)
         
         service.fetch(StopsForLocation.self, url: url) { [unowned self] result in
             DispatchQueue.main.async {

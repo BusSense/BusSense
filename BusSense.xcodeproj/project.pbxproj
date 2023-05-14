@@ -78,6 +78,7 @@
 		7AC5E1EB29CB7ED300743398 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		7AC5E1F029CB90E600743398 /* BusStopResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopResultsView.swift; sourceTree = "<group>"; };
 		7AC5E1F229CB92F400743398 /* BusStopRoutesBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopRoutesBuilder.swift; sourceTree = "<group>"; };
+		BE6213982A10F2F1000D5B8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +131,7 @@
 		21724E6A298F1FA000E5BDFF /* BusSense */ = {
 			isa = PBXGroup;
 			children = (
+				BE6213982A10F2F1000D5B8A /* Info.plist */,
 				21724E6B298F1FA000E5BDFF /* BusSenseApp.swift */,
 				21724E6D298F1FA000E5BDFF /* ContentView.swift */,
 				7AC5E1EF29CB8D8400743398 /* Views */,
@@ -520,6 +522,7 @@
 				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusSense/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App wants to use location services.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App wants to use location services.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -551,6 +554,7 @@
 				DEVELOPMENT_TEAM = UNJZL3G253;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BusSense/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App wants to use location services.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App wants to use location services.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

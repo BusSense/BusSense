@@ -42,7 +42,7 @@ struct BusStopResultsView: View {
                         
                         TabView() {
                                                         
-                            ForEach(busStopRoutes.busStopRoutes, id: \.id) { stop in
+                            ForEach(busStopRoutes.busStopRoutes.filter({!$0.routes.isEmpty}), id: \.id) { stop in
                                 
                                 VStack {
                                     
@@ -94,7 +94,7 @@ struct BusStopResultsView: View {
                                             
                                             Spacer().frame(height: 20)
                                         }.onAppear() {
-                                            print(busStopRoutes.busStopRoutes)
+//                                            print(busStopRoutes.busStopRoutes)
                                         }
                                     }.frame(width: 350, height: 400, alignment: .top).background(Color("Color2"))
                                     

@@ -42,9 +42,9 @@ class BusStopRoutesBuilder: ObservableObject {
         group.notify(queue: DispatchQueue.global()) {
             if let busStops = self.stopsForLocationFetched.nearbyStops {
                 print("From bus stop route builder")
-                print(busStops)
+//                print(busStops)
                 if (busStops.busStops.count != 0) {
-                    print("bus stop count:", busStops.busStops.count)
+//                    print("bus stop count:", busStops.busStops.count)
                     self.parser(busStops.busStops)
                     print("parsing complete")
                 } else {
@@ -101,67 +101,71 @@ class BusStopRoutesBuilder: ObservableObject {
             }
         }
         for busStop in busStops {
-            print("bus stop")
-            print(busStop.name)
-            print(busStop.code)
-            print(busStop)
+//            print("bus stop")
+//            print(busStop.name)
+//            print(busStop.code)
+//            print(busStop)
             
             let group = DispatchGroup()
             group.enter()
-            print("entering group")
-            self.stopMonitoringFetched.fetchStopMonitoring(monitoringRef: busStop.code) {
-                print("completion")
-                group.leave()
-            }
+//            print("entering group")
             
-            group.notify(queue: DispatchQueue.global()) {
-                if let monitoredStops = self.stopMonitoringFetched.monitoredStops {
-                    var routes: [RouteDetail] = []
-                    print(monitoredStops)
-                    print(routes)
-                    for monitoredStop in monitoredStops {
-                        let monitoredVehicleJourney = monitoredStop.monitoredVehicleJourney
-                        let publishedLineName = monitoredVehicleJourney.publishedLineName[0]
-                        let destinationName = monitoredVehicleJourney.destinationName[0]
-                        let lineNameAndDestinationNameView = "\(publishedLineName) - \(destinationName)"
-                        
-                        if !self.containsRoute(lineAndDestination: lineNameAndDestinationNameView, routes: routes) {
-//                            print(lineNameAndDestinationNameView)
-                            let routeDetail = RouteDetail(lineRef: monitoredVehicleJourney.lineRef,
-                                                          directionRef: monitoredVehicleJourney.directionRef,
-                                                          journeyPatternRef: monitoredVehicleJourney.journeyPatternRef,
-                                                          publishedLineName: monitoredVehicleJourney.publishedLineName[0],
-                                                          operatorRef: monitoredVehicleJourney.operatorRef,
-                                                          originRef: monitoredVehicleJourney.originRef,
-                                                          destinationRef: monitoredVehicleJourney.destinationRef,
-                                                          destinationName: monitoredVehicleJourney.destinationName[0],
-                                                          lineNameAndDestinationName: lineNameAndDestinationNameView)
-                            routes.append(routeDetail)
+            Task{
+                await self.stopMonitoringFetched.fetchStopMonitoring(monitoringRef: busStop.code) {
+//                    print("completion")
+                    group.leave()
+                }
+                
+                group.notify(queue: DispatchQueue.global()) {
+                    if let monitoredStops = self.stopMonitoringFetched.monitoredStops {
+                        var routes: [RouteDetail] = []
+//                        print(monitoredStops)
+//                        print(routes)
+                        for monitoredStop in monitoredStops {
+                            let monitoredVehicleJourney = monitoredStop.monitoredVehicleJourney
+                            let publishedLineName = monitoredVehicleJourney.publishedLineName[0]
+                            let destinationName = monitoredVehicleJourney.destinationName[0]
+                            let lineNameAndDestinationNameView = "\(publishedLineName) - \(destinationName)"
+                            
+                            if !self.containsRoute(lineAndDestination: lineNameAndDestinationNameView, routes: routes) {
+    //                            print(lineNameAndDestinationNameView)
+                                let routeDetail = RouteDetail(lineRef: monitoredVehicleJourney.lineRef,
+                                                              directionRef: monitoredVehicleJourney.directionRef,
+                                                              journeyPatternRef: monitoredVehicleJourney.journeyPatternRef,
+                                                              publishedLineName: monitoredVehicleJourney.publishedLineName[0],
+                                                              operatorRef: monitoredVehicleJourney.operatorRef,
+                                                              originRef: monitoredVehicleJourney.originRef,
+                                                              destinationRef: monitoredVehicleJourney.destinationRef,
+                                                              destinationName: monitoredVehicleJourney.destinationName[0],
+                                                              lineNameAndDestinationName: lineNameAndDestinationNameView)
+                                routes.append(routeDetail)
+                            }
                         }
+                        
+                        let busStopRoute = BusStopRoute(code: busStop.code,
+                                                        id: busStop.id,
+                                                        name: busStop.name,
+                                                        direction: busStop.direction,
+                                                        lat: busStop.lat,
+                                                        lon: busStop.lon,
+                                                        locationType: busStop.locationType,
+                                                        routes: routes)
+//                        print(busStopRoute)
+                        
+                        DispatchQueue.main.async {
+                            self.busStopRoutes.append(busStopRoute)
+    //                        self.hasFetchedCompleted = true
+    //                        self.isLoading = false
+                        }
+                        
+                        
+                    } else if let err = self.stopMonitoringFetched.errorMessage {
+                        print(err)
                     }
-                    
-                    let busStopRoute = BusStopRoute(code: busStop.code,
-                                                    id: busStop.id,
-                                                    name: busStop.name,
-                                                    direction: busStop.direction,
-                                                    lat: busStop.lat,
-                                                    lon: busStop.lon,
-                                                    locationType: busStop.locationType,
-                                                    routes: routes)
-                    print(busStopRoute)
-                    
-                    DispatchQueue.main.async {
-                        self.busStopRoutes.append(busStopRoute)
-//                        self.hasFetchedCompleted = true
-//                        self.isLoading = false
-                    }
-                    
-                    
-                } else if let err = self.stopMonitoringFetched.errorMessage {
-                    print(err)
                 }
             }
-        }
+            }
+            
         print("end of parser")
     }
     
