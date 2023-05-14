@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BusStopResultsView: View {
     @ObservedObject var busStopRoutes: BusStopRoutesBuilder
+//    @ObservedObject var busStopRoutes: MTA
     
     var body: some View {
         
@@ -114,5 +115,6 @@ struct BusStopResultsView: View {
 struct BusStopResultsView_Previews: PreviewProvider {
     static var previews: some View {
         BusStopResultsView(busStopRoutes: BusStopRoutesBuilder())
+//        BusStopResultsView(busStopRoutes: MTA())
     }
 }
