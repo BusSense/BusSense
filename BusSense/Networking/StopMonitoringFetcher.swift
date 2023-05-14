@@ -64,51 +64,6 @@ class StopMonitoringFetcher: ObservableObject {
         }
     }
     
-//    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil) {
-//        // start of fetching data
-//        isLoading = true
-//        hasFetchCompleted = false
-//        // resets errorMessage everytime function is called
-//        errorMessage = nil
-//
-//        let key = "test"
-//        let version = "2"
-//        var url = URL(string: "")
-//
-//        let group = DispatchGroup()
-//        let serialQueue = DispatchQueue(label: "url")
-//        group.enter()
-//        serialQueue.sync {
-//            if let lineRef = lineRef {
-//                url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
-//            } else {
-//                url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
-//            }
-//            group.leave()
-//        }
-//
-//        group.enter()
-//        serialQueue.sync {
-//            Task.init {
-//                defer {
-//                    DispatchQueue.main.async {
-//                        self.isLoading = false
-//                        self.hasFetchCompleted = true
-//                    }
-//                }
-//                do {
-//                    let monitoredStops = try await APIService().fetch(type: StopMonitoring.self, from: url!)
-//                    DispatchQueue.main.async {
-//                        self.monitoredStops = monitoredStops.monitoredStopVisit
-//                    }
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//            group.leave()
-//        }
-//    }
-    
     func getProximityAway() -> String{
         guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
             // return miles first vehicle is away from stop

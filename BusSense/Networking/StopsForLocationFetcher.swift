@@ -53,38 +53,6 @@ class StopsForLocationFetcher: ObservableObject {
             }
         }
     }
-    
-//    func fetchNearbyBusStops(lat: Double, lon: Double) {
-//        print("fetchNearbyBusStops")
-//        // start of fetching data
-//        isLoading = true
-//        hasFetchCompleted = false
-//        // resets errorMessage everytime function is called
-//        errorMessage = nil
-//
-//        // TODO: - Set actual key in plist
-//        let key = "test"
-//        let version = "2"
-//        let radius = "10"
-//        let url = URL(string: "https://bustime.mta.info/api/where/stops-for-location.json?key=\(key)&version=\(version)&lat=\(lat)&lon=\(lon)&radius=\(radius)")
-//
-//        Task.init {
-//            defer {
-//                DispatchQueue.main.async {
-//                    self.isLoading = false
-//                    self.hasFetchCompleted = true
-//                }
-//            }
-//            do {
-//                let nearbyStops = try await APIService().fetch(type: StopsForLocation.self, from: url!)
-//                DispatchQueue.main.async {
-//                    self.nearbyStops = nearbyStops
-//                }
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
 }
 
 //class StopsForLocationFetcher: ObservableObject {

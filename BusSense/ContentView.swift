@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var busStopRoutes = BusStopRoutesBuilder()
+//    @StateObject var busStopRoutes = MTA()
     
     var body: some View {
         // TODO: - Check camera permission here too
@@ -21,10 +22,9 @@ struct ContentView: View {
                 locationManager.requestLocation()
             }
         } else if let location = locationManager.userLocation {
-            if !busStopRoutes.hasFetchedCompleted || busStopRoutes.isLoading {
+            if !busStopRoutes.hasFetchCompleted || busStopRoutes.isLoading {
                 LoadingView().onAppear() {
                     print(location.coordinate.latitude, location.coordinate.longitude)
-//                    busStopRoutes.buildBusStopRoutesOld(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                     busStopRoutes.buildBusStopRoutes(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                 }
             } else {
