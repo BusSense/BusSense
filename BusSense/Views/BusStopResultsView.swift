@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct BusStopResultsView: View {
     @ObservedObject var busStopRoutes: BusStopRoutesBuilder
 //    @ObservedObject var busStopRoutes: MTA
+    let speechSynthesizer = SpeechSynthesizer()
+    let cRadius = 10.0
+    
     
     var body: some View {
         
@@ -53,6 +57,9 @@ struct BusStopResultsView: View {
                                             .font(.title3)
                                             .foregroundColor(Color.white)
                                             .multilineTextAlignment(.center)
+//                                            .onAppear() {
+//                                                speechSynthesizer.speak("bus stop name")
+//                                            }
                                         
                                         Spacer().frame(height: 10)
                                         
@@ -61,7 +68,13 @@ struct BusStopResultsView: View {
                                             .fontWeight(.bold)
                                             .foregroundColor(Color.white)
                                             .multilineTextAlignment(.center)
-                                    }.frame(width: 350, height: 150).background(Color("Color2"))
+                                            .onAppear() {
+                                                speechSynthesizer.speak("\(stop.name)")
+                                            }
+                                    }
+                                    .frame(width: 350, height: 150)
+                                    .background(Color("Color2"))
+                                    .cornerRadius(cRadius)
                                     
                                     Spacer().frame(height: 50)
 
@@ -74,6 +87,9 @@ struct BusStopResultsView: View {
                                             .foregroundColor(Color.white)
                                             .multilineTextAlignment(.center)
                                             .padding(10)
+//                                            .onAppear() {
+//                                                speechSynthesizer.speak("select your bus")
+//                                            }
                                         
                                         Spacer().frame(height: 10)
                                         
@@ -82,7 +98,7 @@ struct BusStopResultsView: View {
                                             Button (action: {
                                                 print(route.lineNameAndDestinationName)
                                             }, label: {
-                                                NavigationLink(destination: BusTrackingView(busStop: stop, busRoute: route).navigationBarBackButtonHidden(true)) {
+                                                NavigationLink(destination: BusTrackingView(busStop: stop, busRoute: route).navigationBarBackButtonHidden(false)) {
                                                     Text("\(route.lineNameAndDestinationName)").frame(width: 300, height: 50, alignment: .leading)
                                                         .padding(10)
                                                         .font(.title3)
@@ -90,6 +106,9 @@ struct BusStopResultsView: View {
                                                         .foregroundColor(Color.black)
                                                         .background(Color("Color1"))
                                                         .cornerRadius(10)
+                                                        .onAppear() {
+                                                            speechSynthesizer.speak("\(route.lineNameAndDestinationName)")
+                                                        }
                                                 }
                                             })
                                             
@@ -97,14 +116,18 @@ struct BusStopResultsView: View {
                                         }.onAppear() {
                                             print(busStopRoutes.busStopRoutes)
                                         }
-                                    }.frame(width: 350, height: 400, alignment: .top).background(Color("Color2"))
-                                    
+                                    }
+                                    .frame(width: 350, height: 400, alignment: .top)
+                                    .background(Color("Color2"))
+                                    .cornerRadius(cRadius)
                                 }
                                 .frame(width: 375, height: 650, alignment: .center)
                                 .background(Color("Color1"))
-                                .cornerRadius(20)
+                                .cornerRadius(cRadius)
                             }
-                        }.tabViewStyle(.page).indexViewStyle(.page(backgroundDisplayMode: .always))
+                        }
+                        .tabViewStyle(.page)
+                        .indexViewStyle(.page(backgroundDisplayMode: .always))
                     }
                 }
             }

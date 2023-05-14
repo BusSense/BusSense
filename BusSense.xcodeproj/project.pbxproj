@@ -22,6 +22,7 @@
 		7A36897F29D1578400E245E6 /* DeniedPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36897E29D1578400E245E6 /* DeniedPermissionsView.swift */; };
 		7A3DEFDC29D164E90077F797 /* DefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DEFDB29D164E90077F797 /* DefaultView.swift */; };
 		7A57D5AF2A10BA5900E7B67E /* MTA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A57D5AE2A10BA5900E7B67E /* MTA.swift */; };
+		7A57D5B22A10C97800E7B67E /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A57D5B12A10C97800E7B67E /* SpeechSynthesizer.swift */; };
 		7A7C591829C7C99D00C54AEA /* StopsForLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591729C7C99D00C54AEA /* StopsForLocation.swift */; };
 		7A7C591A29C7C9F000C54AEA /* StopMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591929C7C9F000C54AEA /* StopMonitoring.swift */; };
 		7A7C591C29C7CAA900C54AEA /* StopsForLocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C591B29C7CAA900C54AEA /* StopsForLocationFetcher.swift */; };
@@ -70,6 +71,7 @@
 		7A36897E29D1578400E245E6 /* DeniedPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeniedPermissionsView.swift; sourceTree = "<group>"; };
 		7A3DEFDB29D164E90077F797 /* DefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultView.swift; sourceTree = "<group>"; };
 		7A57D5AE2A10BA5900E7B67E /* MTA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTA.swift; sourceTree = "<group>"; };
+		7A57D5B12A10C97800E7B67E /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 		7A7C591729C7C99D00C54AEA /* StopsForLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsForLocation.swift; sourceTree = "<group>"; };
 		7A7C591929C7C9F000C54AEA /* StopMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMonitoring.swift; sourceTree = "<group>"; };
 		7A7C591B29C7CAA900C54AEA /* StopsForLocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsForLocationFetcher.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				7AC5E1EE29CB8CF400743398 /* Manager */,
 				7A7C591E29C7D36200C54AEA /* Networking */,
 				7A7C591D29C7D33700C54AEA /* Models */,
+				7A57D5B02A10C92900E7B67E /* Helper */,
 			);
 			path = BusSense;
 			sourceTree = "<group>";
@@ -165,6 +168,14 @@
 				21724E88298F1FA600E5BDFF /* BusSenseUITestsLaunchTests.swift */,
 			);
 			path = BusSenseUITests;
+			sourceTree = "<group>";
+		};
+		7A57D5B02A10C92900E7B67E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				7A57D5B12A10C97800E7B67E /* SpeechSynthesizer.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		7A7C591D29C7D33700C54AEA /* Models */ = {
@@ -348,6 +359,7 @@
 				7A7C591C29C7CAA900C54AEA /* StopsForLocationFetcher.swift in Sources */,
 				7AC5E1F129CB90E600743398 /* BusStopResultsView.swift in Sources */,
 				7A36897F29D1578400E245E6 /* DeniedPermissionsView.swift in Sources */,
+				7A57D5B22A10C97800E7B67E /* SpeechSynthesizer.swift in Sources */,
 				7A36897D29D1576500E245E6 /* LoadingView.swift in Sources */,
 				7A7C591A29C7C9F000C54AEA /* StopMonitoring.swift in Sources */,
 				7AA4C67D29A452B80047743B /* LocationManager.swift in Sources */,
