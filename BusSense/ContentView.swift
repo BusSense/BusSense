@@ -12,6 +12,7 @@ struct ContentView: View {
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var busStopRoutes = BusStopRoutesBuilder()
 //    @StateObject var busStopRoutes = MTA()
+    let speechSynthesizer = SpeechSynthesizer()
     
     var body: some View {
         // TODO: - Check camera permission here too
@@ -28,9 +29,15 @@ struct ContentView: View {
                     busStopRoutes.buildBusStopRoutes(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                 }
             } else {
-                BusStopResultsView(busStopRoutes: busStopRoutes).onAppear() {
-//                    print("BusStopResultsView()")
-//                    print(busStopRoutes.busStopRoutes)
+                BusStopResultsView(busStopRoutes: busStopRoutes)
+                    .onAppear() {
+                        print("BusStopResultsView()")
+                        print(busStopRoutes.busStopRoutes)
+//                        speechSynthesizer.speak("hello there")
+                        print("bus stop results view")
+                        for stop in busStopRoutes.busStopRoutes {
+                            print(stop.name)
+                        }
                 }
             }
         }

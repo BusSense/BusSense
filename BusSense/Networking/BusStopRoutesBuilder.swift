@@ -41,12 +41,12 @@ class BusStopRoutesBuilder: ObservableObject {
         
         group.notify(queue: DispatchQueue.global()) {
             if let busStops = self.stopsForLocationFetched.nearbyStops {
-                print("From bus stop route builder")
-                print(busStops)
+//                print("From bus stop route builder")
+//                print(busStops)
                 if (busStops.busStops.count != 0) {
-                    print("bus stop count:", busStops.busStops.count)
+//                    print("bus stop count:", busStops.busStops.count)
                     self.parser(busStops.busStops)
-                    print("parsing complete")
+//                    print("parsing complete")
                 } else {
                     print("0 bus stops nearby")
                     DispatchQueue.main.async {
@@ -101,24 +101,24 @@ class BusStopRoutesBuilder: ObservableObject {
             }
         }
         for busStop in busStops {
-            print("bus stop")
-            print(busStop.name)
-            print(busStop.code)
-            print(busStop)
+//            print("bus stop")
+//            print(busStop.name)
+//            print(busStop.code)
+//            print(busStop)
             
             let group = DispatchGroup()
             group.enter()
-            print("entering group")
+//            print("entering group")
             self.stopMonitoringFetched.fetchStopMonitoring(monitoringRef: busStop.code) {
-                print("completion")
+//                print("completion")
                 group.leave()
             }
             
             group.notify(queue: DispatchQueue.global()) {
                 if let monitoredStops = self.stopMonitoringFetched.monitoredStops {
                     var routes: [RouteDetail] = []
-                    print(monitoredStops)
-                    print(routes)
+//                    print(monitoredStops)
+//                    print(routes)
                     for monitoredStop in monitoredStops {
                         let monitoredVehicleJourney = monitoredStop.monitoredVehicleJourney
                         let publishedLineName = monitoredVehicleJourney.publishedLineName[0]
@@ -148,7 +148,7 @@ class BusStopRoutesBuilder: ObservableObject {
                                                     lon: busStop.lon,
                                                     locationType: busStop.locationType,
                                                     routes: routes)
-                    print(busStopRoute)
+//                    print(busStopRoute)
                     
                     DispatchQueue.main.async {
                         self.busStopRoutes.append(busStopRoute)
@@ -162,7 +162,7 @@ class BusStopRoutesBuilder: ObservableObject {
                 }
             }
         }
-        print("end of parser")
+//        print("end of parser")
     }
     
     func containsRoute(lineAndDestination: String, routes: [RouteDetail]) -> Bool {
