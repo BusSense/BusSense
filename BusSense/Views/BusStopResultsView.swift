@@ -14,7 +14,6 @@ struct BusStopResultsView: View {
     let speechSynthesizer = SpeechSynthesizer()
     let radius = 10.0
     
-    
     var body: some View {
         
                
@@ -69,7 +68,8 @@ struct BusStopResultsView: View {
                                             .foregroundColor(Color.white)
                                             .multilineTextAlignment(.center)
                                             .onAppear() {
-                                                speechSynthesizer.speak("\(stop.name)")
+//                                                speechSynthesizer.speak("\(stop.name)")
+                                                print(stop.name)
                                             }
                                     }
                                     .frame(width: 350, height: 150)
@@ -96,7 +96,8 @@ struct BusStopResultsView: View {
                                         ForEach(stop.routes, id: \.lineRef) { route in
                                             
                                             Button (action: {
-                                                print(route.lineNameAndDestinationName)
+//                                                print(route.lineNameAndDestinationName)
+                                                speechSynthesizer.speak("\(route.lineNameAndDestinationName)")
                                             }, label: {
                                                 NavigationLink(destination: BusTrackingView(busStop: stop, busRoute: route).navigationBarBackButtonHidden(false)) {
                                                     Text("\(route.lineNameAndDestinationName)").frame(width: 300, height: 50, alignment: .leading)
@@ -107,14 +108,13 @@ struct BusStopResultsView: View {
                                                         .background(Color("Color1"))
                                                         .cornerRadius(10)
                                                         .onAppear() {
-                                                            speechSynthesizer.speak("\(route.lineNameAndDestinationName)")
+                                                            print(route.lineNameAndDestinationName)
                                                         }
                                                 }
                                             })
-                                            
                                             Spacer().frame(height: 20)
                                         }.onAppear() {
-                                            print(busStopRoutes.busStopRoutes)
+//                                            print(busStopRoutes.busStopRoutes)
                                         }
                                     }
                                     .frame(width: 350, height: 400, alignment: .top)
@@ -128,7 +128,16 @@ struct BusStopResultsView: View {
                         }
                         .tabViewStyle(.page)
                         .indexViewStyle(.page(backgroundDisplayMode: .always))
+//                        .onAppear() {
+//    //                        speechSynthesizer.speak("hello there")
+//                            print("bus stop results tab view")
+//                            print(busStopRoutes.busStopRoutes)
+//                            for stop in busStopRoutes.busStopRoutes {
+//                                print(stop.name)
+//                            }
+//                        }
                     }
+                    
                 }
             }
         }

@@ -22,7 +22,8 @@ struct BusTrackingView: View {
     var body: some View {
         
         let proximityData = stopMonitoringFetcher.getProximityAway()
-        let metersData = stopMonitoringFetcher.getMetersAway()
+//        let metersData = stopMonitoringFetcher.getMetersAway()
+        let milesData = stopMonitoringFetcher.getMilesAway()
         let stopsData = stopMonitoringFetcher.getStopsAway()
         let timeData = stopMonitoringFetcher.getTimeAway()
         
@@ -57,14 +58,15 @@ struct BusTrackingView: View {
                             .padding()
                             .background(Color("Color2"))
                             .cornerRadius(20)
-                            .onAppear() {
-                                speechSynthesizer.speak("currently tracking")
-                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
-                                speechSynthesizer.speak("NOTICE:")
-                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
-                            }
+//                            .onAppear() {
+//                                speechSynthesizer.speak("currently tracking")
+//                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
+//                                speechSynthesizer.speak("NOTICE:")
+//                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+//                            }
                     } else {
-                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)\n\(metersData) meters away\n\(stopsData) stops away\n\(timeData)")
+//                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)\n\(milesData) meters away\n\(stopsData) stops away\n\(timeData)")
+                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)\n\(stopsData) stops away\n\(timeData)")
                             .frame(width: 350, height: 200)
                             .font(.title3)
                             .fontWeight(.bold)
@@ -73,12 +75,12 @@ struct BusTrackingView: View {
                             .padding()
                             .background(Color("Color2"))
                             .cornerRadius(20)
-                            .onAppear() {
-                                speechSynthesizer.speak("currently tracking")
-                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
-                                speechSynthesizer.speak("NOTICE:")
-                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
-                            }
+//                            .onAppear() {
+//                                speechSynthesizer.speak("currently tracking")
+//                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
+//                                speechSynthesizer.speak("NOTICE:")
+//                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+//                            }
                     }
                 }
                 .frame(width: 375, height: 300, alignment: .top)

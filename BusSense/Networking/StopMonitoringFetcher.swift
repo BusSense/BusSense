@@ -20,7 +20,7 @@ class StopMonitoringFetcher: ObservableObject {
 //    }
     
     func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil, completion: @escaping () -> Void = {}) {
-        print("entered fetchStopMonitoring")
+//        print("entered fetchStopMonitoring")
         // start of fetching data
         isLoading = true
         hasFetchCompleted = false
@@ -52,7 +52,7 @@ class StopMonitoringFetcher: ObservableObject {
                 case .success(let monitoredStop):
                     if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
                         self.monitoredStops = monitoredStopVisit
-                        print(monitoredStopVisit)
+//                        print(monitoredStopVisit)
                         completion()
                     } else {
                         // indicates that there were no returned buses for the bus stop
@@ -66,12 +66,9 @@ class StopMonitoringFetcher: ObservableObject {
     
     func getProximityAway() -> String{
         guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
-            // return miles first vehicle is away from stop
-            return self
-            .monitoredStops![0]
-            .monitoredVehicleJourney
-            .monitoredCall
-            .arrivalProximityText
+        
+        // return miles first vehicle is away from stop
+        return self.monitoredStops![0].monitoredVehicleJourney.monitoredCall.arrivalProximityText
     }
     
     func getMetersAway() -> Int{
@@ -82,6 +79,11 @@ class StopMonitoringFetcher: ObservableObject {
             .monitoredVehicleJourney
             .monitoredCall
             .distanceFromStop
+    }
+    
+    func getMilesAway() -> Float {
+        let metersAway = getMetersAway()
+        return Float(metersAway) * 0.0006213712
     }
     
     func getStopsAway() -> Int{
@@ -100,27 +102,49 @@ class StopMonitoringFetcher: ObservableObject {
         let currDate = Date()
         var curr = Calendar.current
         curr.timeZone = TimeZone(abbreviation: "EST")!
-        let components = curr.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currDate)
+//        let components = curr.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currDate)
         
         let arrivingTime = self.monitoredStops![0].monitoredVehicleJourney.monitoredCall.expectedArrivalTime ?? ""
+        print("expected arrival time:", arrivingTime)
+//        let isoFormat = arrivingTime
+        let formatter = ISO8601DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "EST")
+        formatter.formatOptions = [
+            .withInternetDateTime,
+            .withFractionalSeconds
+        ]
+        let isoDate = formatter.date(from: arrivingTime)
         
-        var date = DateComponents()
-        date.year = Int(String(arrivingTime.prefix(4))) ?? 0
-        date.month = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 6)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -22)]) ?? 0
-        date.day = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 8)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -19)]) ?? 0
-        date.timeZone = TimeZone(abbreviation: "EST")
-        date.hour = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 11)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -16)]) ?? 0
-        date.minute = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 15)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -13)]) ?? 0
-        date.second = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 18)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -10)]) ?? 0
-
-        let arrivingDateTime = curr.date(from: date)!
+        print("iso 8601 date:", isoDate as Any)
+        print("current time:", currDate)
         
-        let diffs = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currDate, to: arrivingDateTime)
+        let newDiff = Calendar.current.dateComponents([.hour, .minute], from: currDate, to: isoDate!)
+        print("time diff:", newDiff)
         
-        let minAway = -1 * diffs.minute!
-        let secAway = -1 * diffs.second!
+//        var date = DateComponents()
+//        date.year = Int(String(arrivingTime.prefix(4))) ?? 0
+//        date.month = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 6)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -22)]) ?? 0
+//        date.day = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 8)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -19)]) ?? 0
+//        date.timeZone = TimeZone(abbreviation: "EST")
+//        date.hour = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 11)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -16)]) ?? 0
+//        date.minute = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 15)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -13)]) ?? 0
+//        date.second = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 18)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -10)]) ?? 0
+//
+//        let arrivingDateTime = curr.date(from: date)!
         
-        let status = String(minAway) + " minutes and " + String(secAway) + " seconds away"
+//        let diffs = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currDate, to: arrivingDateTime)
+        let diffs = Calendar.current.dateComponents([.hour, .minute], from: currDate, to: isoDate!)
+        
+//        let minAway = -1 * diffs.minute!
+//        let secAway = -1 * diffs.second!
+        
+        let status = String(diffs.minute!) + " minutes away"
+        
+//        if diffs.minute! > 0 {
+//            status = String(diffs.minute!) + " minutes away"
+//        } else {
+//            status = String("Bus is approaching")
+//        }
         
         // return miles first vehicle is away from stop
         return status
