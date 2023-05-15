@@ -14,11 +14,11 @@ class TrackedStopFetcher: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var hasFetchCompleted: Bool = false
     @Published var errorMessage: String? = nil
-    @Published var proximityMsg: String? = nil
-    @Published var milesAway: String? = nil
-    @Published var timeAway: String? = nil
-    @Published var stopsAway: String? = nil
-    @Published var busesAhead: String? = nil
+    @Published var proximityMsg: String = ""
+    @Published var milesAway: String = "0"
+    @Published var timeAway: String = "0"
+    @Published var stopsAway: Int = 0
+    @Published var busesAhead: String? = "0"
     
     func getClosestTrackedBus(monitoredStops: [MonitoredStopVisit], publishedLineName: String, destinationName: String) -> MonitoredVehicleJourney {
         var minDate: Date? = nil
@@ -142,8 +142,8 @@ class TrackedStopFetcher: ObservableObject {
         return String(rounded)
     }
     
-    func getStopsAway(monitoredVehicle: MonitoredVehicleJourney) -> String {
-        return String(monitoredVehicle.monitoredCall.numberOfStopsAway)
+    func getStopsAway(monitoredVehicle: MonitoredVehicleJourney) -> Int {
+        return monitoredVehicle.monitoredCall.numberOfStopsAway
     }
     
     func getTimeAway(monitoredVehicle: MonitoredVehicleJourney) -> String {
