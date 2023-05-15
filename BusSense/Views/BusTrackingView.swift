@@ -97,6 +97,25 @@ struct BusTrackingView: View {
                     .frame(width: 375, height: 300, alignment: .top)
                     .background(Color("Color2"))
                     .cornerRadius(20)
+                    .onAppear() {
+                        if speechSynthesizer.voiceEnabled {
+                            speechSynthesizer.speak("currently tracking")
+                            speechSynthesizer.speak(busRoute.lineNameAndDestinationName)
+                            if trackedStop.proximityMsg == "No vehicles detected at this time. Please try again later." {
+                                speechSynthesizer.speak("Approaching")
+                            } else if trackedStop.proximityMsg == "approaching" {
+                                speechSynthesizer.speak(trackedStop.proximityMsg)
+                            } else {
+                                speechSynthesizer.speak(trackedStop.milesAway)
+                                speechSynthesizer.speak("miles away")
+                                speechSynthesizer.speak(String(trackedStop.stopsAway))
+                                speechSynthesizer.speak("Stops away")
+                                speechSynthesizer.speak(trackedStop.timeAway)
+                            }
+                            speechSynthesizer.speak("buses ahead")
+                            speechSynthesizer.speak(trackedStop.busesAhead + " buses ahead of \(busRoute.publishedLineName)")
+                        }
+                    }
                     
                     VStack {
                         
@@ -111,7 +130,7 @@ struct BusTrackingView: View {
                             .background(Color("Color1"))
                             .cornerRadius(10)
 
-                        Text(trackedStop.busesAhead! + " buses ahead of \(busRoute.publishedLineName)")
+                        Text(trackedStop.busesAhead + " buses ahead of \(busRoute.publishedLineName)")
                             .frame(width: 350, height: 100)
                             .font(.title3)
                             .fontWeight(.bold)
