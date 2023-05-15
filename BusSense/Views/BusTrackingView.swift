@@ -6,26 +6,21 @@
 //
 
 import SwiftUI
+import AVFAudio
 
 struct BusTrackingView: View {
     
     var busStop: BusStopRoute
     var busRoute: RouteDetail
-    let speechSynthesizer = SpeechSynthesizer()
-    
-    @StateObject var stopMonitoringFetcher: StopMonitoringFetcher = StopMonitoringFetcher()
-    
-    func notice() {
-        
-    }
+    @EnvironmentObject var speechSynthesizer: SpeechSynthesizer
+    @StateObject var trackedStop: TrackedStopFetcher = TrackedStopFetcher()
     
     var body: some View {
         
-        let proximityData = stopMonitoringFetcher.getProximityAway()
-//        let metersData = stopMonitoringFetcher.getMetersAway()
-        let milesData = stopMonitoringFetcher.getMilesAway()
-        let stopsData = stopMonitoringFetcher.getStopsAway()
-        let timeData = stopMonitoringFetcher.getTimeAway()
+        let proximityData = trackedStop.getProximityAway()
+        let milesData = trackedStop.getMilesAway()
+        let stopsData = trackedStop.getStopsAway()
+        let timeData = trackedStop.getTimeAway()
         
         ZStack {
             
@@ -49,6 +44,22 @@ struct BusTrackingView: View {
                         .cornerRadius(10)
                     
                     if proximityData == "No vehicles detected at this time. Please try again later." {
+                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\nApproaching")
+                            .frame(width: 350, height: 200)
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .background(Color("Color2"))
+                            .cornerRadius(20)
+//                            .onAppear() {
+//                                speechSynthesizer.speak("currently tracking")
+//                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
+//                                speechSynthesizer.speak("NOTICE:")
+//                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+//                            }
+                    } else if proximityData == "approaching" {
                         Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
                             .frame(width: 350, height: 200)
                             .font(.title3)
@@ -65,8 +76,7 @@ struct BusTrackingView: View {
 //                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
 //                            }
                     } else {
-//                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)\n\(milesData) meters away\n\(stopsData) stops away\n\(timeData)")
-                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)\n\(stopsData) stops away\n\(timeData)")
+                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(milesData) miles away\n\(stopsData) stops away\n\(timeData)")
                             .frame(width: 350, height: 200)
                             .font(.title3)
                             .fontWeight(.bold)
@@ -75,12 +85,6 @@ struct BusTrackingView: View {
                             .padding()
                             .background(Color("Color2"))
                             .cornerRadius(20)
-//                            .onAppear() {
-//                                speechSynthesizer.speak("currently tracking")
-//                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
-//                                speechSynthesizer.speak("NOTICE:")
-//                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
-//                            }
                     }
                 }
                 .frame(width: 375, height: 300, alignment: .top)
@@ -91,7 +95,7 @@ struct BusTrackingView: View {
                     
                     Spacer().frame(height: 10)
                     
-                    Text("NOTICE:")
+                    Text("BUSES AHEAD:")
                         .frame(width: 350, height: 30)
                         .font(.title)
                         .fontWeight(.bold)
@@ -99,8 +103,8 @@ struct BusTrackingView: View {
                         .multilineTextAlignment(.center)
                         .background(Color("Color1"))
                         .cornerRadius(10)
-                    
-                    Text("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+
+                    Text("2 buses ahead of \(busRoute.publishedLineName)")
                         .frame(width: 350, height: 100)
                         .font(.title3)
                         .fontWeight(.bold)
@@ -125,78 +129,21 @@ struct BusTrackingView: View {
                 Spacer().frame(height: 10)
                 
                 HStack {
-                    
                     Button {
-                        print("user requests to change bus")
-                    } label: {
-                        NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
-                            
-                            ZStack {
-                                
-                                Text("").frame(width: 175, height: 225)
-                                    .background(Color("Color2"))
-                                    .cornerRadius(20)
-                                
-                                VStack {
-                                    
-                                    Spacer().frame(height: 10)
-                                    
-                                    Text("Change\nBus").frame(width: 175, height: 50)
-                                        .background(Color("Color2"))
-                                        .font(.title3)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.white)
-                                        .cornerRadius(20)
-                                    
-                                    Spacer().frame(height: 20)
-                                    
-                                    Image(systemName: "arrowshape.backward")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 100)
-                                        .foregroundColor(.white)
-                                }
+                        speechSynthesizer.toggleVoice()
+                        if !speechSynthesizer.voiceEnabled {
+                            if speechSynthesizer.synthesizer.isSpeaking {
+                                speechSynthesizer.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
                             }
                         }
-                    }
-                    
-                    Button {
-                        print("user requests to change bus")
                     } label: {
-                        NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true)) {
-                            
-                            ZStack {
-                                
-                                Text("").frame(width: 175, height: 225)
-                                    .background(Color("Color2"))
-                                    .cornerRadius(20)
-                                
-                                VStack {
-                                    Text("Update Bus \nStatus")
-                                        .frame(width: 175, height: 50)
-                                        .multilineTextAlignment(.center)
-                                        .background(Color("Color2"))
-                                        .font(.title3)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.white)
-                                        .cornerRadius(20)
-                                    
-                                    Spacer().frame(height: 20)
-                                    
-                                    Image(systemName: "arrow.clockwise")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 75)
-                                        .foregroundColor(.white)
-                                }
-                            }
-                        }
+                        toggleVoiceView()
                     }
                 }
             }
         }
         .onAppear {
-            stopMonitoringFetcher.fetchStopMonitoring(monitoringRef: busStop.code, lineRef: busRoute.lineRef.replacingOccurrences(of: " ", with: "%20"))
+            trackedStop.fetchStopMonitoring(monitoringRef: busStop.code, lineRef: busRoute.lineRef.replacingOccurrences(of: " ", with: "%20"))
         }
     }
 }

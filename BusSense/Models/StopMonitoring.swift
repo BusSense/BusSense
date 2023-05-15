@@ -225,7 +225,22 @@ struct StopMonitoring: Codable {
     init(from decoder: Decoder) throws {
         let rawResponse = try RawServerResponseStopMonitoring(from: decoder)
         if let monitoredStopVisit = rawResponse.siri.serviceDelivery.stopMonitoringDelivery[0].monitoredStopVisit {
+            print(monitoredStopVisit[0])
             self.monitoredStopVisit = monitoredStopVisit
+        } else {
+            self.monitoredStopVisit = nil
+        }
+    }
+}
+
+struct TrackedStop: Codable {
+    var monitoredStopVisit: MonitoredStopVisit?
+
+    init(from decoder: Decoder) throws {
+        let rawResponse = try RawServerResponseStopMonitoring(from: decoder)
+        if let monitoredStopVisit = rawResponse.siri.serviceDelivery.stopMonitoringDelivery[0].monitoredStopVisit {
+//            print(monitoredStopVisit)
+            self.monitoredStopVisit = monitoredStopVisit[0]
         } else {
             self.monitoredStopVisit = nil
         }

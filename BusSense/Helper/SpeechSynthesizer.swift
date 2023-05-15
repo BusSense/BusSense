@@ -8,9 +8,18 @@
 import Foundation
 import AVFoundation
 
-class SpeechSynthesizer {
-    let synthesizer = AVSpeechSynthesizer()
+class SpeechSynthesizer: ObservableObject {
+    @Published var synthesizer = AVSpeechSynthesizer()
     var voiceToUse: AVSpeechSynthesisVoice? = nil
+    @Published var voiceEnabled = true
+    
+    func toggleVoice() {
+        if voiceEnabled {
+            voiceEnabled = false
+        } else {
+            voiceEnabled = true
+        }
+    }
     
     init() {
         var speechVoice = AVSpeechSynthesisVoice(language: "en-US")

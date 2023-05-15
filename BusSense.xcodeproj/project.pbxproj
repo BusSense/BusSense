@@ -17,6 +17,9 @@
 		21C7C1702A0EDBF1008C59DB /* BusTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C7C16F2A0EDBF1008C59DB /* BusTrackingView.swift */; };
 		21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */; };
 		21FFD3B8298F5D7B0015FF7E /* BusStopTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FFD3B7298F5D7B0015FF7E /* BusStopTrackingView.swift */; };
+		7A04A1392A11F46700DBE3AD /* NoNearbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A04A1382A11F46700DBE3AD /* NoNearbyView.swift */; };
+		7A04A13B2A1210D200DBE3AD /* TrackedStopFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A04A13A2A1210D200DBE3AD /* TrackedStopFetcher.swift */; };
+		7A04A1412A121E5C00DBE3AD /* toggleVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A04A1402A121E5C00DBE3AD /* toggleVoiceView.swift */; };
 		7A36897829CFCB2300E245E6 /* BusStopRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36897729CFCB2300E245E6 /* BusStopRoute.swift */; };
 		7A36897D29D1576500E245E6 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36897C29D1576500E245E6 /* LoadingView.swift */; };
 		7A36897F29D1578400E245E6 /* DeniedPermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A36897E29D1578400E245E6 /* DeniedPermissionsView.swift */; };
@@ -66,6 +69,9 @@
 		21C7C16F2A0EDBF1008C59DB /* BusTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusTrackingView.swift; sourceTree = "<group>"; };
 		21FFD3B5298F5D510015FF7E /* BusBoundSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusBoundSelectionView.swift; sourceTree = "<group>"; };
 		21FFD3B7298F5D7B0015FF7E /* BusStopTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopTrackingView.swift; sourceTree = "<group>"; };
+		7A04A1382A11F46700DBE3AD /* NoNearbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNearbyView.swift; sourceTree = "<group>"; };
+		7A04A13A2A1210D200DBE3AD /* TrackedStopFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedStopFetcher.swift; sourceTree = "<group>"; };
+		7A04A1402A121E5C00DBE3AD /* toggleVoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toggleVoiceView.swift; sourceTree = "<group>"; };
 		7A36897729CFCB2300E245E6 /* BusStopRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopRoute.swift; sourceTree = "<group>"; };
 		7A36897C29D1576500E245E6 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7A36897E29D1578400E245E6 /* DeniedPermissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeniedPermissionsView.swift; sourceTree = "<group>"; };
@@ -193,6 +199,7 @@
 			children = (
 				7A7C591B29C7CAA900C54AEA /* StopsForLocationFetcher.swift */,
 				7A7C594129CA6C4A00C54AEA /* StopMonitoringFetcher.swift */,
+				7A04A13A2A1210D200DBE3AD /* TrackedStopFetcher.swift */,
 				7AC5E1F229CB92F400743398 /* BusStopRoutesBuilder.swift */,
 				7AC5E1E929CB7EC800743398 /* APIService.swift */,
 				7AC5E1EB29CB7ED300743398 /* APIError.swift */,
@@ -220,6 +227,8 @@
 				7A36897C29D1576500E245E6 /* LoadingView.swift */,
 				7A36897E29D1578400E245E6 /* DeniedPermissionsView.swift */,
 				21C7C16F2A0EDBF1008C59DB /* BusTrackingView.swift */,
+				7A04A1382A11F46700DBE3AD /* NoNearbyView.swift */,
+				7A04A1402A121E5C00DBE3AD /* toggleVoiceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -365,10 +374,13 @@
 				7AA4C67D29A452B80047743B /* LocationManager.swift in Sources */,
 				21C7C1702A0EDBF1008C59DB /* BusTrackingView.swift in Sources */,
 				21FFD3B8298F5D7B0015FF7E /* BusStopTrackingView.swift in Sources */,
+				7A04A1412A121E5C00DBE3AD /* toggleVoiceView.swift in Sources */,
 				7A57D5AF2A10BA5900E7B67E /* MTA.swift in Sources */,
 				21FFD3B6298F5D520015FF7E /* BusBoundSelectionView.swift in Sources */,
 				7A7C591829C7C99D00C54AEA /* StopsForLocation.swift in Sources */,
+				7A04A1392A11F46700DBE3AD /* NoNearbyView.swift in Sources */,
 				7AC5E1EA29CB7EC800743398 /* APIService.swift in Sources */,
+				7A04A13B2A1210D200DBE3AD /* TrackedStopFetcher.swift in Sources */,
 				7A7C594229CA6C4A00C54AEA /* StopMonitoringFetcher.swift in Sources */,
 				7A7E022A29B5E36C00883F48 /* BusConfimationView.swift in Sources */,
 				7A3DEFDC29D164E90077F797 /* DefaultView.swift in Sources */,
