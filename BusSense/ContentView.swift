@@ -28,7 +28,7 @@ struct ContentView: View {
                     print(location.coordinate.latitude, location.coordinate.longitude)
                     busStopRoutes.buildBusStopRoutes(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                 }
-            } else {
+            } else if busStopRoutes.busStopRoutes.count != 0 {
                 BusStopResultsView(busStopRoutes: busStopRoutes)
                     .onAppear() {
                         print("BusStopResultsView()")
@@ -38,6 +38,10 @@ struct ContentView: View {
                         for stop in busStopRoutes.busStopRoutes {
                             print(stop.name)
                         }
+                    }
+            } else {
+                NoNearbyView().onAppear() {
+                    print("no nearby bus stops view")
                 }
             }
         }

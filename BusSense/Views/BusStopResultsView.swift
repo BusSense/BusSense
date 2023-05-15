@@ -99,7 +99,7 @@ struct BusStopResultsView: View {
 //                                                print(route.lineNameAndDestinationName)
                                                 speechSynthesizer.speak("\(route.lineNameAndDestinationName)")
                                             }, label: {
-                                                NavigationLink(destination: BusTrackingView(busStop: stop, busRoute: route).navigationBarBackButtonHidden(false)) {
+                                                NavigationLink(destination: BusTrackingView(busStop: stop, busRoute: route)) {
                                                     Text("\(route.lineNameAndDestinationName)").frame(width: 300, height: 50, alignment: .leading)
                                                         .padding(10)
                                                         .font(.title3)

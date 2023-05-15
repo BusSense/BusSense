@@ -1,19 +1,23 @@
 //
-//  MTASIRIFetcher.swift
+//  TrackedStopFetcher.swift
 //  BusSense
 //
-//  Created by Daniel Aguilar-Rodriguez on 3/21/23.
+//  Created by Daniel Aguilar-Rodriguez on 5/15/23.
 //
 
 import Foundation
 
-// needs to inherit ObservableObject to allow it to be used in UI
-class StopMonitoringFetcher: ObservableObject {
+class TrackedStopFetcher: ObservableObject {
     
     @Published var monitoredStops: [MonitoredStopVisit]? = nil
+    @Published var trackedBus: MonitoredVehicleJourney? = nil
     @Published var isLoading: Bool = false
     @Published var hasFetchCompleted: Bool = false
     @Published var errorMessage: String? = nil
+    @Published var proximityMsg: String? = nil
+    @Published var milesAway: String? = nil
+    @Published var timeAway: String? = nil
+    @Published var busesAhead: String? = nil
     
 //    init() {
 //        fetchStopMonitoring()
@@ -69,14 +73,14 @@ class StopMonitoringFetcher: ObservableObject {
     }
     
     func getProximityAway() -> String{
-        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
+        guard hasFetchCompleted && monitoredStops != nil else { return "No vehicles detected at this time. Please try again later."}
         
         // return miles first vehicle is away from stop
         return self.monitoredStops![0].monitoredVehicleJourney.monitoredCall.arrivalProximityText
     }
     
     func getMetersAway() -> Int{
-        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return 0 }
+        guard hasFetchCompleted && !monitoredStops!.isEmpty else { return 0 }
             // return miles first vehicle is away from stop
             return self
             .monitoredStops![0]
@@ -89,12 +93,11 @@ class StopMonitoringFetcher: ObservableObject {
         let metersAway = getMetersAway()
         let milesAway = Float(metersAway) * 0.0006213712
         let rounded = round(milesAway * 10) / 10.0
-//        self.milesAway = String(rounded)
         return String(rounded)
     }
     
     func getStopsAway() -> Int{
-        guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return 0 }
+        guard hasFetchCompleted && monitoredStops != nil else { return 0 }
             // return miles first vehicle is away from stop
             return self
             .monitoredStops![0]
@@ -152,39 +155,6 @@ class StopMonitoringFetcher: ObservableObject {
         } else if hourInt == 0 {
             status = formattedMinute + " away"
         }
-        
-//        if monitoredStops != nil {
-//            let arrivingTime = self.monitoredStops![0].monitoredVehicleJourney.monitoredCall.expectedArrivalTime ?? ""
-//            print("expected arrival time:", arrivingTime)
-//            let formatter = ISO8601DateFormatter()
-//            formatter.timeZone = TimeZone(abbreviation: "EST")
-//            formatter.formatOptions = [
-//                .withInternetDateTime,
-//                .withFractionalSeconds
-//            ]
-//            let isoDate = formatter.date(from: arrivingTime)
-//
-//            print("iso 8601 date:", isoDate as Any)
-//            print("current time:", currDate)
-//
-//            let diffs = Calendar.current.dateComponents([.hour, .minute], from: currDate, to: isoDate!)
-//
-//            let hourInt = diffs.hour!
-//            let minuteInt = diffs.minute!
-//            let formattedHour = timeStringFormatter(hourInt, for: "hour")
-//            let formattedMinute = timeStringFormatter(minuteInt, for: "minute")
-//
-//            if hourInt > 0 && minuteInt > 0 {
-//                status = formattedHour + " and " + formattedMinute + " away"
-//            } else if hourInt > 0 && minuteInt == 0 {
-//                status = formattedHour + " away"
-//            } else if hourInt == 0 {
-//                status = formattedMinute + " away"
-//            }
-//        } else {
-//            let arrivingTime = self.monitoredStops![0].monitoredVehicleJourney.monitoredCall.aimedArrivalTime ?? ""
-//        }
-        
         
         // return miles first vehicle is away from stop
         return status

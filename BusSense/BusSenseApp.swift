@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct BusSenseApp: App {
+    @StateObject var speechSynthesizer = SpeechSynthesizer()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(speechSynthesizer)
         }
     }
 }
