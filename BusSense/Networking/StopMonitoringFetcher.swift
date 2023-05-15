@@ -96,6 +96,16 @@ class StopMonitoringFetcher: ObservableObject {
             .numberOfStopsAway
     }
     
+    func timeStringFormatter(_ value: Int, for type: String) -> String {
+        var timeType = type
+        
+        if value != 1 {
+            timeType = timeType.replacingOccurrences(of: type, with: type + "s")
+        }
+        
+        return timeType
+    }
+    
     func getTimeAway() -> String{
         guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
         
@@ -118,9 +128,6 @@ class StopMonitoringFetcher: ObservableObject {
         print("iso 8601 date:", isoDate as Any)
         print("current time:", currDate)
         
-        let newDiff = Calendar.current.dateComponents([.hour, .minute], from: currDate, to: isoDate!)
-        print("time diff:", newDiff)
-        
 //        var date = DateComponents()
 //        date.year = Int(String(arrivingTime.prefix(4))) ?? 0
 //        date.month = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 6)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -22)]) ?? 0
@@ -135,16 +142,22 @@ class StopMonitoringFetcher: ObservableObject {
 //        let diffs = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currDate, to: arrivingDateTime)
         let diffs = Calendar.current.dateComponents([.hour, .minute], from: currDate, to: isoDate!)
         
-//        let minAway = -1 * diffs.minute!
-//        let secAway = -1 * diffs.second!
+        var status = ""
         
-        let status = String(diffs.minute!) + " minutes away"
+        let hourStr = String(diffs.hour!)
+        let hourInt = diffs.hour!
+        let minuteStr = String(diffs.minute!)
+        let minuteInt = diffs.minute!
+        let formattedHour = timeStringFormatter(hourInt, for: "hour")
+        let formattedMinute = timeStringFormatter(minuteInt, for: "minute")
         
-//        if diffs.minute! > 0 {
-//            status = String(diffs.minute!) + " minutes away"
-//        } else {
-//            status = String("Bus is approaching")
-//        }
+        if hourInt > 0 && minuteInt > 0 {
+            status = hourStr + " " + formattedHour + " and " + minuteStr + " " + formattedMinute + " away"
+        } else if hourInt > 0 && minuteInt == 0 {
+            status = hourStr + " " + formattedHour + " away"
+        } else if hourInt == 0 {
+            status = minuteStr + " " + formattedMinute + " away"
+        }
         
         // return miles first vehicle is away from stop
         return status
