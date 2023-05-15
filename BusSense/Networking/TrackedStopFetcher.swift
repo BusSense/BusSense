@@ -48,8 +48,10 @@ class TrackedStopFetcher: ObservableObject {
                         closestBus = monitoredVehicleJourney
                     }
                 } else {
-                    minDate = formatter.date(from: monitoredVehicleJourney.monitoredCall.expectedArrivalTime!)
-                    closestBus = monitoredVehicleJourney
+                    if monitoredVehicleJourney.monitoredCall.expectedArrivalTime != nil {
+                        minDate = formatter.date(from: monitoredVehicleJourney.monitoredCall.expectedArrivalTime!)
+                        closestBus = monitoredVehicleJourney
+                    }
                 }
             }
         }
