@@ -99,11 +99,12 @@ class StopMonitoringFetcher: ObservableObject {
     func timeStringFormatter(_ value: Int, for type: String) -> String {
         var timeType = type
         
+        // determines if singular or plural
         if value != 1 {
             timeType = timeType.replacingOccurrences(of: type, with: type + "s")
         }
         
-        return timeType
+        return String(value) + " " + timeType
     }
     
     func getTimeAway() -> String{
@@ -112,7 +113,6 @@ class StopMonitoringFetcher: ObservableObject {
         let currDate = Date()
         var curr = Calendar.current
         curr.timeZone = TimeZone(abbreviation: "EST")!
-//        let components = curr.dateComponents([.year,.month,.day,.hour,.minute,.second], from: currDate)
         
         let arrivingTime = self.monitoredStops![0].monitoredVehicleJourney.monitoredCall.expectedArrivalTime ?? ""
         print("expected arrival time:", arrivingTime)
@@ -128,35 +128,21 @@ class StopMonitoringFetcher: ObservableObject {
         print("iso 8601 date:", isoDate as Any)
         print("current time:", currDate)
         
-//        var date = DateComponents()
-//        date.year = Int(String(arrivingTime.prefix(4))) ?? 0
-//        date.month = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 6)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -22)]) ?? 0
-//        date.day = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 8)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -19)]) ?? 0
-//        date.timeZone = TimeZone(abbreviation: "EST")
-//        date.hour = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 11)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -16)]) ?? 0
-//        date.minute = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 15)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -13)]) ?? 0
-//        date.second = Int(arrivingTime[arrivingTime.index(arrivingTime.startIndex, offsetBy: 18)..<arrivingTime.index(arrivingTime.endIndex, offsetBy: -10)]) ?? 0
-//
-//        let arrivingDateTime = curr.date(from: date)!
-        
-//        let diffs = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currDate, to: arrivingDateTime)
         let diffs = Calendar.current.dateComponents([.hour, .minute], from: currDate, to: isoDate!)
         
         var status = ""
         
-        let hourStr = String(diffs.hour!)
         let hourInt = diffs.hour!
-        let minuteStr = String(diffs.minute!)
         let minuteInt = diffs.minute!
         let formattedHour = timeStringFormatter(hourInt, for: "hour")
         let formattedMinute = timeStringFormatter(minuteInt, for: "minute")
         
         if hourInt > 0 && minuteInt > 0 {
-            status = hourStr + " " + formattedHour + " and " + minuteStr + " " + formattedMinute + " away"
+            status = formattedHour + " and " + formattedMinute + " away"
         } else if hourInt > 0 && minuteInt == 0 {
-            status = hourStr + " " + formattedHour + " away"
+            status = formattedHour + " away"
         } else if hourInt == 0 {
-            status = minuteStr + " " + formattedMinute + " away"
+            status = formattedMinute + " away"
         }
         
         // return miles first vehicle is away from stop
