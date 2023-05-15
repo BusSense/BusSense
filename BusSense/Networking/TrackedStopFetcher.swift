@@ -17,15 +17,77 @@ class TrackedStopFetcher: ObservableObject {
     @Published var proximityMsg: String? = nil
     @Published var milesAway: String? = nil
     @Published var timeAway: String? = nil
+    @Published var stopsAway: String? = nil
     @Published var busesAhead: String? = nil
     
-//    init() {
-//        fetchStopMonitoring()
-//    }
+    func getClosestTrackedBus(monitoredStops: [MonitoredStopVisit], publishedLineName: String, destinationName: String) -> MonitoredVehicleJourney {
+        var minDate: Date? = nil
+        var tempDate: Date? = nil
+        var closestBus: MonitoredVehicleJourney? = nil
+        let formatter = ISO8601DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "EST")
+        formatter.formatOptions = [
+            .withInternetDateTime,
+            .withFractionalSeconds
+        ]
+        for monitoredStop in monitoredStops {
+            let monitoredVehicleJourney = monitoredStop.monitoredVehicleJourney
+            let pubLineName = monitoredVehicleJourney.publishedLineName[0]
+            let destName = monitoredVehicleJourney.destinationName[0]
+            
+            if pubLineName == publishedLineName && destName == destinationName {
+                if minDate != nil {
+                    if monitoredVehicleJourney.monitoredCall.expectedArrivalTime != nil {
+                        tempDate = formatter.date(from: monitoredVehicleJourney.monitoredCall.expectedArrivalTime!)
+                    } else {
+                        tempDate = formatter.date(from: monitoredVehicleJourney.monitoredCall.aimedArrivalTime)
+                    }
+                    
+                    if minDate! > tempDate! {
+                        minDate = tempDate
+                        closestBus = monitoredVehicleJourney
+                    }
+                } else {
+                    minDate = formatter.date(from: monitoredVehicleJourney.monitoredCall.expectedArrivalTime!)
+                    closestBus = monitoredVehicleJourney
+                }
+            }
+        }
+        
+        return closestBus!
+    }
     
-    func fetchStopMonitoring(monitoringRef: String, lineRef: String? = nil, completion: @escaping () -> Void = {}) {
-//        print("entered fetchStopMonitoring")
-        // start of fetching data
+    func countBusesAhead(monitoredStops: [MonitoredStopVisit], closestBus: MonitoredVehicleJourney, publishedLineName: String, destinationName: String) -> Int {
+        let formatter = ISO8601DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "EST")
+        formatter.formatOptions = [
+            .withInternetDateTime,
+            .withFractionalSeconds
+        ]
+        
+        var count = 0
+        var tempDate: Date? = nil
+        let maxDate = formatter.date(from: closestBus.monitoredCall.expectedArrivalTime!)
+        
+        for monitoredStop in monitoredStops {
+            let monitoredVehicleJourney = monitoredStop.monitoredVehicleJourney
+            let pubLineName = monitoredVehicleJourney.publishedLineName[0]
+            let destName = monitoredVehicleJourney.destinationName[0]
+            
+            if pubLineName != publishedLineName || destName != destinationName {
+                if monitoredVehicleJourney.monitoredCall.expectedArrivalTime != nil {
+                    tempDate = formatter.date(from: monitoredVehicleJourney.monitoredCall.expectedArrivalTime!)
+                    if tempDate! < maxDate! {
+                        count += 1
+                    }
+                }
+            }
+        }
+        
+        return count
+    }
+    
+    func fetchStopMonitoring(monitoringRef: String, publishedLineName: String, destinationName: String, completion: @escaping () -> Void = {}) {
         isLoading = true
         hasFetchCompleted = false
         // resets errorMessage everytime function is called
@@ -34,13 +96,7 @@ class TrackedStopFetcher: ObservableObject {
         let key = "test"
         let version = "2"
         let service = APIService()
-        var url = URL(string: "")
-        
-        if let lineRef = lineRef {
-            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)&LineRef=\(lineRef)")
-        } else {
-            url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
-        }
+        let url = URL(string: "https://bustime.mta.info/api/siri/stop-monitoring.json?key=\(key)&version=\(version)&MonitoringRef=\(monitoringRef)")
         
         service.fetch(StopMonitoring.self, url: url) { [unowned self] result in
             DispatchQueue.main.async {
@@ -56,6 +112,13 @@ class TrackedStopFetcher: ObservableObject {
                 case .success(let monitoredStop):
                     if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
                         self.monitoredStops = monitoredStopVisit
+                        let closestBus = self.getClosestTrackedBus(monitoredStops: monitoredStopVisit, publishedLineName: publishedLineName, destinationName: destinationName)
+                        self.trackedBus = closestBus
+                        self.proximityMsg = self.getProximityAway(monitoredVehicle: closestBus)
+                        self.milesAway = self.getMilesAway(monitoredVehicle: closestBus)
+                        self.timeAway = self.getTimeAway(monitoredVehicle: closestBus)
+                        self.stopsAway = self.getStopsAway(monitoredVehicle: closestBus)
+                        self.busesAhead = String(self.countBusesAhead(monitoredStops: monitoredStopVisit, closestBus: closestBus, publishedLineName: publishedLineName, destinationName: destinationName))
 //                        print(monitoredStopVisit)
                         completion()
                     } else {
@@ -68,7 +131,63 @@ class TrackedStopFetcher: ObservableObject {
         }
     }
     
-    func updateTrackedData() {
+    func getProximityAway(monitoredVehicle: MonitoredVehicleJourney) -> String {
+        return monitoredVehicle.monitoredCall.arrivalProximityText
+    }
+    
+    func getMilesAway(monitoredVehicle: MonitoredVehicleJourney) -> String {
+        let metersAway = monitoredVehicle.monitoredCall.distanceFromStop
+        let milesAway = Float(metersAway) * 0.0006213712
+        let rounded = round(milesAway * 10) / 10.0
+        return String(rounded)
+    }
+    
+    func getStopsAway(monitoredVehicle: MonitoredVehicleJourney) -> String {
+        return String(monitoredVehicle.monitoredCall.numberOfStopsAway)
+    }
+    
+    func getTimeAway(monitoredVehicle: MonitoredVehicleJourney) -> String {
+        let currDate = Date()
+        var curr = Calendar.current
+        curr.timeZone = TimeZone(abbreviation: "EST")!
+        
+        var status = ""
+        
+        print("getTimeAway:", monitoredStops as Any)
+        
+        let arrivingTime = monitoredVehicle.monitoredCall.expectedArrivalTime ?? ""
+        print("expected arrival time:", arrivingTime)
+        let formatter = ISO8601DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "EST")
+        formatter.formatOptions = [
+            .withInternetDateTime,
+            .withFractionalSeconds
+        ]
+        let isoDate = formatter.date(from: arrivingTime)
+        
+        print("iso 8601 date:", isoDate as Any)
+        print("current time:", currDate)
+        
+        let diffs = Calendar.current.dateComponents([.hour, .minute], from: currDate, to: isoDate!)
+        
+        let hourInt = diffs.hour!
+        let minuteInt = diffs.minute!
+        let formattedHour = timeStringFormatter(hourInt, for: "hour")
+        let formattedMinute = timeStringFormatter(minuteInt, for: "minute")
+        
+        if hourInt > 0 && minuteInt > 0 {
+            status = formattedHour + " and " + formattedMinute + " away"
+        } else if hourInt > 0 && minuteInt == 0 {
+            status = formattedHour + " away"
+        } else if hourInt == 0 {
+            status = formattedMinute + " away"
+        }
+        
+        // return miles first vehicle is away from stop
+        return status
+    }
+    
+    func updateTrackedData(monitoredStopVisit: [MonitoredStopVisit]) {
         
     }
     
@@ -96,15 +215,15 @@ class TrackedStopFetcher: ObservableObject {
         return String(rounded)
     }
     
-    func getStopsAway() -> Int{
-        guard hasFetchCompleted && monitoredStops != nil else { return 0 }
-            // return miles first vehicle is away from stop
-            return self
-            .monitoredStops![0]
-            .monitoredVehicleJourney
-            .monitoredCall
-            .numberOfStopsAway
-    }
+//    func getStopsAway() -> Int{
+//        guard hasFetchCompleted && monitoredStops != nil else { return 0 }
+//            // return miles first vehicle is away from stop
+//            return self
+//            .monitoredStops![0]
+//            .monitoredVehicleJourney
+//            .monitoredCall
+//            .numberOfStopsAway
+//    }
     
     func timeStringFormatter(_ value: Int, for type: String) -> String {
         var timeType = type
@@ -161,48 +280,46 @@ class TrackedStopFetcher: ObservableObject {
     }
     
     func busesAhead(stop: BusStopRoute, route: RouteDetail) -> [(Date, String)] {
+        // array of tuples (oncoming time and bus to that specific stop)
+        var arrivingTimes: [(day: Date, bus: String)] = []
 
-            // array of tuples (oncoming time and bus to that specific stop)
-            var arrivingTimes: [(day: Date, bus: String)] = []
+        let _ = Date()
+        let curr = Calendar.current
+        var count = 0
 
-            let currDate = Date()
-            var curr = Calendar.current
+        // get all buses arriving at stop
+//        fetchStopMonitoring(monitoringRef: stop.code)
 
-            // get all buses arriving at stop
-            fetchStopMonitoring(monitoringRef: stop.code)
+        for x in monitoredStops! {
 
-            for x in monitoredStops! {
+            let nextTime = x.monitoredVehicleJourney.monitoredCall.expectedArrivalTime
 
-                var nextTime = x.monitoredVehicleJourney.monitoredCall.expectedArrivalTime
+            var date = DateComponents()
+            date.year = Int(String(nextTime!.prefix(4))) ?? 0
+            date.month = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 6)..<nextTime!.index(nextTime!.endIndex, offsetBy: -22)]) ?? 0
+            date.day = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 8)..<nextTime!.index(nextTime!.endIndex, offsetBy: -19)]) ?? 0
+            date.timeZone = TimeZone(abbreviation: "EST")
+            date.hour = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 11)..<nextTime!.index(nextTime!.endIndex, offsetBy: -16)]) ?? 0
+            date.minute = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 15)..<nextTime!.index(nextTime!.endIndex, offsetBy: -13)]) ?? 0
+            date.second = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 18)..<nextTime!.index(nextTime!.endIndex, offsetBy: -10)]) ?? 0
+            let arrivingDateTime = curr.date(from: date)!
 
-                var date = DateComponents()
-                date.year = Int(String(nextTime!.prefix(4))) ?? 0
-                date.month = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 6)..<nextTime!.index(nextTime!.endIndex, offsetBy: -22)]) ?? 0
-                date.day = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 8)..<nextTime!.index(nextTime!.endIndex, offsetBy: -19)]) ?? 0
-                date.timeZone = TimeZone(abbreviation: "EST")
-                date.hour = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 11)..<nextTime!.index(nextTime!.endIndex, offsetBy: -16)]) ?? 0
-                date.minute = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 15)..<nextTime!.index(nextTime!.endIndex, offsetBy: -13)]) ?? 0
-                date.second = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 18)..<nextTime!.index(nextTime!.endIndex, offsetBy: -10)]) ?? 0
-                let arrivingDateTime = curr.date(from: date)!
-
-                arrivingTimes.append((arrivingDateTime, x.monitoredVehicleJourney.lineRef))
-            }
-
-                arrivingTimes = arrivingTimes.sorted(by: {$0.day < $1.day})
-
-
-            return arrivingTimes
+            arrivingTimes.append((arrivingDateTime, x.monitoredVehicleJourney.lineRef))
         }
 
-        // count the number of buses ahead of the desired bus
-        func ahead(route: RouteDetail, arrivingTimes: [(Date, String)]) -> Int {
+        arrivingTimes = arrivingTimes.sorted(by: {$0.day < $1.day})
+        return arrivingTimes
+    }
 
-            var numberofBus = 0
-            for i in arrivingTimes {
-                if i.1 != route.lineRef {
-                    numberofBus += 1
-                }
+    // count the number of buses ahead of the desired bus
+    func ahead(route: RouteDetail, arrivingTimes: [(Date, String)]) -> Int {
+
+        var numberofBus = 0
+        for i in arrivingTimes {
+            if i.1 != route.lineRef {
+                numberofBus += 1
             }
-            return numberofBus
         }
+        return numberofBus
+    }
 }

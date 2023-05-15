@@ -64,10 +64,6 @@ class StopMonitoringFetcher: ObservableObject {
         }
     }
     
-    func updateTrackedData() {
-        
-    }
-    
     func getProximityAway() -> String{
         guard self.hasFetchCompleted && !monitoredStops!.isEmpty else { return "No vehicles detected at this time. Please try again later."}
         
@@ -189,50 +185,4 @@ class StopMonitoringFetcher: ObservableObject {
         // return miles first vehicle is away from stop
         return status
     }
-    
-    func busesAhead(stop: BusStopRoute, route: RouteDetail) -> [(Date, String)] {
-
-            // array of tuples (oncoming time and bus to that specific stop)
-            var arrivingTimes: [(day: Date, bus: String)] = []
-
-            let currDate = Date()
-            var curr = Calendar.current
-
-            // get all buses arriving at stop
-            fetchStopMonitoring(monitoringRef: stop.code)
-
-            for x in monitoredStops! {
-
-                var nextTime = x.monitoredVehicleJourney.monitoredCall.expectedArrivalTime
-
-                var date = DateComponents()
-                date.year = Int(String(nextTime!.prefix(4))) ?? 0
-                date.month = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 6)..<nextTime!.index(nextTime!.endIndex, offsetBy: -22)]) ?? 0
-                date.day = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 8)..<nextTime!.index(nextTime!.endIndex, offsetBy: -19)]) ?? 0
-                date.timeZone = TimeZone(abbreviation: "EST")
-                date.hour = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 11)..<nextTime!.index(nextTime!.endIndex, offsetBy: -16)]) ?? 0
-                date.minute = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 15)..<nextTime!.index(nextTime!.endIndex, offsetBy: -13)]) ?? 0
-                date.second = Int(nextTime![nextTime!.index(nextTime!.startIndex, offsetBy: 18)..<nextTime!.index(nextTime!.endIndex, offsetBy: -10)]) ?? 0
-                let arrivingDateTime = curr.date(from: date)!
-
-                arrivingTimes.append((arrivingDateTime, x.monitoredVehicleJourney.lineRef))
-            }
-
-                arrivingTimes = arrivingTimes.sorted(by: {$0.day < $1.day})
-
-
-            return arrivingTimes
-        }
-
-        // count the number of buses ahead of the desired bus
-        func ahead(route: RouteDetail, arrivingTimes: [(Date, String)]) -> Int {
-
-            var numberofBus = 0
-            for i in arrivingTimes {
-                if i.1 != route.lineRef {
-                    numberofBus += 1
-                }
-            }
-            return numberofBus
-        }
 }
