@@ -17,134 +17,142 @@ struct BusTrackingView: View {
     
     var body: some View {
         
-        let proximityData = trackedStop.getProximityAway()
-        let milesData = trackedStop.getMilesAway()
-        let stopsData = trackedStop.getStopsAway()
-        let timeData = trackedStop.getTimeAway()
+//        let proximityData = trackedStop.getProximityAway()
+//        let milesData = trackedStop.getMilesAway()
+//        let stopsData = trackedStop.getStopsAway()
+//        let timeData = trackedStop.getTimeAway()
         
         ZStack {
             
             Color("Color1").ignoresSafeArea()
             
-            VStack {
-                
-                Spacer().frame(height: 10)
-                
-                VStack {
-                    
-                    Spacer().frame(height: 10)
-                    
-                    Text("CURRENTLY TRACKING:")
-                        .frame(width: 350, height: 30)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.black)
-                        .multilineTextAlignment(.center)
-                        .background(Color("Color1"))
-                        .cornerRadius(10)
-                    
-                    if proximityData == "No vehicles detected at this time. Please try again later." {
-                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\nApproaching")
-                            .frame(width: 350, height: 200)
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .background(Color("Color2"))
-                            .cornerRadius(20)
-//                            .onAppear() {
-//                                speechSynthesizer.speak("currently tracking")
-//                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
-//                                speechSynthesizer.speak("NOTICE:")
-//                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
-//                            }
-                    } else if proximityData == "approaching" {
-                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
-                            .frame(width: 350, height: 200)
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .background(Color("Color2"))
-                            .cornerRadius(20)
-//                            .onAppear() {
-//                                speechSynthesizer.speak("currently tracking")
-//                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
-//                                speechSynthesizer.speak("NOTICE:")
-//                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
-//                            }
-                    } else {
-                        Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(milesData) miles away\n\(stopsData) stops away\n\(timeData)")
-                            .frame(width: 350, height: 200)
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .background(Color("Color2"))
-                            .cornerRadius(20)
-                    }
+            if !trackedStop.hasFetchCompleted || trackedStop.isLoading {
+                LoadingView().onAppear() {
+                    trackedStop.fetchStopMonitoring(monitoringRef: busStop.code, publishedLineName: busRoute.publishedLineName, destinationName: busRoute.destinationName)
                 }
-                .frame(width: 375, height: 300, alignment: .top)
-                .background(Color("Color2"))
-                .cornerRadius(20)
-                
+            } else {
                 VStack {
                     
                     Spacer().frame(height: 10)
                     
-                    Text("BUSES AHEAD:")
-                        .frame(width: 350, height: 30)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.black)
-                        .multilineTextAlignment(.center)
-                        .background(Color("Color1"))
-                        .cornerRadius(10)
+                    VStack {
+                        
+                        Spacer().frame(height: 10)
+                        
+                        Text("CURRENTLY TRACKING:")
+                            .frame(width: 350, height: 30)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.black)
+                            .multilineTextAlignment(.center)
+                            .background(Color("Color1"))
+                            .cornerRadius(10)
+                        
+                        
+                        
+                        if trackedStop.proximityMsg == "No vehicles detected at this time. Please try again later." {
+                            Text("\(busRoute.lineNameAndDestinationName)" + "\n\nApproaching")
+                                .frame(width: 350, height: 200)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                                .background(Color("Color2"))
+                                .cornerRadius(20)
+    //                            .onAppear() {
+    //                                speechSynthesizer.speak("currently tracking")
+    //                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
+    //                                speechSynthesizer.speak("NOTICE:")
+    //                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+    //                            }
+                        } else if trackedStop.proximityMsg == "approaching" {
+                            Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(trackedStop.proximityMsg)")
+                                .frame(width: 350, height: 200)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                                .background(Color("Color2"))
+                                .cornerRadius(20)
+    //                            .onAppear() {
+    //                                speechSynthesizer.speak("currently tracking")
+    //                                speechSynthesizer.speak("\(busRoute.lineNameAndDestinationName)" + "\n\n\(proximityData)")
+    //                                speechSynthesizer.speak("NOTICE:")
+    //                                speechSynthesizer.speak("Bx4A is approaching your stop. This is not your bus. There are two buses ahead of the Bx4.")
+    //                            }
+                        } else {
+                            Text("\(busRoute.lineNameAndDestinationName)" + "\n\n\(trackedStop.milesAway) miles away\n\(trackedStop.stopsAway) stops away\n\(trackedStop.timeAway)")
+                                .frame(width: 350, height: 200)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.center)
+                                .padding()
+                                .background(Color("Color2"))
+                                .cornerRadius(20)
+                        }
+                    }
+                    .frame(width: 375, height: 300, alignment: .top)
+                    .background(Color("Color2"))
+                    .cornerRadius(20)
+                    
+                    VStack {
+                        
+                        Spacer().frame(height: 10)
+                        
+                        Text("BUSES AHEAD:")
+                            .frame(width: 350, height: 30)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.black)
+                            .multilineTextAlignment(.center)
+                            .background(Color("Color1"))
+                            .cornerRadius(10)
 
-                    Text("2 buses ahead of \(busRoute.publishedLineName)")
-                        .frame(width: 350, height: 100)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.center)
-                        .padding()
+                        Text(trackedStop.busesAhead! + " buses ahead of \(busRoute.publishedLineName)")
+                            .frame(width: 350, height: 100)
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .background(Color("Color2"))
+                            .cornerRadius(20)
+                        
+                        
+                    }.frame(width: 375, height: 200, alignment: .top)
                         .background(Color("Color2"))
                         .cornerRadius(20)
                     
+                    Spacer().frame(height: 10)
                     
-                }.frame(width: 375, height: 200, alignment: .top)
-                    .background(Color("Color2"))
-                    .cornerRadius(20)
-                
-                Spacer().frame(height: 10)
-                
-//                Image("logo2")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    .frame(width: 150).cornerRadius(20)
-                
-                Spacer().frame(height: 10)
-                
-                HStack {
-                    Button {
-                        speechSynthesizer.toggleVoice()
-                        if !speechSynthesizer.voiceEnabled {
-                            if speechSynthesizer.synthesizer.isSpeaking {
-                                speechSynthesizer.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+    //                Image("logo2")
+    //                    .resizable()
+    //                    .aspectRatio(contentMode: .fit)
+    //                    .frame(width: 150).cornerRadius(20)
+                    
+                    Spacer().frame(height: 10)
+                    
+                    HStack {
+                        Button {
+                            speechSynthesizer.toggleVoice()
+                            if !speechSynthesizer.voiceEnabled {
+                                if speechSynthesizer.synthesizer.isSpeaking {
+                                    speechSynthesizer.synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+                                }
                             }
+                        } label: {
+                            toggleVoiceView()
                         }
-                    } label: {
-                        toggleVoiceView()
                     }
                 }
             }
         }
-        .onAppear {
-            trackedStop.fetchStopMonitoring(monitoringRef: busStop.code, lineRef: busRoute.lineRef.replacingOccurrences(of: " ", with: "%20"))
-        }
+//        .onAppear {
+//            trackedStop.fetchStopMonitoring(monitoringRef: busStop.code, lineRef: busRoute.lineRef.replacingOccurrences(of: " ", with: "%20"))
+//        }
     }
 }
 
