@@ -18,7 +18,7 @@ class TrackedStopFetcher: ObservableObject {
     @Published var milesAway: String = "0"
     @Published var timeAway: String = "0"
     @Published var stopsAway: Int = 0
-    @Published var busesAhead: String? = "0"
+    @Published var busesAhead: String = "0"
     
     func getClosestTrackedBus(monitoredStops: [MonitoredStopVisit], publishedLineName: String, destinationName: String) -> MonitoredVehicleJourney {
         var minDate: Date? = nil
