@@ -12,6 +12,9 @@ struct BusTrackingView: View {
     
     var busStop: BusStopRoute
     var busRoute: RouteDetail
+    let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+    @State var hasFetchedOnce = false
+    @State var spokenUpdate = true
     @EnvironmentObject var speechSynthesizer: SpeechSynthesizer
     @StateObject var trackedStop: TrackedStopFetcher = TrackedStopFetcher()
     
@@ -26,7 +29,7 @@ struct BusTrackingView: View {
             
             Color("Color1").ignoresSafeArea()
             
-            if !trackedStop.hasFetchCompleted || trackedStop.isLoading {
+            if (!trackedStop.hasFetchCompleted || trackedStop.isLoading) && !hasFetchedOnce  {
                 LoadingView().onAppear() {
                     trackedStop.fetchStopMonitoring(monitoringRef: busStop.code, publishedLineName: busRoute.publishedLineName, destinationName: busRoute.destinationName)
                 }
@@ -167,6 +170,13 @@ struct BusTrackingView: View {
                         }
                     }
                 }
+                .onReceive(timer) { _ in
+                    if !hasFetchedOnce {
+                        hasFetchedOnce = true
+                    }
+                    trackedStop.fetchStopMonitoring(monitoringRef: busStop.code, publishedLineName: busRoute.publishedLineName, destinationName: busRoute.destinationName)
+                }
+//                if trackedStop.
             }
         }
 //        .onAppear {

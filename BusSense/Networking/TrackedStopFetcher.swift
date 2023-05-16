@@ -15,10 +15,15 @@ class TrackedStopFetcher: ObservableObject {
     @Published var hasFetchCompleted: Bool = false
     @Published var errorMessage: String? = nil
     @Published var proximityMsg: String = ""
+    @Published var proximityChange: Bool = false
     @Published var milesAway: String = "0"
+    @Published var milesChange: Bool = false
     @Published var timeAway: String = "0"
+    @Published var timeChange: Bool = false
     @Published var stopsAway: Int = 0
+    @Published var stopsChange: Bool = false
     @Published var busesAhead: String = "0"
+    @Published var busesAheadChange: Bool = false
     
     func getClosestTrackedBus(monitoredStops: [MonitoredStopVisit], publishedLineName: String, destinationName: String) -> MonitoredVehicleJourney {
         var minDate: Date? = nil
@@ -95,6 +100,18 @@ class TrackedStopFetcher: ObservableObject {
         // resets errorMessage everytime function is called
         errorMessage = nil
         
+        let oldProximityMsg = proximityMsg
+        let oldMilesAway = milesAway
+        let oldTimeAway = timeAway
+        let oldStopsAway = stopsAway
+        let oldBusesAhead = busesAhead
+        
+        proximityChange = false
+        milesChange = false
+        timeChange = false
+        stopsChange = false
+        busesAheadChange = false
+        
         let key = "test"
         let version = "2"
         let service = APIService()
@@ -115,12 +132,32 @@ class TrackedStopFetcher: ObservableObject {
                     if let monitoredStopVisit = monitoredStop.monitoredStopVisit {
                         self.monitoredStops = monitoredStopVisit
                         let closestBus = self.getClosestTrackedBus(monitoredStops: monitoredStopVisit, publishedLineName: publishedLineName, destinationName: destinationName)
+                        let newProximityMsg = self.getProximityAway(monitoredVehicle: closestBus)
+                        let newMilesAway = self.getMilesAway(monitoredVehicle: closestBus)
+                        let newTimeAway = self.getTimeAway(monitoredVehicle: closestBus)
+                        let newStopsAway = self.getStopsAway(monitoredVehicle: closestBus)
+                        let newBusesAhead = String(self.countBusesAhead(monitoredStops: monitoredStopVisit, closestBus: closestBus, publishedLineName: publishedLineName, destinationName: destinationName))
                         self.trackedBus = closestBus
-                        self.proximityMsg = self.getProximityAway(monitoredVehicle: closestBus)
-                        self.milesAway = self.getMilesAway(monitoredVehicle: closestBus)
-                        self.timeAway = self.getTimeAway(monitoredVehicle: closestBus)
-                        self.stopsAway = self.getStopsAway(monitoredVehicle: closestBus)
-                        self.busesAhead = String(self.countBusesAhead(monitoredStops: monitoredStopVisit, closestBus: closestBus, publishedLineName: publishedLineName, destinationName: destinationName))
+                        self.proximityMsg = newProximityMsg
+                        self.milesAway = newMilesAway
+                        self.timeAway = newTimeAway
+                        self.stopsAway = newStopsAway
+                        self.busesAhead = newBusesAhead
+                        if newProximityMsg != oldProximityMsg {
+                            self.proximityChange = true
+                        }
+                        if newMilesAway != oldMilesAway {
+                            self.milesChange = true
+                        }
+                        if newTimeAway != oldTimeAway {
+                            self.timeChange = true
+                        }
+                        if newStopsAway != oldStopsAway {
+                            self.stopsChange = true
+                        }
+                        if newBusesAhead != oldBusesAhead {
+                            self.busesAheadChange = true
+                        }
 //                        print(monitoredStopVisit)
                         completion()
                     } else {
