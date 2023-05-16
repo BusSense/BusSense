@@ -1,2 +1,5 @@
 # BusSense
-Main repo for the iOS BusSense Application
+BusSene is an assistive iOS application targeted towards blind and low vision individuals. It is meant to be used in supplement and not replace established navigation apps. BusSense currently only works with the MTA bus system in New York City. 
+
+
+BusSense works by finding the user's current location and displaying the bus stops within a 10 meter (~33 feet) radius and lists all the bus routes that stop at a specific bus stop. The user selects and bus route to track and it'll display and read out detailed arrival time of the next desired bus. The app will also display and read out how many buses before the desired bus will pass by so the user is aware of the number of buses to expect. The data refreshes and updates every 30 seconds and the user can also toggle the text-to-speech option. 
